@@ -15,7 +15,9 @@ export const metadata: Metadata = {
     "Ronald Tchuekou Portfolio, Développeur FullStack et Administrateur de systèmes",
   description:
     "Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.",
-  metadataBase: new URL("https://roncoder.agyl.tech"),
+  metadataBase: new URL(
+    process.env.BASE_LINK || "https://roncoder-beta.vercel.app"
+  ),
   alternates: {
     canonical: "/",
     languages: {

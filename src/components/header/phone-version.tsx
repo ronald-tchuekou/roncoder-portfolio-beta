@@ -44,7 +44,7 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({
                 alt="Ronald Tchuekou"
                 height={232}
                 width={692}
-                className={cn("w-16 lg:w-32 h-auto aspect-auto")}
+                className={cn("w-20 lg:w-32 h-auto aspect-auto")}
               />
             </Link>
             <div className={cn("flex items-center gap-3")}>
