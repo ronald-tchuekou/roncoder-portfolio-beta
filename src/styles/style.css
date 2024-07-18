@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 189 77% 5%;
+    --foreground: 187 21% 75%;
+    --muted: 189 12% 15%;
+    --muted-foreground: 189 12% 65%;
+    --popover: 189 77% 2%;
+    --popover-foreground: 187 21% 85%;
+    --card: 189 77% 3%;
+    --card-foreground: 187 21% 80%;
+    --border: 189 67% 10%;
+    --input: 189 67% 13%;
+    --primary: 182.29 57.21% 44.9%;
+    --primary-foreground: 190 69% 10%;
+    --secondary: 187 30% 75%;
+    --secondary-foreground: 187 30% 15%;
+    --accent: 189 77% 20%;
+    --accent-foreground: 189 77% 80%;
+    --destructive: 0 73.47% 50.71%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 187 78% 39%;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+  .nav-link {
+    @apply block p-5 text-base font-medium transition duration-300 space-y-1;
+    .nav-link-label {
+      @apply block;
+    }
+    .nav-link-indicator {
+      transition: 300ms;
+      @apply block h-1 w-0 group-hover:w-full rounded-full bg-primary;
+    }
+    &:hover,
+    &.active {
+      @apply text-primary;
+      .nav-link-indicator {
+        @apply w-full;
+      }
+    }
+  }
+}
