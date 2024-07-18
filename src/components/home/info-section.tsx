@@ -1,11 +1,20 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CloudDownload, LinkedinIcon } from "lucide-react";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { RevealFromBottom } from "../motions/reveal-from-bottom";
 
 export const InfoSection: FC = () => {
+  const downloadResume = useCallback(() => {
+    const a = document.createElement("a");
+    a.setAttribute("href", "/ronald-tchuekou-resume.pdf");
+    a.setAttribute("download", "Ronald-Tchuekou-Resume.pdf");
+    a.click();
+  }, []);
+
   return (
     <section
       className={cn(
@@ -37,6 +46,7 @@ export const InfoSection: FC = () => {
           technologies.
         </span>
       </RevealFromBottom>
+      {/* Socials buttons */}
       <div className={cn("flex gap-3")}>
         {/* LinkedIn */}
         <RevealFromBottom delay={0.4}>
@@ -130,8 +140,9 @@ export const InfoSection: FC = () => {
           </Link>
         </RevealFromBottom>
       </div>
+      {/* Download resume button */}
       <RevealFromBottom delay={0.8}>
-        <Button className={cn("rounded-full")}>
+        <Button onClick={downloadResume} className={cn("rounded-full")}>
           Télécharger mon CV
           <CloudDownload className="size-4 ml-3" />
         </Button>

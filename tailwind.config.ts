@@ -15,7 +15,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-jet-brains-mono)"],
+        mono: ["var(--font-jet-brains-mono)"],
+        barrio: ["var(--font-barrio)"],
       },
       colors: {
         border: "hsl(var(--border))",

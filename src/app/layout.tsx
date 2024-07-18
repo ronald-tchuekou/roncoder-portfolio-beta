@@ -2,12 +2,18 @@ import { cn } from "@/lib/utils";
 import { Header } from "@src/components/header/header";
 import "@src/styles/style.css";
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Barrio, JetBrains_Mono } from "next/font/google";
 
-const font = JetBrains_Mono({
+const jetBrainsMonoFont = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-jet-brains-mono",
+});
+
+const barrioFont = Barrio({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-barrio",
 });
 
 export const metadata: Metadata = {
@@ -37,7 +43,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={cn("min-h-screen font-sans antialiased", font.variable)}>
+      <body
+        className={cn(
+          "min-h-screen font-mono antialiased",
+          jetBrainsMonoFont.variable,
+          barrioFont.variable
+        )}
+      >
         <Header />
         {children}
       </body>
