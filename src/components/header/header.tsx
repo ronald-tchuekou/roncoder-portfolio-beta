@@ -27,7 +27,7 @@ export const Header: FC = () => {
             alt="Ronald Tchuekou"
             height={232}
             width={692}
-            className={cn("w-16 md:w-20 lg:w-32 h-auto aspect-auto")}
+            className={cn("w-20 lg:w-32 h-auto aspect-auto")}
           />
         </Link>
         <nav className={cn("flex items-center gap-3 md:gap-0")}>

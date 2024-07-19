@@ -1,4 +1,4 @@
-import { Experience, NavLink, Service, Skill } from "./util-types";
+import { Experience, NavLink, Project, Service, Skill } from "./util-types";
 
 export const NAV_LINKS: NavLink[] = [
   { url: "/", label: "Presentation" },
@@ -605,5 +605,55 @@ export const INFORMATIONS: {
     value: "https://www.linkedin.com/in/ronald-tchuekou-02129b191",
     isLong: true,
     link: "https://www.linkedin.com/in/ronald-tchuekou-02129b191",
+  },
+];
+
+export const PROJECTS: Project[] = [
+  {
+    id: "bigoodee-mobile",
+    image: "/images/projects/bigoodee-mobile.png",
+    title: "Bigoodee Mobile",
+    description:
+      "Bigoodee est une application mobile qui permet de trouver des services de proximité.",
+    tags: ["React Native", "Expo", "Redux Toolkit"],
+    company: "AGYL TECH",
+  },
+  {
+    id: "bigoodee-atelier-web",
+    image: "/images/projects/bigoodee-atelier-web.png",
+    title: "Bigoodee Atelier",
+    description:
+      "Bigoodee est une application web qui permet de trouver des services de proximité.",
+    tags: ["Angular", "MaterialUI", "Tailwind CSS"],
+    company: "AGYL TECH",
+  },
+  {
+    id: "les-vadrouilleurs",
+    image: "/images/projects/les-vadrouilleurs.png",
+    title: "Les Vadrouilleurs",
+    description: "Les vadrouilleurs est une application web de voyage.",
+    tags: [
+      "React Native",
+      "Expo",
+      "Google Map",
+      "Redux Toolkit",
+      "Async Storage",
+    ],
+    company: "AGYL TECH",
+  },
+  {
+    id: "dolishop",
+    image: "/images/projects/dolishop.png",
+    title: "Dolishop",
+    description: "Dolishop est une application web de vente en ligne.",
+    tags: [
+      "NextJS",
+      "React",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "Framer Motion",
+      "WhatsApp",
+    ],
+    company: "AGYL TECH",
   },
 ];

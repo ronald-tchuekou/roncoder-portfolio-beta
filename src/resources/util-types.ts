@@ -37,3 +37,12 @@ export type Experience = {
   date: string;
   description: string;
 };
+
+export type Project = {
+  id: string;
+  image: string;
+  title: string;
+  description: string;
+  tags: string[];
+  company: string;
+};
