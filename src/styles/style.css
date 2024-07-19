@@ -23,6 +23,7 @@
     --destructive: 0 73.47% 50.71%;
     --destructive-foreground: 0 0% 100%;
     --ring: 187 78% 39%;
+    --radius: 0.5rem;
   }
 }
 
@@ -30,6 +31,7 @@
   body {
     @apply bg-background text-foreground overflow-x-hidden;
   }
+
   .nav-link {
     @apply block p-5 text-base font-medium transition duration-300 space-y-1;
     .nav-link-label {
@@ -47,4 +49,8 @@
       }
     }
   }
+}
+
+.slick-arrow {
+  display: none !important;
 }

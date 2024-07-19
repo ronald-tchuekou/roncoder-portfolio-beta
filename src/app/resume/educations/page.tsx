@@ -1,0 +1,62 @@
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import { EDUCATIONS_LIST } from "@src/resources/util-data";
+import { DotIcon, MoveRightIcon } from "lucide-react";
+
+export default function Educations() {
+  return (
+    <section className="w-full flex flex-col gap-5">
+      <RevealFromBottom
+        elt={"h2"}
+        className={cn(
+          "scroll-m-20 text-xl lg:text-3xl tracking-tight ",
+          "text-white"
+        )}
+      >
+        Mes Certifications
+      </RevealFromBottom>
+      <RevealFromBottom elt={"p"} delay={0.1}>
+        Pour l’acquisition de nouvelle compétences, j’ai suivit plusieurs
+        parcours et validé plusieurs certifications dont je vous partage
+        quelques unes ci-dessous :
+      </RevealFromBottom>
+      <div className={cn("w-full grid grid-cols-1 gap-8 lg:grid-cols-2")}>
+        {EDUCATIONS_LIST.map((experience, index) => (
+          <RevealFromBottom key={experience.id} delay={index * 0.1}>
+            <div
+              className={cn(
+                "bg-card border border-input",
+                "rounded-lg p-5 size-full",
+                "flex flex-col gap-3"
+              )}
+            >
+              <h3 className={cn("text-xl font-bold text-white")}>
+                {experience.title}
+              </h3>
+              <p className={cn("text-primary text-lg uppercase")}>
+                {experience.company}
+              </p>
+              <div className="flex items-center h-full">
+                <DotIcon className="size-8 text-primary" />
+                <small className={cn("text-muted-foreground")}>
+                  {experience.date}
+                </small>
+              </div>
+              <div>
+                <Button
+                  variant={"outline"}
+                  size={"sm"}
+                  className={cn("text-xs", "rounded-full")}
+                >
+                  Consulter
+                  <MoveRightIcon className="size-5 ml-2" />
+                </Button>
+              </div>
+            </div>
+          </RevealFromBottom>
+        ))}
+      </div>
+    </section>
+  );
+}
