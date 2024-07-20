@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { EXPERIENCES_LIST } from "@src/resources/util-data";
 import { DotIcon, MoveRightIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Experiences() {
   return (
@@ -43,14 +44,16 @@ export default function Experiences() {
                 </small>
               </div>
               <div>
-                <Button
-                  variant={"outline"}
-                  size={"sm"}
-                  className={cn("text-xs", "rounded-full")}
-                >
-                  Consulter
-                  <MoveRightIcon className="size-5 ml-2" />
-                </Button>
+                <Link href={`/resume/experiences/${experience.id}`}>
+                  <Button
+                    variant={"outline"}
+                    size={"sm"}
+                    className={cn("text-xs", "rounded-full")}
+                  >
+                    Consulter
+                    <MoveRightIcon className="size-5 ml-2" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </RevealFromBottom>

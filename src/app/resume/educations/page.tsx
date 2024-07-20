@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { EDUCATIONS_LIST } from "@src/resources/util-data";
 import { DotIcon, MoveRightIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Educations() {
   return (
@@ -22,8 +23,8 @@ export default function Educations() {
         quelques unes ci-dessous :
       </RevealFromBottom>
       <div className={cn("w-full grid grid-cols-1 gap-8 lg:grid-cols-2")}>
-        {EDUCATIONS_LIST.map((experience, index) => (
-          <RevealFromBottom key={experience.id} delay={index * 0.1}>
+        {EDUCATIONS_LIST.map((education, index) => (
+          <RevealFromBottom key={education.id} delay={index * 0.1}>
             <div
               className={cn(
                 "bg-card border border-input",
@@ -32,26 +33,28 @@ export default function Educations() {
               )}
             >
               <h3 className={cn("text-xl font-bold text-white")}>
-                {experience.title}
+                {education.title}
               </h3>
               <p className={cn("text-primary text-lg uppercase")}>
-                {experience.company}
+                {education.company}
               </p>
               <div className="flex items-center h-full">
                 <DotIcon className="size-8 text-primary" />
                 <small className={cn("text-muted-foreground")}>
-                  {experience.date}
+                  {education.date}
                 </small>
               </div>
               <div>
-                <Button
-                  variant={"outline"}
-                  size={"sm"}
-                  className={cn("text-xs", "rounded-full")}
-                >
-                  Consulter
-                  <MoveRightIcon className="size-5 ml-2" />
-                </Button>
+                <Link href={`/resume/educations/${education.id}`}>
+                  <Button
+                    variant={"outline"}
+                    size={"sm"}
+                    className={cn("text-xs", "rounded-full")}
+                  >
+                    Consulter
+                    <MoveRightIcon className="size-5 ml-2" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </RevealFromBottom>
