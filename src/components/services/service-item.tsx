@@ -4,9 +4,12 @@ import { Service } from "@src/resources/util-types";
 import { MoveRightIcon } from "lucide-react";
 import { FC } from "react";
 
-export type ServiceItemProps = { item: Service };
+export type ServiceItemProps = {
+  item: Service;
+  onContinue: (serviceKey: string) => void;
+};
 
-export const ServiceItem: FC<ServiceItemProps> = ({ item }) => {
+export const ServiceItem: FC<ServiceItemProps> = ({ item, onContinue }) => {
   return (
     <article
       className={cn(
@@ -33,7 +36,11 @@ export const ServiceItem: FC<ServiceItemProps> = ({ item }) => {
       </h3>
       <p>{item.description}</p>
       <div>
-        <Button variant={"outline"} className={cn("rounded-full")}>
+        <Button
+          onClick={() => onContinue(item.key)}
+          variant={"outline"}
+          className={cn("rounded-full")}
+        >
           Continuer
           <MoveRightIcon className="ml-3 size-4" />
         </Button>

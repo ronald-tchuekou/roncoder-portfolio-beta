@@ -21,7 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SERVICES } from "@src/resources/util-data";
-import { FC, useCallback } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -36,14 +36,28 @@ const contactFormSchema = z.object({
 
 type contactFormSchema = z.infer<typeof contactFormSchema>;
 
-export const ContactFormContent: FC = () => {
+type ContactFormContentProps = {
+  serviceKey?: string;
+};
+
+export const ContactFormContent: FC<ContactFormContentProps> = ({
+  serviceKey,
+}) => {
   const form = useForm<contactFormSchema>({
     resolver: zodResolver(contactFormSchema),
+    defaultValues: useMemo(() => ({ service: serviceKey }), [serviceKey]),
   });
 
   const submit = useCallback((data: contactFormSchema) => {
     console.log(data);
   }, []);
+
+  // useEffect(() => {
+  //   console.log(serviceKey);
+  //   form.reset({
+  //     service: serviceKey,
+  //   });
+  // }, [form, serviceKey]);
 
   return (
     <Form {...form}>
@@ -150,7 +164,11 @@ export const ContactFormContent: FC = () => {
               <FormLabel htmlFor="service">
                 Service <sup>*</sup>
               </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                value={field.value}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue
