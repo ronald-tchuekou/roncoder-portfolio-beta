@@ -37,6 +37,23 @@ export default function ExperienceDetails({
           </small>
         </div>
       </RevealFromBottom>
+      <RevealFromBottom elt={"p"} delay={0.2} className={cn("")}>
+        {experience?.description}
+      </RevealFromBottom>
+      <RevealFromBottom
+        elt={"h3"}
+        delay={0.3}
+        className={cn("text-lg text-accent-foreground")}
+      >
+        Tâches
+      </RevealFromBottom>
+      <ul className={cn("list-disc pl-8 space-y-3")}>
+        {experience?.tasks.map((task, idx) => (
+          <RevealFromBottom delay={(idx + 1) * 0.1} elt={"li"} key={idx}>
+            {task}
+          </RevealFromBottom>
+        ))}
+      </ul>
     </section>
   );
 }

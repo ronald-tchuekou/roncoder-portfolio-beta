@@ -25,6 +25,13 @@ export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(
       setServiceKey(undefined);
     }, []);
 
+    const toggleOpen = useCallback(
+      (stateOpened: boolean) => {
+        if (stateOpened === false) closeModal();
+      },
+      [closeModal]
+    );
+
     useImperativeHandle(ref, () => ({
       open: (serviceKey) => {
         setServiceKey(serviceKey);
@@ -33,7 +40,7 @@ export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(
     }));
 
     return (
-      <Credenza open={open} onOpenChange={closeModal}>
+      <Credenza open={open} onOpenChange={toggleOpen}>
         <CredenzaContent
           aria-describedby={undefined}
           className={"gap-0 pb-0 md:min-w-[750px] bg-card"}

@@ -3,6 +3,7 @@ import { BackButton } from "@src/components/back-button";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { EDUCATIONS_LIST } from "@src/resources/util-data";
 import { DotIcon } from "lucide-react";
+import Image from "next/image";
 
 export default function EducationDetails({
   params,
@@ -39,6 +40,39 @@ export default function EducationDetails({
           </small>
         </div>
       </RevealFromBottom>
+      <RevealFromBottom elt={"p"} delay={0.2} className={cn("")}>
+        {education?.description}
+      </RevealFromBottom>
+      {education?.imageLink && (
+        <RevealFromBottom
+          delay={0.2}
+          className={cn("w-full aspect-auto", "rounded-lg", "bg-secondary/10")}
+        >
+          <Image
+            src={education.imageLink}
+            alt={education.title}
+            width={1000}
+            height={600}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=="
+            className={cn("rounded-lg w-full aspect-auto")}
+          />
+        </RevealFromBottom>
+      )}
+      <RevealFromBottom
+        elt={"h3"}
+        delay={0.3}
+        className={cn("text-lg text-accent-foreground")}
+      >
+        Contenu de la formation
+      </RevealFromBottom>
+      <ul className={cn("list-disc pl-8 space-y-3")}>
+        {education?.tasks.map((task, idx) => (
+          <RevealFromBottom delay={(idx + 1) * 0.1} elt={"li"} key={idx}>
+            {task}
+          </RevealFromBottom>
+        ))}
+      </ul>
     </section>
   );
 }
