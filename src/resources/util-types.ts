@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type NavLink = {
   url: string;
   label: string;
@@ -40,6 +42,20 @@ export type Experience = {
   imageLink?: string;
 };
 
+export type Information = {
+  id: string;
+  label: string;
+  value: string;
+  isLong: boolean;
+  link?: string;
+};
+
+export type ProjectLink = {
+  icon?: ReactNode;
+  label?: string;
+  link: string;
+};
+
 export type Project = {
   id: string;
   image: string;
@@ -47,4 +63,11 @@ export type Project = {
   description: string;
   tags: string[];
   company: string;
+  gallery: string[];
+  links: ProjectLink[];
+  date: string;
+  authentication?: {
+    username: string;
+    password: string;
+  };
 };

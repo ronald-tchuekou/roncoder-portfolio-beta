@@ -49,6 +49,7 @@ export default function EducationDetails({
           className={cn("w-full aspect-auto", "rounded-lg", "bg-secondary/10")}
         >
           <Image
+            quality={100}
             src={education.imageLink}
             alt={education.title}
             width={1000}

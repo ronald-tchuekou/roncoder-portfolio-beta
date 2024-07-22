@@ -24,6 +24,7 @@ export const Header: FC = () => {
         <Link href={"/"} arial-label="Ronald Tchuekou">
           <Image
             priority
+            quality={100}
             src={"/line-logo.png"}
             alt="Ronald Tchuekou"
             height={232}

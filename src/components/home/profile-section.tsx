@@ -10,6 +10,7 @@ export const ProfileSection: FC = () => {
     <section className="py-10 order-1  md:order-2">
       <div className="w-full relative">
         <Image
+          quality={100}
           src={"/profile-image.png"}
           alt="Ronald Tchuekou"
           width={500}

@@ -4,13 +4,19 @@ import { MotionTag } from "@src/resources/util-types";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { FC, PropsWithChildren, useEffect, useRef } from "react";
 
-type Props = { className?: string; delay?: number; elt?: MotionTag };
+type Props = {
+  className?: string;
+  delay?: number;
+  elt?: MotionTag;
+  onClick?: () => void;
+};
 
 export const RevealFromBottom: FC<PropsWithChildren<Props>> = ({
   children,
   className,
   elt,
   delay = 0,
+  onClick,
 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -33,6 +39,7 @@ export const RevealFromBottom: FC<PropsWithChildren<Props>> = ({
       }}
       initial="hidden"
       animate={controls}
+      onClick={onClick}
       transition={{ duration: 0.35, delay: delay }}
     >
       {children}

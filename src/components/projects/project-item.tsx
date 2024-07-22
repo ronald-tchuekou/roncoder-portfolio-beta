@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Project } from "@src/resources/util-types";
 import { MoveRightIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 import { ProjectTags } from "./project-tags";
 
@@ -27,6 +28,8 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item }) => {
         )}
       >
         <Image
+          priority
+          unoptimized
           src={item.image}
           alt={item.title}
           width={400}
@@ -46,13 +49,15 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item }) => {
           {item.title}
         </h2>
         <h3 className="text-primary uppercase font-semibold">{item.company}</h3>
-        <p>{item.description}</p>
+        <p className="line-clamp-3 h-full">{item.description}</p>
         <ProjectTags tags={item.tags} />
         <div>
-          <Button variant={"outline"} className={cn("rounded-full")}>
-            Continuer
-            <MoveRightIcon className="ml-3 size-4" />
-          </Button>
+          <Link href={`/projects/${item.id}`}>
+            <Button variant={"outline"} className={cn("rounded-full")}>
+              Continuer
+              <MoveRightIcon className="ml-3 size-4" />
+            </Button>
+          </Link>
         </div>
       </div>
     </article>
