@@ -115,8 +115,8 @@ export default function ExperienceDetails({
                   delay={index * 0.1}
                   className={cn("flex gap-3")}
                 >
-                  <div className="flex items-center justify-center gap-2">
-                    {link.icon}
+                  <div className="flex items-center justify-center gap-2 flex-none">
+                    {link.icon && <div className="flex-none">{link.icon}</div>}
                     {link.label && (
                       <p className="text-muted-foreground text-sm flex-none">
                         {link.label}

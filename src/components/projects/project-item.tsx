@@ -39,7 +39,7 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item }) => {
           className={cn("w-full aspect-video", "rounded-t-xl")}
         />
       </div>
-      <div className={cn("w-full px-5 pb-5 flex flex-col gap-5")}>
+      <div className={cn("size-full px-5 pb-5 flex flex-col gap-5")}>
         <h2
           className={cn(
             "scroll-m-20 text-2xl font-normal tracking-tight",
@@ -49,9 +49,9 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item }) => {
           {item.title}
         </h2>
         <h3 className="text-primary uppercase font-semibold">{item.company}</h3>
-        <p className="line-clamp-3 h-full">{item.description}</p>
+        <p className="line-clamp-3 flex-none">{item.description}</p>
         <ProjectTags tags={item.tags} />
-        <div>
+        <div className="h-full flex items-end">
           <Link href={`/projects/${item.id}`}>
             <Button variant={"outline"} className={cn("rounded-full")}>
               Continuer
