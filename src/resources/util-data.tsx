@@ -723,60 +723,6 @@ export const INFORMATIONS: Information[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: "bon-paiement",
-    image: "/projects/bon-paiement/bon-paiement-cover.jpg",
-    title: "Bon de paiement",
-    description:
-      "Bon de paiement est une application web qui permet de faire la gestion de paiement dans une entreprise, c'est projet fait de manière personnelle qui m'a permis de comprendre le fonctionnement de NextJs, l'api Context de React. Dans ce projet j'ai créer un composant FileUploader pour la récupération et l'upload de plusieurs fichiers images. J'ai également fait une intégration de React-ChartJs-2 pour la présentation d'un graphe de progression des movements générer. Cella été un réel plaisir, car pour ce projet j'ai fait un prototype sur Figma.",
-    tags: ["React", "NextJs", "React Dom", "React-ChartJs", "SCSS"],
-    company: "Projet Personnel",
-    gallery: [
-      "/projects/bon-paiement/bon-paiement-img-01.jpg",
-      "/projects/bon-paiement/bon-paiement-img-02.jpg",
-      "/projects/bon-paiement/bon-paiement-img-03.jpg",
-      "/projects/bon-paiement/bon-paiement-img-04.jpg",
-      "/projects/bon-paiement/bon-paiement-img-05.jpg",
-      "/projects/bon-paiement/bon-paiement-img-06.jpg",
-      "/projects/bon-paiement/bon-paiement-img-07.jpg",
-      "/projects/bon-paiement/bon-paiement-img-08.jpg",
-      "/projects/bon-paiement/bon-paiement-img-09.jpg",
-      "/projects/bon-paiement/bon-paiement-img-10.jpg",
-      "/projects/bon-paiement/bon-paiement-img-11.jpg",
-      "/projects/bon-paiement/bon-paiement-img-12.jpg",
-      "/projects/bon-paiement/bon-paiement-img-13.jpg",
-    ],
-    authentication: {
-      username: "demo",
-      password: "demo",
-    },
-    links: [
-      {
-        icon: <LinkIcon className="size-6" />,
-        label: "Lien",
-        link: "https://bon-paiement.vercel.app",
-      },
-      {
-        icon: (
-          <svg
-            role="img"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            className="size-6"
-          >
-            <path
-              fill="currentColor"
-              stroke="none"
-              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-            />
-          </svg>
-        ),
-        label: "GitHub",
-        link: "https://github.com/ronald-tchuekou/bon-paiement",
-      },
-    ],
-    date: "2022-01-25",
-  },
-  {
     id: "amizone",
     image: "/projects/amizone/amizone-cover.jpg",
     title: "Amizone CM",
@@ -862,6 +808,82 @@ export const PROJECTS: Project[] = [
       },
     ],
     date: "2021-11-25",
+  },
+  {
+    id: "localtik-web",
+    image: "/projects/localtik-web/localtik-web-cover.jpg",
+    title: "Localtik Web",
+    description:
+      "Localtik est une plateforme qui permet de partager des documents et des informations avec des personnes de votre choix. Elle permet également de créer des groupes de discussion et de partager des fichiers avec ces groupes. Elle est conçue pour être simple et intuitive, et elle est accessible depuis n'importe quel appareil. Ce qui est présent c'est juste un prototype de l'idée global. Ce projet à été fait avec Angular.",
+    tags: ["Angular", "Tailwind CSS", "NgRx", "Angular Material"],
+    company: "Projet de partenariat",
+    gallery: [
+      "/projects/localtik-web/localtik-web-img-1.jpg",
+      "/projects/localtik-web/localtik-web-img-2.jpg",
+      "/projects/localtik-web/localtik-web-img-3.jpg",
+    ],
+    links: [
+      {
+        icon: <LinkIcon className="size-6" />,
+        label: "Lien",
+        link: "https://localtik-web-beta.vercel.app/cloud",
+      },
+    ],
+    date: "2022-04-14",
+  },
+  {
+    id: "bon-paiement",
+    image: "/projects/bon-paiement/bon-paiement-cover.jpg",
+    title: "Bon de paiement",
+    description:
+      "Bon de paiement est une application web qui permet de faire la gestion de paiement dans une entreprise, c'est projet fait de manière personnelle qui m'a permis de comprendre le fonctionnement de NextJs, l'api Context de React. Dans ce projet j'ai créer un composant FileUploader pour la récupération et l'upload de plusieurs fichiers images. J'ai également fait une intégration de React-ChartJs-2 pour la présentation d'un graphe de progression des movements générer. Cella été un réel plaisir, car pour ce projet j'ai fait un prototype sur Figma.",
+    tags: ["React", "NextJs", "React Dom", "React-ChartJs", "SCSS"],
+    company: "Projet Personnel",
+    gallery: [
+      "/projects/bon-paiement/bon-paiement-img-01.jpg",
+      "/projects/bon-paiement/bon-paiement-img-02.jpg",
+      "/projects/bon-paiement/bon-paiement-img-03.jpg",
+      "/projects/bon-paiement/bon-paiement-img-04.jpg",
+      "/projects/bon-paiement/bon-paiement-img-05.jpg",
+      "/projects/bon-paiement/bon-paiement-img-06.jpg",
+      "/projects/bon-paiement/bon-paiement-img-07.jpg",
+      "/projects/bon-paiement/bon-paiement-img-08.jpg",
+      "/projects/bon-paiement/bon-paiement-img-09.jpg",
+      "/projects/bon-paiement/bon-paiement-img-10.jpg",
+      "/projects/bon-paiement/bon-paiement-img-11.jpg",
+      "/projects/bon-paiement/bon-paiement-img-12.jpg",
+      "/projects/bon-paiement/bon-paiement-img-13.jpg",
+    ],
+    authentication: {
+      username: "demo",
+      password: "demo",
+    },
+    links: [
+      {
+        icon: <LinkIcon className="size-6" />,
+        label: "Lien",
+        link: "https://bon-paiement.vercel.app",
+      },
+      {
+        icon: (
+          <svg
+            role="img"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            className="size-6"
+          >
+            <path
+              fill="currentColor"
+              stroke="none"
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+            />
+          </svg>
+        ),
+        label: "GitHub",
+        link: "https://github.com/ronald-tchuekou/bon-paiement",
+      },
+    ],
+    date: "2022-01-25",
   },
   // {
   //   id: "bigoodee-mobile",
