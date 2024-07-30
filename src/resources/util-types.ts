@@ -71,3 +71,15 @@ export type Project = {
     password: string;
   };
 };
+
+export type RequestModel = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  service: string;
+  message: string;
+  read: boolean;
+  createdAt: Date;
+};

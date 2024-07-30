@@ -1,5 +1,7 @@
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Header } from "@src/components/header/header";
+import { QueryProvider } from "@src/components/providers/query-provider";
 import "@src/styles/style.css";
 import type { Metadata } from "next";
 import { Barrio, JetBrains_Mono } from "next/font/google";
@@ -51,7 +53,8 @@ export default function RootLayout({
         )}
       >
         <Header />
-        {children}
+        <QueryProvider>{children}</QueryProvider>
+        <Toaster />
       </body>
     </html>
   );

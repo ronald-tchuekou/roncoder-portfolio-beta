@@ -20,44 +20,72 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  contactFormSchema,
+  ContactFormSchema,
+} from "@src/resources/form-schemas";
 import { SERVICES } from "@src/resources/util-data";
+import { createRequest } from "@src/services/contact-service";
+import { useMutation } from "@tanstack/react-query";
+import { RefreshCw } from "lucide-react";
 import { FC, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-const contactFormSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
-  email: z.string().email(),
-  phone: z.optional(z.string()),
-  service: z.string(),
-  message: z.string(),
-});
-
-type contactFormSchema = z.infer<typeof contactFormSchema>;
+import { toast } from "sonner";
 
 type ContactFormContentProps = {
   serviceKey?: string;
+  onCompleted?: () => void;
 };
 
 export const ContactFormContent: FC<ContactFormContentProps> = ({
   serviceKey,
+  onCompleted,
 }) => {
-  const form = useForm<contactFormSchema>({
+  const form = useForm<ContactFormSchema>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: useMemo(() => ({ service: serviceKey }), [serviceKey]),
   });
 
-  const submit = useCallback((data: contactFormSchema) => {
-    console.log(data);
-  }, []);
+  const { mutate, isPending } = useMutation({
+    mutationFn: createRequest,
+    onSuccess() {
+      form.reset({
+        service: serviceKey || "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+      onCompleted?.();
+      toast.success("Votre message a été envoyé avec succès !", {
+        richColors: true,
+        duration: 10000,
+        description:
+          "Merci de m'avoir contacté. Je vous donnerai une réponse dans les plus brefs délais.",
+        action: {
+          label: "OK",
+          onClick: () => toast.dismiss(),
+        },
+      });
+    },
+    onError(error) {
+      console.log("Request error", error);
+      toast.error("Une erreur s'est produite lors de l'envoi du message.", {
+        richColors: true,
+        duration: 10000,
+        description:
+          "Veuillez réessayer ou me contacter directement par email ou WhatsApp, juste sur la section de droite (Desktop) ou en haut (Mobile).",
+      });
+    },
+  });
 
-  // useEffect(() => {
-  //   console.log(serviceKey);
-  //   form.reset({
-  //     service: serviceKey,
-  //   });
-  // }, [form, serviceKey]);
+  const submit = useCallback(
+    (data: ContactFormSchema) => {
+      mutate(data);
+    },
+    [mutate]
+  );
 
   return (
     <Form {...form}>
@@ -214,7 +242,8 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
           )}
         />
         <div className="md:col-span-2 pt-5">
-          <Button className="rounded-full" type="submit">
+          <Button disabled={isPending} className="rounded-full" type="submit">
+            {isPending && <RefreshCw className="animate-spin size-4 mr-2" />}
             Envoyer le message
           </Button>
         </div>
