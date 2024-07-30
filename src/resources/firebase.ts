@@ -1,6 +1,4 @@
-import { getAnalytics } from "firebase/analytics";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getApps, initializeApp } from "firebase/app";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,8 +10,7 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
+const firebaseApp =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
-export { analytics, app, db };
+export { firebaseApp };

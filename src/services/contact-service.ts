@@ -1,9 +1,15 @@
-import { db } from "@src/resources/firebase";
+import { firebaseApp } from "@src/resources/firebase";
 import { ContactFormSchema } from "@src/resources/form-schemas";
 import { RequestModel } from "@src/resources/util-types";
-import { addDoc, collection, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getFirestore,
+  updateDoc,
+} from "firebase/firestore";
 
 export const createRequest = async (request: ContactFormSchema) => {
+  const db = getFirestore(firebaseApp);
   const requestRef = collection(db, "Requests");
   const docRef = await addDoc(requestRef, {
     ...request,
