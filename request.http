@@ -1,0 +1,19 @@
+### Discrod webhooks
+POST https://discord.com/api/webhooks/1268438162057723944/rubBwklQDeMVqk9e39RMiMFwJrUelfVghD5GOvPrbJv4r-xBJ8Kst3MoQuIXvBuLSQ9m
+Accept: application/json
+Content-Type: application/json
+
+{
+  "content": "###This is my test message.",
+  "embeds": [
+    {
+      "title": "Nouvelle demande de contact",
+      "type": "rich",
+      "description": "Ronald Tchuekou vous a contacter par votre porfolio pour soliciter un service.\n\n\nNom: ${lastname}\nPrénom: ${firstname}\nAdresse email: ${email}\nTéléphone: ${phone}\nService: ${service}\nMessage: ${message}\n\n\nCréer le ${date}",
+      "author": {
+        "name": "Embed author name",
+        "icon_url": "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk"
+      }
+    }
+  ]
+}

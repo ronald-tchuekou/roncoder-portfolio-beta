@@ -1,3 +1,5 @@
+import { SERVICES } from "./util-data";
+
 export const isCurrentPath = (
   currentPath: string,
   path: string,
@@ -15,4 +17,10 @@ export const isCurrentPath = (
   }
 
   return currentPathSegment[index] === pathSegment[index];
+};
+
+export const getServiceLabel = (serviceId: string) => {
+  const foundService = SERVICES.find((item) => item.key === serviceId);
+
+  return foundService?.title;
 };
