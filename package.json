@@ -17,6 +17,10 @@
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-query": "^5.51.15",
+<<<<<<< HEAD
+=======
+    "@vercel/analytics": "^1.3.1",
+>>>>>>> f3a18d4 (chore: set vercel analytics.)
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.12",

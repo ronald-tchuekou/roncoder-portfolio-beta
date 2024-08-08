@@ -5,6 +5,10 @@ import { QueryProvider } from "@src/components/providers/query-provider";
 import "@src/styles/style.css";
 import type { Metadata } from "next";
 import { Barrio, JetBrains_Mono } from "next/font/google";
+<<<<<<< HEAD
+=======
+import { Analytics } from "@vercel/analytics/react"
+>>>>>>> f3a18d4 (chore: set vercel analytics.)
 
 const jetBrainsMonoFont = JetBrains_Mono({
   subsets: ["latin"],
@@ -55,6 +59,10 @@ export default function RootLayout({
         <Header />
         <QueryProvider>{children}</QueryProvider>
         <Toaster />
+<<<<<<< HEAD
+=======
+        <Analytics/>
+>>>>>>> f3a18d4 (chore: set vercel analytics.)
       </body>
     </html>
   );
