@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 		title: exp?.title,
 		description: exp?.description,
 		openGraph: {
-			images: [exp?.imageLink ?? '', ...previousImages],
+			images: [exp?.imageLink ?? ''],
 		},
 		...METADATA,
 	};

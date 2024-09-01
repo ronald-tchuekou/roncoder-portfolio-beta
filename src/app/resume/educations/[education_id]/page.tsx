@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 		title: project?.title,
 		description: project?.description,
 		openGraph: {
-			images: [project?.imageLink ?? '', ...previousImages],
+			images: [project?.imageLink ?? ''],
 		},
 		...METADATA,
 	};

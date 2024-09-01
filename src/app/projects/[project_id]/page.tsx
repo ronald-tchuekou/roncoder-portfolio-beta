@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 		title: project?.title,
 		description: project?.description,
 		openGraph: {
-			images: [project?.image ?? '', ...previousImages],
+			images: [project?.image ?? ''],
 		},
 		...METADATA,
 		keywords: [...METADATA_KEYWORDS, ...(project?.tags ?? [])],
