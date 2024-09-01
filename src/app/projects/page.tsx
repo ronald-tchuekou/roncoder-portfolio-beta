@@ -2,7 +2,15 @@ import { cn } from "@/lib/utils";
 import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { ProjectItem } from "@src/components/projects/project-item";
-import { PROJECTS } from "@src/resources/util-data";
+import { METADATA, PROJECTS } from '@src/resources/util-data';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Quelques une me mes réalisations. | roncoder',
+	description:
+		'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
+	...METADATA,
+};
 
 export default function Projects() {
   return (

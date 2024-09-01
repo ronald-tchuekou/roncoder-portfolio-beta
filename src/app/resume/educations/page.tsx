@@ -1,9 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { EDUCATIONS_LIST } from "@src/resources/util-data";
+import { EDUCATIONS_LIST, METADATA } from '@src/resources/util-data';
 import { DotIcon, MoveRightIcon } from "lucide-react";
-import Link from "next/link";
+import { Metadata } from 'next';
+import Link from 'next/link';
+
+export const metadata: Metadata = {
+	title: 'Mon parcours et certifications. | roncoder',
+	description:
+		'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
+	...METADATA,
+};
 
 export default function Educations() {
   return (

@@ -1,6 +1,15 @@
 import { cn } from "@/lib/utils";
 import { Container } from "@src/components/container";
 import { ResumeSideBar } from "@src/components/resume/side-bar";
+import { METADATA } from '@src/resources/util-data';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Mon parcours, mes expériences et certifications. | roncoder',
+	description:
+		'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
+	...METADATA,
+};
 
 export default function ResumeLayout({
   children,

@@ -1,7 +1,15 @@
 import { cn } from "@/lib/utils";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { INFORMATIONS } from "@src/resources/util-data";
+import { INFORMATIONS, METADATA } from '@src/resources/util-data';
+import { Metadata } from 'next';
 import Link from "next/link";
+
+export const metadata: Metadata = {
+	title: 'A propos de Ronald Tchuekou. | roncoder',
+	description:
+		'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
+	...METADATA,
+};
 
 export default function About() {
   return (

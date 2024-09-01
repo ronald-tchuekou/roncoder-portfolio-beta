@@ -1,79 +1,81 @@
 import { cn } from "@/lib/utils";
 import { BackButton } from "@src/components/back-button";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { EDUCATIONS_LIST } from "@src/resources/util-data";
+import { EDUCATIONS_LIST, METADATA } from '@src/resources/util-data';
 import { DotIcon } from "lucide-react";
-import Image from "next/image";
+import { Metadata, ResolvingMetadata } from 'next';
+import Image from 'next/image';
 
-export default function EducationDetails({
-  params,
-}: {
-  params: { education_id: string };
-}) {
-  const education = EDUCATIONS_LIST.find(
-    (exp) => exp.id === params.education_id
-  );
+type Props = {
+	params: { education_id: string };
+};
 
-  return (
-    <section className="w-full flex flex-col gap-5">
-      <div className={cn("flex gap-3 items-center")}>
-        <BackButton />
-        <RevealFromBottom
-          delay={0.1}
-          elt={"h2"}
-          className={cn(
-            "scroll-m-20 text-xl lg:text-3xl tracking-tight ",
-            "text-white"
-          )}
-        >
-          {education?.title || "Détails sur la certification"}
-        </RevealFromBottom>
-      </div>
-      <RevealFromBottom delay={0.2} className={cn("flex")}>
-        <p className={cn("text-primary text-lg uppercase")}>
-          {education?.company}
-        </p>
-        <div className="flex items-center h-full">
-          <DotIcon className="size-8 text-primary" />
-          <small className={cn("text-muted-foreground")}>
-            {education?.date}
-          </small>
-        </div>
-      </RevealFromBottom>
-      <RevealFromBottom elt={"p"} delay={0.2} className={cn("")}>
-        {education?.description}
-      </RevealFromBottom>
-      {education?.imageLink && (
-        <RevealFromBottom
-          delay={0.2}
-          className={cn("w-full aspect-auto", "rounded-lg", "bg-secondary/10")}
-        >
-          <Image
-            quality={100}
-            src={education.imageLink}
-            alt={education.title}
-            width={1000}
-            height={600}
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=="
-            className={cn("rounded-lg w-full aspect-auto")}
-          />
-        </RevealFromBottom>
-      )}
-      <RevealFromBottom
-        elt={"h3"}
-        delay={0.3}
-        className={cn("text-lg text-accent-foreground")}
-      >
-        Contenu de la formation
-      </RevealFromBottom>
-      <ul className={cn("list-disc pl-8 space-y-3")}>
-        {education?.tasks.map((task, idx) => (
-          <RevealFromBottom delay={(idx + 1) * 0.1} elt={"li"} key={idx}>
-            {task}
-          </RevealFromBottom>
-        ))}
-      </ul>
-    </section>
-  );
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+	// fetch data
+	const project = EDUCATIONS_LIST.find((exp) => exp.id === params.education_id);
+
+	// optionally access and extend (rather than replace) parent metadata
+	const previousImages = (await parent).openGraph?.images || [];
+
+	return {
+		title: project?.title,
+		description: project?.description,
+		openGraph: {
+			images: [project?.imageLink ?? '', ...previousImages],
+		},
+		...METADATA,
+	};
+}
+
+export default function EducationDetails({ params }: Props) {
+	const education = EDUCATIONS_LIST.find((exp) => exp.id === params.education_id);
+
+	return (
+		<section className='w-full flex flex-col gap-5'>
+			<div className={cn('flex gap-3 items-center')}>
+				<BackButton />
+				<RevealFromBottom
+					delay={0.1}
+					elt={'h2'}
+					className={cn('scroll-m-20 text-xl lg:text-3xl tracking-tight ', 'text-white')}
+				>
+					{education?.title || 'Détails sur la certification'}
+				</RevealFromBottom>
+			</div>
+			<RevealFromBottom delay={0.2} className={cn('flex')}>
+				<p className={cn('text-primary text-lg uppercase')}>{education?.company}</p>
+				<div className='flex items-center h-full'>
+					<DotIcon className='size-8 text-primary' />
+					<small className={cn('text-muted-foreground')}>{education?.date}</small>
+				</div>
+			</RevealFromBottom>
+			<RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
+				{education?.description}
+			</RevealFromBottom>
+			{education?.imageLink && (
+				<RevealFromBottom delay={0.2} className={cn('w-full aspect-auto', 'rounded-lg', 'bg-secondary/10')}>
+					<Image
+						quality={100}
+						src={education.imageLink}
+						alt={education.title}
+						width={1000}
+						height={600}
+						placeholder='blur'
+						blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
+						className={cn('rounded-lg w-full aspect-auto')}
+					/>
+				</RevealFromBottom>
+			)}
+			<RevealFromBottom elt={'h3'} delay={0.3} className={cn('text-lg text-accent-foreground')}>
+				Contenu de la formation
+			</RevealFromBottom>
+			<ul className={cn('list-disc pl-8 space-y-3')}>
+				{education?.tasks.map((task, idx) => (
+					<RevealFromBottom delay={(idx + 1) * 0.1} elt={'li'} key={idx}>
+						{task}
+					</RevealFromBottom>
+				))}
+			</ul>
+		</section>
+	);
 }
