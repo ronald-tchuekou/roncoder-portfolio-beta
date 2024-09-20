@@ -716,7 +716,7 @@ export const PROJECTS: Project[] = [
 			{
 				icon: <LinkIcon className='size-6' />,
 				label: 'Lien',
-				link: 'https://maori.vercel.app',
+				link: 'https://maori-delta.vercel.app',
 			},
 		],
 		date: '2021-11-25',
