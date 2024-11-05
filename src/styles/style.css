@@ -27,28 +27,29 @@
   }
 }
 
-@layer base {
-  body {
-    @apply bg-background text-foreground overflow-x-hidden;
-  }
+body {
+  @apply bg-background text-foreground overflow-x-hidden;
+}
 
-  .nav-link {
-    @apply block p-5 text-base font-medium transition duration-300 space-y-1;
-    .nav-link-label {
-      @apply block;
-    }
-    .nav-link-indicator {
-      transition: 300ms;
-      @apply block h-1 w-0 group-hover:w-full rounded-full bg-primary;
-    }
-    &:hover,
-    &.active {
-      @apply text-primary;
-      .nav-link-indicator {
-        @apply w-full;
-      }
-    }
-  }
+.nav-link {
+  @apply block p-5 text-base font-medium transition duration-300 space-y-1;
+}
+
+.nav-link .nav-link-label {
+  @apply block;
+}
+.nav-link .nav-link-indicator {
+  transition: 300ms;
+  @apply block h-1 w-0 group-hover:w-full rounded-full bg-primary;
+}
+.nav-link:hover,
+.nav-link.active {
+  @apply text-primary;
+}
+
+.nav-link:hover .nav-link-indicator,
+.nav-link.active .nav-link-indicator {
+  @apply w-full;
 }
 
 .slick-arrow {

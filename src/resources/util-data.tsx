@@ -16,43 +16,51 @@ export const SERVICES: Service[] = [
 		key: 'ux_ui_design',
 		title: 'UX/UI Design',
 		description:
-			"Vous avez besoin d'un prototype modern, épuré, attrayant qui respect le mieux et à la perfection votre charte graphique ?",
+			"Je conçois des interfaces utilisateur intuitives et esthétiques qui offrent une expérience utilisateur optimale. Mon objectif est de créer des designs qui non seulement attirent l'œil, mais qui sont également fonctionnels et faciles à utiliser.",
 	},
 	{
 		id: '02',
 		key: 'web_dev',
 		title: 'Développement web',
 		description:
-			"Vous avez besoin d'une application web modern, responsive, épuré, attrayant qui respect le mieux et à la perfection votre charte graphique ?",
+			"Vous avez besoin d'une application web moderne, responsive, épurée et attrayante qui respecte parfaitement votre charte graphique ? Je suis là pour transformer vos idées en réalité avec des solutions web sur mesure.",
 	},
 	{
 		id: '03',
 		key: 'mobile_dev',
 		title: 'Développement mobile',
 		description:
-			'Vous avez besoin d’une application mobile modern, épuré attrayant accessible sur iOS et Android et qui respect le mieux et la perfection votre charte graphique ?',
+			'Vous avez besoin d’une application mobile moderne, épurée et attrayante, accessible sur iOS et Android, qui respecte parfaitement votre charte graphique ? Je développe des applications mobiles performantes et user-friendly.',
 	},
 	{
 		id: '04',
 		key: 'seo',
-		title: 'SEO',
+		title: 'SEO (Référencement naturel)',
 		description:
-			'Vous avez besoin gérer le référencement naturel de votre plateforme pour maximiser votre trafic et augmenter vos vente ?',
+			'Vous souhaitez optimiser le référencement naturel de votre plateforme pour maximiser votre trafic et augmenter vos ventes ou votre visibilité ? Je propose des stratégies SEO efficaces pour améliorer votre positionnement sur les moteurs de recherche.',
 	},
 	{
 		id: '05',
 		key: 'pay_tools_integration',
 		title: 'Intégration d’outil de paiement',
-		description: 'Vous avez besoin d’ajouter un moyen de paiement dans votre application web et mobile ?',
+		description:
+			'Vous avez besoin d’ajouter un moyen de paiement dans votre application web et mobile ? Je vous aide à intégrer des solutions de paiement sécurisées et fiables pour faciliter les transactions de vos utilisateurs.',
 	},
 	{
 		id: '06',
 		key: 'deploy',
 		title: 'Mise en production',
 		description:
-			'Vous avez besoin de faire le deployment de votre application pour rendre cela accessible par votre audience ?',
+			'Vous avez besoin de déployer votre application pour la rendre accessible à votre audience ? Je m’occupe de la mise en production de vos applications, en assurant une transition fluide et sans interruption.',
 	},
-];
+	{
+		id: '07',
+		key: 'api_build_or_integration',
+		title: "Création et intégration d'API REST",
+		description:
+			'Vous avez besoin de créer ou d’intégrer des API REST pour votre application ? Je développe et intègre des API robustes et sécurisées pour améliorer les fonctionnalités et l’interopérabilité de vos applications.',
+	},
+]
 
 export const RESUME_NAV_LINKS: NavLink[] = [
 	{
@@ -103,7 +111,7 @@ export const RESUME_NAV_LINKS: NavLink[] = [
 			</svg>
 		),
 	},
-];
+]
 
 export const SKILLS_LIST: Skill[] = [
 	{
@@ -376,7 +384,7 @@ export const SKILLS_LIST: Skill[] = [
 			</svg>
 		),
 	},
-];
+]
 
 export const EXPERIENCES_LIST: Experience[] = [
 	{
@@ -384,8 +392,7 @@ export const EXPERIENCES_LIST: Experience[] = [
 		title: 'Développeur Senior Full-Stack',
 		company: 'AGYL TECH',
 		date: 'Oct 2023 - Présent',
-		description:
-			'Développement de plusieurs applications web et mobiles pour des clients locaux et internationaux.',
+		description: 'Développement de plusieurs applications web et mobiles pour des clients locaux et internationaux.',
 		tasks: [
 			'Planification des taches (sprints) pour un projet donné.',
 			'Conception de modèles de données pour les applications clients et internes.',
@@ -427,7 +434,7 @@ export const EXPERIENCES_LIST: Experience[] = [
 			'Conception et réalisation des landing pages pour des clients locaux et internationaux.',
 		],
 	},
-];
+]
 
 export const EDUCATIONS_LIST: Experience[] = [
 	{
@@ -585,7 +592,7 @@ export const EDUCATIONS_LIST: Experience[] = [
 			'Prise en charge des outils de bureautique.',
 		],
 	},
-];
+]
 
 export const INFORMATIONS: Information[] = [
 	{
@@ -603,7 +610,7 @@ export const INFORMATIONS: Information[] = [
 	{
 		id: 'experience',
 		label: 'Expérience',
-		value: "4 ans d'expérience",
+		value: "6 ans d'expérience",
 		isLong: false,
 	},
 	{
@@ -635,13 +642,56 @@ export const INFORMATIONS: Information[] = [
 	{
 		id: 'linked_in',
 		label: 'LinkedIn',
-		value: 'https://www.linkedin.com/in/ronald-tchuekou-02129b191',
+		value: 'https://linkedin.com/in/ronald-tchuekou-02129b191',
 		isLong: true,
-		link: 'https://www.linkedin.com/in/ronald-tchuekou-02129b191',
+		link: 'https://linkedin.com/in/ronald-tchuekou-02129b191',
 	},
-];
+]
 
 export const PROJECTS: Project[] = [
+	{
+		id: 'privie',
+		image: '/projects/privie/privie-web-cover.jpg',
+		title: 'Privie',
+		description:
+			"Vos informations personnelles sont exploitées sans votre consentement. Elles servent à vous harceler, vous manipuler, et peuvent même vous mettre en danger. Il est temps de reprendre le contrôle. Avec PrivieControl, reprenez le contrôle de votre vie privée dès aujourd'hui. Nous supprimons vos données de toutes les entreprises qui les exploitent, éliminons les risques, et ne laisserons plus jamais personne profiter de vous.",
+		tags: [
+			'NextJs',
+			'React',
+			'Redux Toolkit',
+			'Tailwind CSS',
+			'ShadCN UI',
+			'Reacharts',
+			'React-PDF',
+			'Zod',
+			'React-Hook-Form',
+			'Stripe',
+			'Cryptomonnaie',
+		],
+		company: 'Projet Client',
+		gallery: [
+			'/projects/privie/privie-img-01.png',
+			'/projects/privie/privie-img-02.png',
+			'/projects/privie/privie-img-03.png',
+			'/projects/privie/privie-img-04.png',
+			'/projects/privie/privie-img-05.png',
+			'/projects/privie/privie-img-06.png',
+			'/projects/privie/privie-img-07.png',
+			'/projects/privie/privie-img-08.png',
+			'/projects/privie/privie-img-09.png',
+			'/projects/privie/privie-img-10.png',
+			'/projects/privie/privie-img-11.png',
+			'/projects/privie/privie-img-12.png',
+		],
+		links: [
+			{
+				icon: <LinkIcon className='size-6' />,
+				label: 'Lien',
+				link: 'https://privie.io',
+			},
+		],
+		date: '2021-12-25',
+	},
 	{
 		id: 'amizone',
 		image: '/projects/amizone/amizone-cover.jpg',
@@ -839,7 +889,7 @@ export const PROJECTS: Project[] = [
 	//   ],
 	//   company: "AGYL TECH",
 	// },
-];
+]
 
 export const METADATA_KEYWORDS = [
 	'Ronald',
