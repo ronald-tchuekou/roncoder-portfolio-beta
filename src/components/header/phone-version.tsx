@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { NAV_LINKS } from "@src/resources/util-data";
+import { NAV_LINKS } from '@src/resources/data/nav-links'
 import { isCurrentPath } from "@src/resources/util-functions";
 import { motion } from "framer-motion";
 import { MenuIcon, XIcon } from "lucide-react";

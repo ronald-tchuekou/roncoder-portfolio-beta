@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { NAV_LINKS } from "@src/resources/util-data";
+import { NAV_LINKS } from '@src/resources/data/nav-links'
 import { isCurrentPath } from "@src/resources/util-functions";
 import Image from "next/image";
 import Link from "next/link";
