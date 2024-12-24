@@ -2,21 +2,22 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Link } from '@src/i18n/routing'
 import { CloudDownload, LinkedinIcon } from "lucide-react";
-import { useTranslations } from 'next-intl'
-import Link from "next/link";
+import { useLocale, useTranslations } from 'next-intl'
 import { FC, useCallback } from "react";
 import { RevealFromBottom } from "../motions/reveal-from-bottom";
 
 export const InfoSection: FC = () => {
-  const t = useTranslations('home')
+	const t = useTranslations('home')
+	const locale = useLocale()
 
-  const downloadResume = useCallback(() => {
+	const downloadResume = useCallback(() => {
 		const a = document.createElement('a')
-		a.setAttribute('href', '/ronald-tchuekou-resume.pdf')
-		a.setAttribute('download', 'Ronald-Tchuekou-Resume.pdf')
+		a.setAttribute('href', `/resumes/ronald-tchuekou-resume-${locale}.pdf`)
+		a.setAttribute('download', `Ronald-Tchuekou-Resume-${locale}.pdf`)
 		a.click()
-  }, [])
+	}, [locale])
 
   return (
 		<section
