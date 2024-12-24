@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Header } from "@src/components/header/header";
 import { QueryProvider } from "@src/components/providers/query-provider";
-import { METADATA } from '@src/resources/util-data';
+import { METADATA } from '@src/resources/data/metadata'
 import '@src/styles/style.css';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';

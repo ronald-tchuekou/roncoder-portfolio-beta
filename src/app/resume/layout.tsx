@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Container } from "@src/components/container";
 import { ResumeSideBar } from "@src/components/resume/side-bar";
-import { METADATA } from '@src/resources/util-data';
+import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

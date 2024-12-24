@@ -1,21 +1,25 @@
 import { cn } from "@/lib/utils";
 import { BackButton } from "@src/components/back-button";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { EDUCATIONS_LIST, METADATA } from '@src/resources/util-data';
+import { EDUCATIONS_LIST } from '@src/resources/data/educations'
+import { METADATA } from '@src/resources/data/metadata'
 import { DotIcon } from "lucide-react";
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next'
 import Image from 'next/image';
 
 type Props = {
 	params: { education_id: string };
 };
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-	// fetch data
-	const project = EDUCATIONS_LIST.find((exp) => exp.id === params.education_id);
+export async function generateStaticParams() {
+	return EDUCATIONS_LIST.map((education) => ({
+		education_id: education.id,
+	}))
+}
 
-	// optionally access and extend (rather than replace) parent metadata
-	const previousImages = (await parent).openGraph?.images || [];
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	// fetch data
+	const project = EDUCATIONS_LIST.find((exp) => exp.id === params.education_id)
 
 	return {
 		title: project?.title,
@@ -24,7 +28,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 			images: [project?.imageLink ?? ''],
 		},
 		...METADATA,
-	};
+	}
 }
 
 export default function EducationDetails({ params }: Props) {

@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { EXPERIENCES_LIST, METADATA } from '@src/resources/util-data';
+import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
+import { METADATA } from '@src/resources/data/metadata'
 import { DotIcon, MoveRightIcon } from "lucide-react";
 import { Metadata } from 'next';
 import Link from 'next/link';

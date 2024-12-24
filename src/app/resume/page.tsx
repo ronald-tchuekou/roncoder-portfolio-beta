@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { SKILLS_LIST } from "@src/resources/util-data";
+import { SKILLS_LIST } from '@src/resources/data/skills'
 
 export default function Resume() {
   return (

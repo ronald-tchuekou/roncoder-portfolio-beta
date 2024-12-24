@@ -2,7 +2,8 @@ import { cn } from "@/lib/utils";
 import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { ProjectItem } from "@src/components/projects/project-item";
-import { METADATA, PROJECTS } from '@src/resources/util-data';
+import { METADATA } from '@src/resources/data/metadata'
+import { PROJECTS } from '@src/resources/data/projects'
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { RESUME_NAV_LINKS } from "@src/resources/util-data";
+import { RESUME_NAV_LINKS } from '@src/resources/data/resume-nav-links'
 import { isCurrentPath } from "@src/resources/util-functions";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";

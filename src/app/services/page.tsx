@@ -1,5 +1,5 @@
 import { ServicesList } from "@src/components/services/services-list";
-import { METADATA } from '@src/resources/util-data';
+import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

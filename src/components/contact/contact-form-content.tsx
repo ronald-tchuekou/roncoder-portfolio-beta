@@ -20,11 +20,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  contactFormSchema,
-  ContactFormSchema,
-} from "@src/resources/form-schemas";
-import { SERVICES } from "@src/resources/util-data";
+import { SERVICES } from '@src/resources/data/services'
+import { contactFormSchema, ContactFormSchema } from '@src/resources/form-schemas'
 import { createRequest } from "@src/services/contact-service";
 import { useMutation } from "@tanstack/react-query";
 import { RefreshCw } from "lucide-react";

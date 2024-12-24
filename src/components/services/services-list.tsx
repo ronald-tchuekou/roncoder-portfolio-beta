@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { SERVICES } from "@src/resources/util-data";
+import { SERVICES } from '@src/resources/data/services'
 import { FC, useCallback, useRef } from "react";
 import { Container } from "../container";
 import { ContactModal, ContactModalRef } from "../modals/contact-modal";

@@ -1,20 +1,23 @@
 import { cn } from "@/lib/utils";
 import { BackButton } from "@src/components/back-button";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { EXPERIENCES_LIST, METADATA } from '@src/resources/util-data';
+import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
+import { METADATA } from '@src/resources/data/metadata'
 import { DotIcon } from 'lucide-react';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next'
 
 type Props = {
 	params: { exp_id: string };
 };
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-	// fetch data
-	const exp = EXPERIENCES_LIST.find((exp) => exp.id === params.exp_id);
+export async function generateStaticParams() {
+	return EXPERIENCES_LIST.map((exp) => ({
+		exp_id: exp.id,
+	}))
+}
 
-	// optionally access and extend (rather than replace) parent metadata
-	const previousImages = (await parent).openGraph?.images || [];
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const exp = EXPERIENCES_LIST.find((exp) => exp.id === params.exp_id)
 
 	return {
 		title: exp?.title,
@@ -23,7 +26,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 			images: [exp?.imageLink ?? ''],
 		},
 		...METADATA,
-	};
+	}
 }
 
 export default function ExperienceDetails({ params }: Props) {

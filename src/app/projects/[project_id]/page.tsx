@@ -4,9 +4,10 @@ import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { Gallery } from "@src/components/projects/gallery";
 import { ProjectTags } from "@src/components/projects/project-tags";
-import { METADATA, METADATA_KEYWORDS, PROJECTS } from '@src/resources/util-data';
+import { METADATA, METADATA_KEYWORDS } from '@src/resources/data/metadata'
+import { PROJECTS } from '@src/resources/data/projects'
 import { DotIcon } from "lucide-react";
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next'
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,12 +15,14 @@ type Props = {
 	params: { project_id: string };
 };
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-	// fetch data
-	const project = PROJECTS.find((project) => project.id === params.project_id);
+export async function generateStaticParams() {
+	return PROJECTS.map((project) => ({
+		project_id: project.id,
+	}))
+}
 
-	// optionally access and extend (rather than replace) parent metadata
-	const previousImages = (await parent).openGraph?.images || [];
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const project = PROJECTS.find((project) => project.id === params.project_id)
 
 	return {
 		title: project?.title,
@@ -29,7 +32,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 		},
 		...METADATA,
 		keywords: [...METADATA_KEYWORDS, ...(project?.tags ?? [])],
-	};
+	}
 }
 
 export default function ExperienceDetails({ params }: Props) {

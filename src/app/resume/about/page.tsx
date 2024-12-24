@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { INFORMATIONS, METADATA } from '@src/resources/util-data';
+import { INFORMATIONS } from '@src/resources/data/informations'
+import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next';
 import Link from 'next/link'
 

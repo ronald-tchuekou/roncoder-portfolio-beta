@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { ContactForm } from "@src/components/contact/contact-form";
 import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { METADATA } from '@src/resources/util-data';
+import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next';
 import Link from 'next/link';
 
