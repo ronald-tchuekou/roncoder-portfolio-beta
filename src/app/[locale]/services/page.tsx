@@ -1,6 +1,7 @@
 import { ServicesList } from "@src/components/services/services-list";
 import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next';
+import { setRequestLocale } from 'next-intl/server'
 
 export const metadata: Metadata = {
 	title: "Les services que j'offres. | roncoder",
@@ -9,10 +10,20 @@ export const metadata: Metadata = {
 	...METADATA,
 };
 
-export default function Services() {
-  return (
-    <main>
-      <ServicesList />
-    </main>
-  );
+
+type Props = {
+	params: Promise<{ locale: string; project_id: string }>
+}
+
+export default async function Page({ params }: Props) {
+	const locale = (await params).locale
+
+	// Enable static rendering
+	setRequestLocale(locale)
+
+	return (
+		<main>
+			<ServicesList />
+		</main>
+	)
 }

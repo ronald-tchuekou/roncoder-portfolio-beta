@@ -1,9 +1,9 @@
 import { NavLink } from '../util-types'
 
 export const NAV_LINKS: NavLink[] = [
-	{ url: '/', label: 'Presentation' },
-	{ url: '/services', label: 'Services' },
-	{ url: '/resume', label: 'Résumé' },
-	{ url: '/projects', label: 'Projets' },
-	{ url: '/contact', label: 'Contact' },
+	{ url: '/', label: 'presentation' },
+	{ url: '/services', label: 'services' },
+	{ url: '/resume', label: 'resume' },
+	{ url: '/projects', label: 'projects' },
+	{ url: '/contact', label: 'contact' },
 ] as const

@@ -5,10 +5,8 @@ import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
 import { METADATA } from '@src/resources/data/metadata'
 import { DotIcon } from 'lucide-react';
 import { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
 
-type Props = {
-	params: Promise<{ exp_id: string }>
-}
 
 export async function generateStaticParams() {
 	return EXPERIENCES_LIST.map((exp) => ({
@@ -30,7 +28,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 }
 
-export default async function ExperienceDetails({ params }: Props) {
+type Props = {
+	params: Promise<{ locale: string; project_id: string; exp_id: string }>
+}
+
+export default async function Page({ params }: Props) {
+	const locale = (await params).locale
+
+	// Enable static rendering
+	setRequestLocale(locale)
+
 	const expId = (await params).exp_id
 	const experience = EXPERIENCES_LIST.find((exp) => exp.id === expId)
 

@@ -4,16 +4,13 @@ import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { Gallery } from "@src/components/projects/gallery";
 import { ProjectTags } from "@src/components/projects/project-tags";
-import { METADATA, METADATA_KEYWORDS } from '@src/resources/data/metadata'
+import { METADATA } from '@src/resources/data/metadata'
 import { PROJECTS } from '@src/resources/data/projects'
 import { DotIcon } from "lucide-react";
 import { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
 import Image from 'next/image';
 import Link from 'next/link';
-
-type Props = {
-	params: Promise<{ project_id: string }>
-}
 
 export async function generateStaticParams() {
 	return PROJECTS.map((project) => ({
@@ -32,11 +29,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			images: [project?.image ?? ''],
 		},
 		...METADATA,
-		keywords: [...METADATA_KEYWORDS, ...(project?.tags ?? [])],
+		keywords: [...(project?.tags ?? [])],
 	}
 }
 
-export default async function ExperienceDetails({ params }: Props) {
+type Props = {
+	params: Promise<{ locale: string; project_id: string }>
+}
+
+export default async function Page({ params }: Props) {
+	const locale = (await params).locale
+
+	// Enable static rendering
+	setRequestLocale(locale)
+
 	const productId = (await params).project_id
 	const project = PROJECTS.find((project) => project.id === productId)
 

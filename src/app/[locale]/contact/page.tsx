@@ -4,6 +4,7 @@ import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next';
+import { setRequestLocale } from 'next-intl/server'
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -13,8 +14,17 @@ export const metadata: Metadata = {
 	...METADATA,
 };
 
-export default function Resume() {
-  return (
+type Props = {
+	params: Promise<{ locale: string }>
+}
+
+export default async function Page({ params }: Props) {
+	const locale = (await params).locale
+
+	// Enable static rendering
+	setRequestLocale(locale)
+
+	return (
 		<main>
 			<Container className={cn('grid grid-cols-1 md:grid-cols-12 gap-10 py-10 lg:py-20')}>
 				<section className={cn('order-2 md:order-1 md:col-span-8')}>
@@ -55,11 +65,7 @@ export default function Resume() {
 					</RevealFromBottom>
 					{/* Mail */}
 					<RevealFromBottom delay={0.1}>
-						<Link
-							href={'mailto:ronaldtchuekou@gmail.com'}
-							target='_blank'
-							className='flex items-center gap-3'
-						>
+						<Link href={'mailto:ronaldtchuekou@gmail.com'} target='_blank' className='flex items-center gap-3'>
 							<div className='flex justify-center items-center rounded-xl bg-accent/40 flex-none p-5'>
 								<svg
 									className='size-10 text-muted-foreground'
@@ -84,5 +90,5 @@ export default function Resume() {
 				</aside>
 			</Container>
 		</main>
-  );
+	)
 }

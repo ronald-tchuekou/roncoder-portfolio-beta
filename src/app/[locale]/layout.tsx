@@ -35,11 +35,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 	return {
 		title: {
-			default: 'Ronald Tchuekou Portfolio, Développeur FullStack et Administrateur de systèmes',
+			default: t('page_title'),
 			template: '%s | Ronald Tchuekou Portfolio',
 		},
-		description:
-			'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
+		description: t('page_description'),
 		metadataBase: new URL(process.env.BASE_LINK || 'https://roncoder-beta.vercel.app'),
 		alternates: {
 			canonical: '/',
@@ -51,7 +50,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		openGraph: {
 			images: ['/ronald-tchuekou-profile.jpg'],
 		},
+		keywords: [
+			'Ronald',
+			'Tchuekou',
+			'Ronald Tchuekou',
+			'Portfolio',
+			'Ronald Tchuekou Portfolio',
+			'Web',
+			'Mobile',
+			'Front',
+			'FrontEnd',
+			'FullStack',
+			'Full',
+			'Next.js',
+			'React',
+			'JavaScript',
+			'TypeScript',
+			'Angular',
+			'TailwindCSS',
+			'Stripe',
+			'Paddle',
+			'BTCPay Sever',
+			'Création de site web',
+			"Développeur d'application web et mobile",
+			'Web and mobile developer',
+			'Web developer',
+			'Développeur web',
+			'Mobile developer',
+			'Développeur mobile',
+		],
 		...METADATA,
+		twitter: {
+			...METADATA.twitter,
+			title: t('page_title'),
+			description: t('page_description'),
+		},
 	}
 }
 

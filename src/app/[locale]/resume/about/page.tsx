@@ -3,6 +3,7 @@ import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { INFORMATIONS } from '@src/resources/data/informations'
 import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next';
+import { setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -12,7 +13,17 @@ export const metadata: Metadata = {
 	...METADATA,
 }
 
-export default function About() {
+
+type Props = {
+	params: Promise<{ locale: string; project_id: string }>
+}
+
+export default async function Page({ params }: Props) {
+	const locale = (await params).locale
+
+	// Enable static rendering
+	setRequestLocale(locale)
+
 	return (
 		<section className='w-full flex flex-col gap-5'>
 			<RevealFromBottom elt={'h2'} className={cn('scroll-m-20 text-xl lg:text-3xl tracking-tight ', 'text-white')}>

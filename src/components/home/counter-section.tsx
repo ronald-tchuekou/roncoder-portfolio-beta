@@ -1,30 +1,33 @@
 import { cn } from "@/lib/utils";
+import { useTranslations } from 'next-intl'
 import { FC } from "react";
 import { Container } from "../container";
 import { RevealFromBottom } from "../motions/reveal-from-bottom";
 
 export const CounterSection: FC = () => {
-  return (
+	const t = useTranslations('home')
+
+	return (
 		<Container className='pb-10'>
 			<section className={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-3 md:gap-8')}>
 				<RevealFromBottom className='flex gap-3'>
 					<p className='text-5xl font-extrabold text-foreground'>5</p>
 					<p>
-						Années <br /> D&apos;expériences
+						{t('year')} <br /> {t('of_experiences')}
 					</p>
 				</RevealFromBottom>
 
 				<RevealFromBottom delay={0.2} className='flex gap-3'>
 					<p className='text-5xl font-extrabold text-foreground'>13</p>
 					<p>
-						Projets <br /> Terminés
+						{t('projects')} <br /> {t('finish')}
 					</p>
 				</RevealFromBottom>
 
 				<RevealFromBottom delay={0.3} className='flex gap-3'>
 					<p className='text-5xl font-extrabold text-foreground'>8</p>
 					<p>
-						Technologies <br /> Maîtrisées
+						{t('technologies')} <br /> {t('mastered')}
 					</p>
 				</RevealFromBottom>
 
@@ -36,5 +39,5 @@ export const CounterSection: FC = () => {
 				</RevealFromBottom>
 			</section>
 		</Container>
-  )
+	)
 };

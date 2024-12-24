@@ -1,33 +1,10 @@
 import { Metadata } from 'next'
 
-export const METADATA_KEYWORDS = [
-	'Ronald',
-	'Tchuekou',
-	'Ronald Tchuekou',
-	'Portfolio',
-	'Ronald Tchuekou Portfolio',
-	'Web',
-	'Mobile',
-	'Front',
-	'FrontEnd',
-	'FullStack',
-	'Full',
-	'Next.js',
-	'React',
-	'JavaScript',
-	'TypeScript',
-	'Angular',
-	'TailwindCSS',
-	'Stripe',
-	'Paddle',
-	'BTCPay Sever',
-]
 
 export const METADATA: Metadata = {
 	generator: 'Next.js',
 	applicationName: 'roncoder',
 	referrer: 'origin-when-cross-origin',
-	keywords: [...METADATA_KEYWORDS],
 	authors: [{ name: 'Ronald Tchuekou' }],
 	creator: 'Ronald Tchuekou',
 	publisher: 'Vercel',

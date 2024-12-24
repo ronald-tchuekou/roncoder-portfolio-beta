@@ -1,7 +1,21 @@
 {
-	"home": { "page_title": "", "page_description": "", "page_key_words": [] },
-	"contact": { "page_title": "", "page_description": "", "page_key_words": [] },
-	"projects": { "page_title": "", "page_description": "", "page_key_words": [] },
-	"resume": { "page_title": "", "page_description": "", "page_key_words": [] },
-	"services": { "page_title": "", "page_description": "", "page_key_words": [] }
+	"header": {
+		"presentation": "Presentation",
+		"services": "Services",
+		"resume": "Resume",
+		"projects": "Projects",
+		"contact": "Contact"
+	},
+	"home": {
+		"page_title": "Ronald Tchuekou Portfolio, FullStack Developer and Systems Administrator",
+		"page_description": "I design and implement web and mobile applications, design professional prototypes to best describe the scenario of your application's features.",
+		"full_stack_developer": "Full-Stack Developer",
+		"hi_is": "Hi, I'm",
+		"i_create_web_and_mobile_platforms": "I excel in creating elegant web and mobile platforms.",
+		"i_use_many_languages": "I have skills in a variety of languages and technologies."
+	},
+	"contact": { "page_title": "", "page_description": "" },
+	"projects": { "page_title": "", "page_description": "" },
+	"resume": { "page_title": "", "page_description": "" },
+	"services": { "page_title": "", "page_description": "" }
 }

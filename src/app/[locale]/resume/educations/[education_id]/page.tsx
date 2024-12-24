@@ -5,11 +5,8 @@ import { EDUCATIONS_LIST } from '@src/resources/data/educations'
 import { METADATA } from '@src/resources/data/metadata'
 import { DotIcon } from "lucide-react";
 import { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
 import Image from 'next/image';
-
-type Props = {
-	params: Promise<{ education_id: string }>
-}
 
 export async function generateStaticParams() {
 	return EDUCATIONS_LIST.map((education) => ({
@@ -31,7 +28,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 }
 
-export default async function EducationDetails({ params }: Props) {
+type Props = {
+	params: Promise<{ locale: string; project_id: string; education_id: string }>
+}
+
+export default async function Page({ params }: Props) {
+	const locale = (await params).locale
+
+	// Enable static rendering
+	setRequestLocale(locale)
+
 	const educationId = (await params).education_id
 	const education = EDUCATIONS_LIST.find((exp) => exp.id === educationId)
 
