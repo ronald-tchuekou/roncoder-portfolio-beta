@@ -12,8 +12,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 type Props = {
-	params: { project_id: string };
-};
+	params: Promise<{ project_id: string }>
+}
 
 export async function generateStaticParams() {
 	return PROJECTS.map((project) => ({
@@ -22,7 +22,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const project = PROJECTS.find((project) => project.id === params.project_id)
+	const productId = (await params).project_id
+	const project = PROJECTS.find((project) => project.id === productId)
 
 	return {
 		title: project?.title,
@@ -35,8 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 }
 
-export default function ExperienceDetails({ params }: Props) {
-	const project = PROJECTS.find((project) => project.id === params.project_id);
+export default async function ExperienceDetails({ params }: Props) {
+	const productId = (await params).project_id
+	const project = PROJECTS.find((project) => project.id === productId)
 
 	return (
 		<main>
@@ -111,16 +113,10 @@ export default function ExperienceDetails({ params }: Props) {
 				<div className={cn('w-full grid grid-cols-1 gap-8 lg:grid-cols-2')}>
 					{project?.links
 						? project.links.map((link, index) => (
-								<RevealFromBottom
-									key={`link-${index}`}
-									delay={index * 0.1}
-									className={cn('flex gap-3')}
-								>
+								<RevealFromBottom key={`link-${index}`} delay={index * 0.1} className={cn('flex gap-3')}>
 									<div className='flex items-center justify-center gap-2 flex-none'>
 										{link.icon && <div className='flex-none'>{link.icon}</div>}
-										{link.label && (
-											<p className='text-muted-foreground text-sm flex-none'>{link.label}</p>
-										)}
+										{link.label && <p className='text-muted-foreground text-sm flex-none'>{link.label}</p>}
 									</div>
 									<Link
 										href={link.link}
@@ -136,5 +132,5 @@ export default function ExperienceDetails({ params }: Props) {
 			</Container>
 			<div className='h-20'></div>
 		</main>
-	);
+	)
 }

@@ -1,0 +1,85 @@
+import { Toaster } from '@/components/ui/sonner'
+import { cn } from '@/lib/utils'
+import { Header } from '@src/components/header/header'
+import { QueryProvider } from '@src/components/providers/query-provider'
+import { routing } from '@src/i18n/routing'
+import { METADATA } from '@src/resources/data/metadata'
+import '@src/styles/style.css'
+import { Analytics } from '@vercel/analytics/react'
+import type { Metadata } from 'next'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
+import { Barrio, JetBrains_Mono } from 'next/font/google'
+import { redirect } from 'next/navigation'
+
+type Props = Readonly<{
+	children: React.ReactNode
+	params: Promise<{ locale: string }>
+}>
+
+const jetBrainsMonoFont = JetBrains_Mono({
+	subsets: ['latin'],
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
+	variable: '--font-jet-brains-mono',
+})
+
+const barrioFont = Barrio({
+	subsets: ['latin'],
+	weight: ['400'],
+	variable: '--font-barrio',
+})
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const locale = (await params).locale
+	const t = await getTranslations({ locale, namespace: 'home' })
+
+	return {
+		title: {
+			default: 'Ronald Tchuekou Portfolio, Développeur FullStack et Administrateur de systèmes',
+			template: '%s | Ronald Tchuekou Portfolio',
+		},
+		description:
+			'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
+		metadataBase: new URL(process.env.BASE_LINK || 'https://roncoder-beta.vercel.app'),
+		alternates: {
+			canonical: '/',
+			languages: {
+				'en-US': '/en-US',
+				'fr-FR': '/fr-FR',
+			},
+		},
+		openGraph: {
+			images: ['/ronald-tchuekou-profile.jpg'],
+		},
+		...METADATA,
+	}
+}
+
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({ locale }))
+}
+
+export default async function RootLayout({ children, params }: Props) {
+	const locale = (await params).locale
+
+	// Ensure that the incoming `locale` is valid.
+	if (!routing.locales.includes(locale as any)) redirect('/')
+
+	// Enable static rendering
+	setRequestLocale(locale)
+
+	const messages = await getMessages()
+
+	return (
+		<html lang={locale}>
+			<body className={cn('min-h-screen font-mono antialiased', jetBrainsMonoFont.variable, barrioFont.variable)}>
+				<NextIntlClientProvider messages={messages}>
+					<Header />
+					<QueryProvider>{children}</QueryProvider>
+					<Toaster />
+					<Analytics />
+				</NextIntlClientProvider>
+			</body>
+		</html>
+	)
+}

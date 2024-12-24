@@ -7,8 +7,8 @@ import { DotIcon } from 'lucide-react';
 import { Metadata } from 'next'
 
 type Props = {
-	params: { exp_id: string };
-};
+	params: Promise<{ exp_id: string }>
+}
 
 export async function generateStaticParams() {
 	return EXPERIENCES_LIST.map((exp) => ({
@@ -17,7 +17,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const exp = EXPERIENCES_LIST.find((exp) => exp.id === params.exp_id)
+	const expId = (await params).exp_id
+	const exp = EXPERIENCES_LIST.find((exp) => exp.id === expId)
 
 	return {
 		title: exp?.title,
@@ -29,8 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 }
 
-export default function ExperienceDetails({ params }: Props) {
-	const experience = EXPERIENCES_LIST.find((exp) => exp.id === params.exp_id);
+export default async function ExperienceDetails({ params }: Props) {
+	const expId = (await params).exp_id
+	const experience = EXPERIENCES_LIST.find((exp) => exp.id === expId)
 
 	return (
 		<section className='w-full flex flex-col gap-5'>
@@ -65,5 +67,5 @@ export default function ExperienceDetails({ params }: Props) {
 				))}
 			</ul>
 		</section>
-	);
+	)
 }

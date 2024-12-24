@@ -8,8 +8,8 @@ import { Metadata } from 'next'
 import Image from 'next/image';
 
 type Props = {
-	params: { education_id: string };
-};
+	params: Promise<{ education_id: string }>
+}
 
 export async function generateStaticParams() {
 	return EDUCATIONS_LIST.map((education) => ({
@@ -18,8 +18,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	// fetch data
-	const project = EDUCATIONS_LIST.find((exp) => exp.id === params.education_id)
+	const educationId = (await params).education_id
+	const project = EDUCATIONS_LIST.find((exp) => exp.id === educationId)
 
 	return {
 		title: project?.title,
@@ -31,8 +31,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 }
 
-export default function EducationDetails({ params }: Props) {
-	const education = EDUCATIONS_LIST.find((exp) => exp.id === params.education_id);
+export default async function EducationDetails({ params }: Props) {
+	const educationId = (await params).education_id
+	const education = EDUCATIONS_LIST.find((exp) => exp.id === educationId)
 
 	return (
 		<section className='w-full flex flex-col gap-5'>
@@ -81,5 +82,5 @@ export default function EducationDetails({ params }: Props) {
 				))}
 			</ul>
 		</section>
-	);
+	)
 }
