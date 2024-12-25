@@ -16,17 +16,15 @@ export const ServicesList: FC = () => {
   }, []);
 
   return (
-    <>
-      <Container
-        className={cn("grid grid-cols-1 md:grid-cols-2 gap-10 py-10 lg:py-20")}
-      >
-        {SERVICES.map((item, index) => (
-          <RevealFromBottom delay={index * 0.1} key={item.key}>
-            <ServiceItem item={item} onContinue={openContactModal} />
-          </RevealFromBottom>
-        ))}
-      </Container>
-      <ContactModal ref={contactModalRef} />
-    </>
-  );
+     <>
+        <Container className={cn('grid grid-cols-1 md:grid-cols-2 gap-10 py-10 lg:py-20')}>
+           {SERVICES.map((item, index) => (
+              <RevealFromBottom delay={index < 3 ? index * 0.1 : 0.1} key={item.key}>
+                 <ServiceItem item={item} onContinue={openContactModal} />
+              </RevealFromBottom>
+           ))}
+        </Container>
+        <ContactModal ref={contactModalRef} />
+     </>
+  )
 };

@@ -1,28 +1,50 @@
 {
-	"header": {
-		"presentation": "Présentation",
-		"services": "Services",
-		"resume": "Résumé",
-		"projects": "Projets",
-		"contact": "Contact"
-	},
-	"home": {
-		"page_title": "Ronald Tchuekou Portfolio, Développeur FullStack et Administrateur de systèmes",
-		"page_description": "Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.",
-		"full_stack_developer": "Développeur Full-Stack",
-		"hi_is": "Salut, Moi c'est",
-		"i_create_web_and_mobile_platforms": "J'excelle dans la création de plateformes et applications mobile élégantes.",
-		"i_use_many_languages": "J'ai des compétences dans plusieurs variétés de langages et technologies.",
-		"download_my_resume": "Télécharger mon CV",
-		"year": "Années",
-		"of_experiences": "D'expériences",
-		"projects": "Projets",
-		"finish": "Terminés",
-		"technologies": "Technologies",
-		"mastered": "Maîtrisées"
-	},
-	"contact": { "page_title": "", "page_description": "" },
-	"projects": { "page_title": "", "page_description": "" },
-	"resume": { "page_title": "", "page_description": "" },
-	"services": { "page_title": "", "page_description": "" }
+   "header": {
+      "presentation": "Présentation",
+      "services": "Services",
+      "resume": "Résumé",
+      "projects": "Projets",
+      "contact": "Contact"
+   },
+   "home": {
+      "page_title": "Ronald Tchuekou Portfolio, Développeur FullStack et Administrateur de systèmes",
+      "page_description": "Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.",
+      "full_stack_developer": "Développeur Full-Stack",
+      "hi_is": "Salut, Moi c'est",
+      "i_create_web_and_mobile_platforms": "J'excelle dans la création de plateformes et applications mobile élégantes.",
+      "i_use_many_languages": "J'ai des compétences dans plusieurs variétés de langages et technologies.",
+      "download_my_resume": "Télécharger mon CV",
+      "year": "Années",
+      "of_experiences": "D'expériences",
+      "projects": "Projets",
+      "finish": "Terminés",
+      "technologies": "Technologies",
+      "mastered": "Maîtrisées"
+   },
+   "contact": { "page_title": "", "page_description": "" },
+   "projects": { "page_title": "", "page_description": "" },
+   "resume": { "page_title": "", "page_description": "" },
+   "services": {
+      "page_title": "Les services que j'offres.",
+      "page_description": "Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.",
+      "continue": "Continuer",
+      "work_together": "Travaillons ensemble",
+      "you_have_a_project": "Vous avez un projet ?",
+      "let_talk_about_it": "Discutons en pour une collaboration productive.",
+      "your_message_is_successfully_sent": "Votre message a été envoyé avec succès !",
+      "thanks_to_contacted_me": "Merci de m'avoir contacté. Je vous donnerai une réponse dans les plus brefs délais.",
+      "error_has_provided": "Une erreur s'est produite lors de l'envoi du message.",
+      "please_try_again": "Veuillez réessayer ou me contacter directement par email ou WhatsApp, juste sur la section de droite (Desktop) ou en haut (Mobile).",
+      "firstName": "Prénom",
+      "enter_your_firstName": "Veuillez entrer votre prénom",
+      "lastName": "Nom",
+      "enter_your_lastName": "Veuillez entrer votre nom",
+      "email": "Adresse e-mail",
+      "enter_your_email": "Veuillez entrer votre adresse e-mail",
+      "phone": "Téléphone",
+      "enter_your_phone": "Veuillez entrer votre téléphone",
+      "select_the_service": "Veuillez sélectionner un service",
+      "enter_your_message": "Veuillez saisir un message",
+      "send_the_message": "Envoyer le message"
+   }
 }

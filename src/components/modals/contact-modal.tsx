@@ -6,7 +6,8 @@ import {
 } from "@/components/ui/credenza";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { useTranslations } from 'next-intl'
+import { forwardRef, useCallback, useImperativeHandle, useState } from 'react'
 import { ContactFormContent } from "../contact/contact-form-content";
 
 export type ContactModalRef = {
@@ -15,61 +16,51 @@ export type ContactModalRef = {
 
 export type ContactModalProps = {};
 
-export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(
-  ({}, ref) => {
-    const [open, setOpen] = useState(false);
-    const [serviceKey, setServiceKey] = useState<string>();
+export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(({}, ref) => {
+   const t = useTranslations('services')
 
-    const closeModal = useCallback(() => {
-      setOpen(false);
-      setServiceKey(undefined);
-    }, []);
+   const [open, setOpen] = useState(false)
+   const [serviceKey, setServiceKey] = useState<string>()
 
-    const toggleOpen = useCallback(
+   const closeModal = useCallback(() => {
+      setOpen(false)
+      setServiceKey(undefined)
+   }, [])
+
+   const toggleOpen = useCallback(
       (stateOpened: boolean) => {
-        if (stateOpened === false) closeModal();
+         if (stateOpened === false) closeModal()
       },
       [closeModal]
-    );
+   )
 
-    useImperativeHandle(ref, () => ({
+   useImperativeHandle(ref, () => ({
       open: (serviceKey) => {
-        setServiceKey(serviceKey);
-        setOpen(true);
+         setServiceKey(serviceKey)
+         setOpen(true)
       },
-    }));
+   }))
 
-    return (
+   return (
       <Credenza open={open} onOpenChange={toggleOpen}>
-        <CredenzaContent
-          aria-describedby={undefined}
-          className={"gap-0 pb-0 md:min-w-[750px] bg-card"}
-        >
-          <CredenzaHeader className="pb-2">
-            <CredenzaTitle
-              className={cn(
-                "text-xl md:text-3xl tracking-tight font-bold text-white"
-              )}
-            >
-              Travaillons ensemble
-            </CredenzaTitle>
-          </CredenzaHeader>
-          <ScrollArea
-            style={{ height: "calc(100vh - 300px)" }}
-            className={cn("md:-mx-6")}
-          >
-            <div className={cn("p-6 space-y-6")}>
-              <p>
-                Vous avez un projet ? <br />
-                Discutons en pour une collaboration productive.
-              </p>
-              <ContactFormContent serviceKey={serviceKey} />
-            </div>
-          </ScrollArea>
-        </CredenzaContent>
+         <CredenzaContent aria-describedby={undefined} className={'gap-0 pb-0 md:min-w-[750px] bg-card'}>
+            <CredenzaHeader className='pb-2'>
+               <CredenzaTitle className={cn('text-xl md:text-3xl tracking-tight font-bold text-white')}>
+                  {t('work_together')}
+               </CredenzaTitle>
+            </CredenzaHeader>
+            <ScrollArea style={{ height: 'calc(100vh - 300px)' }} className={cn('md:-mx-6')}>
+               <div className={cn('p-6 space-y-6')}>
+                  <p>
+                     {t('you_have_a_project')} <br />
+                     {t('let_talk_about_it')}
+                  </p>
+                  <ContactFormContent serviceKey={serviceKey} />
+               </div>
+            </ScrollArea>
+         </CredenzaContent>
       </Credenza>
-    );
-  }
-);
+   )
+})
 
 ContactModal.displayName = "ContactModal";
