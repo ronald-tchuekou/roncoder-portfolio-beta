@@ -2,10 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Link } from '@src/i18n/routing'
 import { Project } from "@src/resources/util-types";
 import { MoveRightIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
 import { FC } from "react";
 import { ProjectTags } from "./project-tags";
 

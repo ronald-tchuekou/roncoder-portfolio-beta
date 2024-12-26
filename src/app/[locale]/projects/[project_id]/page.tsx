@@ -4,13 +4,13 @@ import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { Gallery } from "@src/components/projects/gallery";
 import { ProjectTags } from "@src/components/projects/project-tags";
+import { Link } from '@src/i18n/routing'
 import { METADATA } from '@src/resources/data/metadata'
 import { PROJECTS } from '@src/resources/data/projects'
 import { DotIcon } from "lucide-react";
 import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
 
 export async function generateStaticParams() {
 	return PROJECTS.map((project) => ({

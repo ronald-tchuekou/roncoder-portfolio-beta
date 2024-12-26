@@ -2,10 +2,10 @@ import { cn } from "@/lib/utils";
 import { ContactForm } from "@src/components/contact/contact-form";
 import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import { Link } from '@src/i18n/routing'
 import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server'
-import Link from 'next/link';
 
 export const metadata: Metadata = {
 	title: 'Contact moi pour une meilleur prise en charge en développement de projets. | roncoder',
