@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Link } from '@src/i18n/routing'
 import { NAV_LINKS } from '@src/resources/data/nav-links'
 import { isCurrentPath } from "@src/resources/util-functions";
 import { motion } from "framer-motion";
 import { MenuIcon, XIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
 import { FC, useCallback, useState } from "react";
 import { Container } from "../container";
 import { LocaleButton } from "./locale-button";
