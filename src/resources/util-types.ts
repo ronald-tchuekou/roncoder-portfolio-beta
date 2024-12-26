@@ -23,21 +23,22 @@ export type Skill = {
 }
 
 export type Experience = {
-	id: string
-	title: string
-	company: string
-	date: string
-	description: string
-	tasks: string[]
-	imageLink?: string
+   id: string
+   title: Record<LocaleType, string>
+   company: string
+   date: Record<LocaleType, string>
+   description: Record<LocaleType, string>
+   tasks: Record<LocaleType, string>[]
+   imageLink?: string
+   keywords: string[]
 }
 
 export type Information = {
-	id: string
-	label: string
-	value: string
-	isLong: boolean
-	link?: string
+   id: string
+   label: Record<LocaleType, string>
+   value: Record<LocaleType, string>
+   isLong: boolean
+   link?: string
 }
 
 export type ProjectLink = {
