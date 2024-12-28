@@ -42,25 +42,25 @@ export type Information = {
 }
 
 export type ProjectLink = {
-	icon?: ReactNode
-	label?: string
-	link: string
+   icon?: ReactNode
+   label?: Record<LocaleType, string>
+   link: string
 }
 
 export type Project = {
-	id: string
-	image: string
-	title: string
-	description: string
-	tags: string[]
-	company: string
-	gallery: string[]
-	links: ProjectLink[]
-	date: string
-	authentication?: {
-		username: string
-		password: string
-	}
+   id: string
+   image: string
+   title: Record<LocaleType, string>
+   description: Record<LocaleType, string>
+   tags: string[]
+   company: Record<LocaleType, string>
+   gallery: string[]
+   links: ProjectLink[]
+   date: Record<LocaleType, string>
+   authentication?: {
+      username: string
+      password: string
+   }
 }
 
 export type RequestModel = {
