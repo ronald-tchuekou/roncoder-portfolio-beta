@@ -64,13 +64,14 @@ export type Project = {
 }
 
 export type RequestModel = {
-	id: string
-	firstName: string
-	lastName: string
-	email: string
-	phone?: string
-	service: string
-	message: string
-	read: boolean
-	createdAt: Date
+   id: string
+   firstName: string
+   lastName: string
+   email: string
+   phone?: string
+   service: string
+   message: string
+   read: boolean
+   locale: string
+   createdAt: Date
 }

@@ -1,22 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +12,7 @@ import { SERVICES } from '@src/resources/data/services'
 import { contactFormSchema, ContactFormSchema } from '@src/resources/form-schemas'
 import { createRequest } from "@src/services/contact-service";
 import { useMutation } from "@tanstack/react-query";
-import { RefreshCw } from "lucide-react";
+import { Loader } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { FC, useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
@@ -45,7 +32,18 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
 
   const form = useForm<ContactFormSchema>({
      resolver: zodResolver(contactFormSchema),
-     defaultValues: useMemo(() => ({ service: serviceKey }), [serviceKey]),
+     defaultValues: useMemo(
+        () => ({
+           firstName: '',
+           lastName: '',
+           email: '',
+           phone: '',
+           message: '',
+           service: serviceKey || '',
+           locale: locale,
+        }),
+        [serviceKey, locale]
+     ),
   })
 
   const { mutate, isPending } = useMutation({
@@ -58,6 +56,7 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
            email: '',
            phone: '',
            message: '',
+           locale,
         })
         onCompleted?.()
         toast.success(t('your_message_is_successfully_sent'), {
@@ -223,7 +222,7 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
            />
            <div className='md:col-span-2 pt-5'>
               <Button disabled={isPending} className='rounded-full' type='submit'>
-                 {isPending && <RefreshCw className='animate-spin size-4 mr-2' />}
+                 {isPending && <Loader className='animate-spin size-4 mr-2' />}
                  {t('send_the_message')}
               </Button>
            </div>
