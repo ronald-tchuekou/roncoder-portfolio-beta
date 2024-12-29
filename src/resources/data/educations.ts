@@ -13,8 +13,8 @@ export const EDUCATIONS_LIST: Experience[] = [
          en: 'August 2024',
       },
       description: {
-         fr: "Dans une récente enquête de Stack Overflow, Node.js a été utilisé par environ 50 % des développeurs ayant répondu à l'enquête, ce qui en fait la technologie côté serveur la plus utilisée. Express s'est classé au quatrième rang des technologies web les plus populaires, ce qui en fait le framework web côté serveur le plus populaire.",
-         en: 'In a recent Stack Overflow survey, Node.js was used by about 50% of developers who responded to the survey, making it the most used server-side technology. Express ranked fourth among the most popular web technologies, making it the most popular server-side web framework.',
+         fr: "Express s'est classé au quatrième rang des technologies web les plus populaires, ce qui en fait le framework web côté serveur le plus populaire.",
+         en: 'Express ranked fourth among the most popular web technologies, making it the most popular server-side web framework.',
       },
       tasks: [
          {
@@ -26,7 +26,7 @@ export const EDUCATIONS_LIST: Experience[] = [
             en: 'Extend your Node.js applications with third-party packages and frameworks, including Express.',
          },
          {
-            fr: 'Utilisez npm pour gérer les paquets Node.js dans votre application Node.js.',
+            fr: 'Utilisez npm pour gérer les packages Node.js dans votre application Node.js.',
             en: 'Use npm to manage Node.js packages in your Node.js application.',
          },
          {
@@ -148,20 +148,34 @@ export const EDUCATIONS_LIST: Experience[] = [
          en: 'Dec 2022',
       },
       description: {
-         fr: 'Attention de fin de formation en Docker Avancé.',
+         fr: 'Attestation de fin de formation en Docker Avancé.',
          en: 'End of Advanced Docker Training Certificate.',
       },
       tasks: [
+         {
+            fr: 'Optimiser la taille des images Docker en utilisant des étapes multiples dans les fichiers Dockerfile',
+            en: 'Optimize Docker image size using multi-stage builds in Dockerfiles',
+         },
          {
             fr: 'Gestion des services (Outil permettant de gérer plusieurs conteneur dans un réseau) avec Docker Compose.',
             en: 'Service management (Tool for managing multiple containers in a network) with Docker Compose.',
          },
          {
-            fr: 'Gestion des machine virtuelles avec Docker Machine.',
-            en: 'Virtual machine management with Docker Machine.',
+            fr: 'Configuration des réseaux Docker personnalisés (bridge, overlay, macvlan)',
+            en: 'Configuration of custom Docker networks (bridge, overlay, macvlan)',
          },
-         { fr: 'Gestion simple de Volume de data.', en: 'Simple data volume management.' },
-         { fr: 'Un outil simple et très efficace.', en: 'A simple and very effective tool.' },
+         {
+            fr: 'Communication entre conteneurs sur des réseaux complexes',
+            en: 'Communication between containers on complex networks',
+         },
+         {
+            fr: 'Gestion avancée des volumes pour la persistance des données',
+            en: 'Advanced volume management for data persistence',
+         },
+         {
+            fr: 'Meilleures pratiques pour sécuriser les conteneurs.',
+            en: 'Best practices for securing containers.',
+         },
       ],
       imageLink: '/certificates/advance_docker.jpeg',
       keywords: ['Docker', 'Docker Compose', 'Docker Machine', 'Data Volume Management', 'Alphorm'],

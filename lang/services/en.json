@@ -1,7 +1,7 @@
 {
    "page_title": "The services I offer.",
    "page_description": "I design and implement web and mobile applications, design professional prototypes to best describe the scenario of your application's features.",
-   "continue": "Continue",
+   "continue": "Contact me",
    "work_together": "Let's work together",
    "you_have_a_project": "Do you have a project?",
    "let_talk_about_it": "Let's discuss it for a productive collaboration.",
@@ -19,5 +19,11 @@
    "enter_your_phone": "Please enter your phone number",
    "select_the_service": "Please select a service",
    "enter_your_message": "Please enter a message",
-   "send_the_message": "Send the message"
+   "send_the_message": "Send the message",
+   "set_your_firstName": "Please enter your first name",
+   "set_your_lastName": "Please enter your last name",
+   "set_a_valid_email": "Please enter a valid email address",
+   "set_a_valid_phone": "Please enter a valid phone number",
+   "select_a_service": "Please select a service",
+   "set_a_message": "Please enter your message"
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from "@/components/ui/textarea";
@@ -106,7 +106,11 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
                           placeholder={t('enter_your_firstName')}
                        />
                     </FormControl>
-                    <FormMessage />
+                    {form.formState.errors.firstName?.message && (
+                       <p className={cn('text-xs font-medium text-destructive')}>
+                          {t(form.formState.errors.firstName.message)}
+                       </p>
+                    )}
                  </FormItem>
               )}
            />
@@ -127,7 +131,11 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
                           placeholder={t('enter_your_lastName')}
                        />
                     </FormControl>
-                    <FormMessage />
+                    {form.formState.errors.lastName?.message && (
+                       <p className={cn('text-xs font-medium text-destructive')}>
+                          {t(form.formState.errors.lastName.message)}
+                       </p>
+                    )}
                  </FormItem>
               )}
            />
@@ -148,7 +156,11 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
                           placeholder={t('enter_your_email')}
                        />
                     </FormControl>
-                    <FormMessage />
+                    {form.formState.errors.email?.message && (
+                       <p className={cn('text-xs font-medium text-destructive')}>
+                          {t(form.formState.errors.email.message)}
+                       </p>
+                    )}
                  </FormItem>
               )}
            />
@@ -167,7 +179,11 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
                           placeholder={t('enter_your_phone')}
                        />
                     </FormControl>
-                    <FormMessage />
+                    {form.formState.errors.phone?.message && (
+                       <p className={cn('text-xs font-medium text-destructive')}>
+                          {t(form.formState.errors.phone.message)}
+                       </p>
+                    )}
                  </FormItem>
               )}
            />
@@ -194,7 +210,11 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
                           ))}
                        </SelectContent>
                     </Select>
-                    <FormMessage />
+                    {form.formState.errors.service?.message && (
+                       <p className={cn('text-xs font-medium text-destructive')}>
+                          {t(form.formState.errors.service.message)}
+                       </p>
+                    )}
                  </FormItem>
               )}
            />
@@ -216,7 +236,11 @@ export const ContactFormContent: FC<ContactFormContentProps> = ({
                           placeholder={t('enter_your_message')}
                        />
                     </FormControl>
-                    <FormMessage />
+                    {form.formState.errors.message?.message && (
+                       <p className={cn('text-xs font-medium text-destructive')}>
+                          {t(form.formState.errors.message.message)}
+                       </p>
+                    )}
                  </FormItem>
               )}
            />

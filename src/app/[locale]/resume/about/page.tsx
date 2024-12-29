@@ -58,13 +58,13 @@ export default async function Page({ params }: Props) {
                </RevealFromBottom>
             ))}
          </div>
-         <img
+         {/* <img
             src={
                'https://github-readme-stats.vercel.app/api?username=ronald-tchuekou&show_icons=true&locale=en&theme=algolia'
             }
             alt='ronald-tchuekou'
             className='mt-8'
-         />
+         /> */}
       </section>
    )
 }
