@@ -14,7 +14,10 @@ export const LocaleButton: FC = () => {
    const path = usePathname()
    const router = useRouter()
 
-   const currentPath = useMemo(() => `${path.substring(3)}` || '/', [path])
+   const currentPath = useMemo(() => {
+      const withLocal = path.startsWith('/' + curLocale)
+      return withLocal ? `${path.substring(3)}` || '/' : path
+   }, [curLocale, path])
 
    const changeLang = useCallback(
       (locale: LocaleType) => {
