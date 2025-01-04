@@ -37,10 +37,16 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item, locale }) => {
             <h3 className='text-primary uppercase font-semibold'>{item.company[locale]}</h3>
             <p className='line-clamp-3 flex-none'>{item.description[locale]}</p>
             <ProjectTags tags={item.tags} />
-            <div className='h-full flex items-end'>
+            <div className='h-full flex items-end gap-5'>
                <Link href={`/projects/${item.id}`}>
                   <Button variant={'outline'} className={cn('rounded-full')}>
                      {t('view_more')}
+                     <MoveRightIcon className='ml-3 size-4' />
+                  </Button>
+               </Link>
+               <Link target='_blank' href={`${item.links[0].link}`}>
+                  <Button className={cn('rounded-full')}>
+                     {t('consult')}
                      <MoveRightIcon className='ml-3 size-4' />
                   </Button>
                </Link>
