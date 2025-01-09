@@ -107,7 +107,6 @@ export default async function RootLayout({ children, params }: Props) {
 	return (
       <html lang={locale}>
          <Script
-            type='text/javascript'
             data-cmp-ab='1'
             src='https://cdn.consentmanager.net/delivery/autoblocking/6adaaa80527ba.js'
             data-cmp-host='b.delivery.consentmanager.net'
