@@ -1,6 +1,5 @@
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
-import { AppScript } from '@src/components/app-script'
 import { Header } from '@src/components/header/header'
 import { QueryProvider } from '@src/components/providers/query-provider'
 import { routing } from '@src/i18n/routing'
@@ -12,7 +11,6 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { Barrio, JetBrains_Mono } from 'next/font/google'
 import { redirect } from 'next/navigation'
-import Script from 'next/script'
 
 type Props = Readonly<{
    children: React.ReactNode
@@ -107,10 +105,6 @@ export default async function RootLayout({ children, params }: Props) {
 
    return (
       <html lang={locale}>
-         <Script src='https://cs.iubenda.com/autoblocking/3889844.js' />
-         <Script src='//cdn.iubenda.com/cs/gpp/stub.js' />
-         <Script src='//cdn.iubenda.com/cs/iubenda_cs.js' async />
-         <AppScript />
          <body className={cn('min-h-screen font-mono antialiased', jetBrainsMonoFont.variable, barrioFont.variable)}>
             <NextIntlClientProvider messages={messages}>
                <Header />
