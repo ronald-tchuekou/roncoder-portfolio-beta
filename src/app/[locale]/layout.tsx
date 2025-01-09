@@ -11,6 +11,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { Barrio, JetBrains_Mono } from 'next/font/google'
 import { redirect } from 'next/navigation'
+import Script from 'next/script'
 
 type Props = Readonly<{
 	children: React.ReactNode
@@ -104,15 +105,23 @@ export default async function RootLayout({ children, params }: Props) {
 	const messages = await getMessages()
 
 	return (
-		<html lang={locale}>
-			<body className={cn('min-h-screen font-mono antialiased', jetBrainsMonoFont.variable, barrioFont.variable)}>
-				<NextIntlClientProvider messages={messages}>
-					<Header />
-					<QueryProvider>{children}</QueryProvider>
-					<Toaster />
-					<Analytics />
-				</NextIntlClientProvider>
-			</body>
-		</html>
-	)
+      <html lang={locale}>
+         <Script
+            type='text/javascript'
+            data-cmp-ab='1'
+            src='https://cdn.consentmanager.net/delivery/autoblocking/6adaaa80527ba.js'
+            data-cmp-host='b.delivery.consentmanager.net'
+            data-cmp-cdn='cdn.consentmanager.net'
+            data-cmp-codesrc='0'
+         />
+         <body className={cn('min-h-screen font-mono antialiased', jetBrainsMonoFont.variable, barrioFont.variable)}>
+            <NextIntlClientProvider messages={messages}>
+               <Header />
+               <QueryProvider>{children}</QueryProvider>
+               <Toaster />
+               <Analytics />
+            </NextIntlClientProvider>
+         </body>
+      </html>
+   )
 }
