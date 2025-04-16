@@ -1,30 +1,37 @@
-import { cn } from "@/lib/utils";
-import { ContactForm } from "@src/components/contact/contact-form";
-import { Container } from "@src/components/container";
-import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import { cn } from '@/lib/utils'
+import { ContactForm } from '@src/components/contact/contact-form'
+import { Container } from '@src/components/container'
+import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { Link } from '@src/i18n/routing'
 import { METADATA } from '@src/resources/data/metadata'
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 
 export const metadata: Metadata = {
-	title: 'Contact moi pour une meilleur prise en charge en développement de projets. | roncoder',
-	description:
-		'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
-	...METADATA,
-};
+   title: 'Contact moi pour une meilleur prise en charge en développement de projets. | roncoder',
+   description:
+      'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
+   keywords: [
+      'roncoder portfolio contact',
+      'contact roncoder',
+      'contact roncoder portfolio',
+      'Ronald Tchuekou Contact',
+      'Contact Ronald Tchuekou',
+   ],
+   ...METADATA,
+}
 
 type Props = {
-	params: Promise<{ locale: string }>
+   params: Promise<{ locale: string }>
 }
 
 export default async function Page({ params }: Props) {
-	const locale = (await params).locale
+   const locale = (await params).locale
 
-	// Enable static rendering
-	setRequestLocale(locale)
+   // Enable static rendering
+   setRequestLocale(locale)
 
-	return (
+   return (
       <main>
          <Container className={cn('grid grid-cols-1 md:grid-cols-12 gap-10 py-10 lg:py-20')}>
             <section className={cn('order-2 md:order-1 md:col-span-8')}>

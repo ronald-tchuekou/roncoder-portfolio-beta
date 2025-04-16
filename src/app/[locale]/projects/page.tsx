@@ -19,6 +19,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t('page_title'),
       description: t('page_description'),
       keywords: [
+         'roncoder projects',
+         'roncoder projet',
+         'projects roncoder',
          'Next.js development',
          'Angular development',
          'Next.js SEO',

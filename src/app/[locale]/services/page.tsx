@@ -7,29 +7,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const t = await getTranslations({ locale, namespace: 'services' })
 
 	return {
-		title: t('page_title'),
-		description: t('page_description'),
-		keywords: [
-			'Application web',
-			"Création d'une application web et mobile",
-			'Développeur web',
-			"Intégration d'outils de paiement",
-			"Création d'api REST",
-			'UX/UI Designer',
-			"Création d'un SaaS",
-			'Web application',
-			'Creating a web and mobile application',
-			'Web developer',
-			'Payment integration tools',
-			'Creating REST API',
-			'UX/UI Designer',
-			'Creating a SaaS',
-		],
-		twitter: {
-			title: t('page_title'),
-			description: t('page_description'),
-		},
-	}
+      title: t('page_title'),
+      description: t('page_description'),
+      keywords: [
+         'roncoder portfolio services',
+         'services roncoder',
+         'Application web',
+         "Création d'une application web et mobile",
+         'Développeur web',
+         "Intégration d'outils de paiement",
+         "Création d'api REST",
+         'UX/UI Designer',
+         "Création d'un SaaS",
+         'Web application',
+         'Creating a web and mobile application',
+         'Web developer',
+         'Payment integration tools',
+         'Creating REST API',
+         'UX/UI Designer',
+         'Creating a SaaS',
+      ],
+      twitter: {
+         title: t('page_title'),
+         description: t('page_description'),
+      },
+   }
 }
 
 type Props = {
