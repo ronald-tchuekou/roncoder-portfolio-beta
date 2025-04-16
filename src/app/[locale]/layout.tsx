@@ -1,5 +1,6 @@
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { Header } from '@src/components/header/header'
 import { QueryProvider } from '@src/components/providers/query-provider'
 import { routing } from '@src/i18n/routing'
@@ -96,6 +97,7 @@ export default async function RootLayout({ children, params }: Props) {
 
    return (
       <html lang={locale}>
+         <GoogleTagManager gtmId='GTM-5X42BXF9' />
          <body className={cn('min-h-screen font-mono antialiased', jetBrainsMonoFont.variable, barrioFont.variable)}>
             <NextIntlClientProvider messages={messages}>
                <Header />
@@ -104,6 +106,7 @@ export default async function RootLayout({ children, params }: Props) {
                <Analytics />
             </NextIntlClientProvider>
          </body>
+         <GoogleAnalytics gaId='G-WBPHPE8X6B' />
       </html>
    )
 }
