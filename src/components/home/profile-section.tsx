@@ -11,11 +11,11 @@ export const ProfileSection: FC = () => {
         <div className='w-full relative'>
            <Image
               quality={100}
-              src={'/profile-image-1.png'}
+              src={'/profile_2.webp'}
               alt='Ronald Tchuekou'
               width={500}
               height={500}
-              className={cn('aspect-square w-full h-auto')}
+              className={cn('aspect-square w-full h-auto rounded-full p-1')}
            />
            <motion.svg
               className={cn('absolute inset-0 rounded-full aspect-square text-primary')}
