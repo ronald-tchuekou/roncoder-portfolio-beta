@@ -99,11 +99,6 @@ export const PROJECTS: Project[] = [
       links: [
          {
             icon: <LinkIcon className='size-6' />,
-            label: { fr: 'Lien (Prod)', en: 'Link (Prod)' },
-            link: 'https://amizonecm.com',
-         },
-         {
-            icon: <LinkIcon className='size-6' />,
             label: { fr: 'Lien (Staging)', en: 'Link (Staging)' },
             link: 'https://amizonecm-beta.vercel.app',
          },
