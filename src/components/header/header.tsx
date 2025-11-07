@@ -7,15 +7,15 @@ import { isCurrentPath } from '@src/resources/util-functions'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { FC, useMemo } from 'react'
+import { FC } from 'react'
 import { Container } from '../container'
+import ThemeToggle from '../theme-toggle'
 import { LocaleButton } from './locale-button'
 import { PhoneNavVersion } from './phone-version'
 
 export const Header: FC = () => {
    const t = useTranslations('header')
    const path = usePathname()
-   const currentPath = useMemo(() => `${path.substring(3)}` || '/', [path])
 
    return (
       <Container rootClassName={cn('z-10', 'sticky top-0 backdrop-blur bg-transparent')}>
@@ -31,19 +31,22 @@ export const Header: FC = () => {
                   className={cn('w-20 lg:w-32 h-auto aspect-auto')}
                />
             </Link>
-            <nav className={cn('flex items-center gap-3 md:gap-0')}>
+            <nav className={cn('flex items-center gap-0')}>
                <ul className={cn('hidden md:flex')}>
                   {NAV_LINKS.map(({ url, label }) => (
                      <li key={url}>
-                        <Link className={cn('nav-link', isCurrentPath(currentPath, url) && 'active')} href={url}>
+                        <Link className={cn('nav-link', isCurrentPath(path, url) && 'active')} href={url}>
                            <span className='nav-link-label'>{t(label)}</span>
                            <span className={'nav-link-indicator'}></span>
                         </Link>
                      </li>
                   ))}
                </ul>
-               <LocaleButton />
-               <PhoneNavVersion currentPath={currentPath} />
+               <div className={cn('flex items-center gap-3')}>
+                  <ThemeToggle />
+                  <LocaleButton />
+                  <PhoneNavVersion currentPath={path} />
+               </div>
             </nav>
          </header>
       </Container>

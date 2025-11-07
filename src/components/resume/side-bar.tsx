@@ -8,7 +8,7 @@ import { isCurrentPath } from "@src/resources/util-functions";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useTranslations } from 'next-intl'
 import { usePathname } from "next/navigation";
-import { FC, useEffect, useMemo, useRef } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -20,17 +20,18 @@ export const ResumeSideBar: FC = () => {
   const t = useTranslations('resume')
   const path = usePathname()
 
-  const currentPath = useMemo(() => `${path.substring(3)}` || '/', [path])
-
   useEffect(() => {
      if (sliderRef.current) {
-        sliderRef.current.slickGoTo(RESUME_NAV_LINKS.findIndex((item) => isCurrentPath(currentPath, item.url, 2)))
+        sliderRef.current.slickGoTo(RESUME_NAV_LINKS.findIndex((item) => isCurrentPath(path, item.url, 2)))
      }
-  }, [currentPath])
+  }, [path])
 
   return (
      <aside className={cn('w-full flex flex-col gap-5')}>
-        <RevealFromBottom elt={'h1'} className={cn('scroll-m-20 text-4xl lg:text-5xl', 'text-white')}>
+        <RevealFromBottom
+           elt={'h1'}
+           className={cn('scroll-m-20 text-4xl lg:text-5xl', 'text-foreground font-mono tracking-tight')}
+        >
            {t('why_choosing_me')}
         </RevealFromBottom>
         <RevealFromBottom elt={'p'} delay={0.1}>
@@ -48,7 +49,7 @@ export const ResumeSideBar: FC = () => {
                           'justify-start transition duration-300',
                           'bg-accent text-muted-foreground',
                           'hover:text-accent-foreground hover:bg-accent',
-                          isCurrentPath(currentPath, item.url, 2) &&
+                          isCurrentPath(path, item.url, 2) &&
                              'bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground'
                        )}
                     >
@@ -110,7 +111,7 @@ export const ResumeSideBar: FC = () => {
                                 'justify-start transition duration-300',
                                 'bg-accent text-muted-foreground',
                                 'hover:text-accent-foreground hover:bg-accent',
-                                isCurrentPath(currentPath, item.url, 2) &&
+                                isCurrentPath(path, item.url, 2) &&
                                    'bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground'
                              )}
                           >

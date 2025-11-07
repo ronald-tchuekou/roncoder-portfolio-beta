@@ -12,7 +12,9 @@ export const ContactForm: FC = () => {
 
     return (
        <div className={cn('w-full bg-card border border-input', 'rounded-xl p-5', 'flex flex-col gap-8')}>
-          <h1 className='text-xl md:text-3xl tracking-tight font-bold text-white'>{t('work_together')}</h1>
+          <h1 className='text-xl md:text-3xl tracking-tight font-bold text-foreground font-mono'>
+             {t('work_together')}
+          </h1>
           <p>
              {t('you_have_a_project')} <br />
              {t('let_talk_about_it')}

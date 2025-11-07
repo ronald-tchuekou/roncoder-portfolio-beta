@@ -17,9 +17,10 @@ export const ServiceItem: FC<ServiceItemProps> = ({ item, onContinue }) => {
 
   return (
      <article className={cn('bg-card rounded-xl border border-input', 'p-5 size-full', 'flex flex-col gap-5')}>
-        <h2 className={cn('font-barrio text-white', 'scroll-m-20 text-4xl font-extrabold lg:text-5xl')}>{item.id}</h2>
-        <h3 className={cn('scroll-m-20 text-2xl font-normal tracking-tight', 'text-white')}>{item.title[locale]}</h3>
-        <p className='h-full'>{item.description[locale]}</p>
+        <h2 className={cn('scroll-m-20 text-2xl font-semibold tracking-tight', 'text-foreground font-serif')}>
+           {item.title[locale]}
+        </h2>
+        <p className='h-full text-muted-foreground'>{item.description[locale]}</p>
         <div>
            <Button onClick={() => onContinue(item.key)} variant={'outline'} className={cn('rounded-full')}>
               {t('continue')}

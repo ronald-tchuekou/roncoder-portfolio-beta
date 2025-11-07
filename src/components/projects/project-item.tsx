@@ -31,7 +31,7 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item, locale }) => {
             />
          </div>
          <div className={cn('size-full px-5 pb-5 flex flex-col gap-5')}>
-            <h2 className={cn('scroll-m-20 text-2xl font-normal tracking-tight', 'text-white')}>
+            <h2 className={cn('scroll-m-20 text-2xl font-normal tracking-tight', 'text-foreground font-mono')}>
                {item.title[locale]}
             </h2>
             <h3 className='text-primary uppercase font-semibold'>{item.company[locale]}</h3>

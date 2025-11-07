@@ -33,7 +33,7 @@ export const InfoSection: FC = () => {
         <RevealFromBottom
            elt={'h1'}
            delay={0.2}
-           className={cn('scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl')}
+           className={cn('scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl font-mono')}
         >
            {t('hi_is')} <br /> <span className='text-primary'>Ronald Tchuekou</span>
         </RevealFromBottom>

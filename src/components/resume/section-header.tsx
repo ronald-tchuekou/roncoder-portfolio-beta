@@ -9,7 +9,10 @@ export const SectionHeader = ({ title, description }: { title: string; descripti
 
    return (
       <>
-         <RevealFromBottom elt={'h2'} className={cn('scroll-m-20 text-xl lg:text-3xl tracking-tight ', 'text-white')}>
+         <RevealFromBottom
+            elt={'h2'}
+            className={cn('scroll-m-20 text-xl lg:text-3xl tracking-tight ', 'text-foreground font-mono')}
+         >
             {t(title)}
          </RevealFromBottom>
          <RevealFromBottom elt={'p'} delay={0.1}>

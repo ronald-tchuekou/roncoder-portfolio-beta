@@ -54,7 +54,10 @@ export default async function Page({ params }: Props) {
             <RevealFromBottom
                delay={0.1}
                elt={'h2'}
-               className={cn('scroll-m-20 text-xl lg:text-3xl tracking-tight ', 'text-white')}
+               className={cn(
+                  'scroll-m-20 text-xl lg:text-3xl tracking-tight ',
+                  'text-foreground font-mono tracking-tight'
+               )}
             >
                {education?.title[locale]}
             </RevealFromBottom>

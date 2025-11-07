@@ -26,61 +26,53 @@ export const Gallery: FC<GalleryProps> = ({ images }) => {
   }, [images]);
 
   return (
-    <>
-      <section className={cn("flex flex-row flex-wrap gap-5")}>
-        {subImages.map((image, idx) => (
-          <RevealFromBottom
-            delay={idx * 0.1}
-            key={`image-${idx}`}
-            onClick={() => previewImage(idx)}
-            className={cn("aspect-video w-[150px]", "cursor-pointer")}
-          >
-            <Image
-              src={image}
-              alt={image}
-              width={300}
-              height={120}
-              quality={100}
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=="
-              className={cn("aspect-auto size-full")}
-            />
-          </RevealFromBottom>
-        ))}
-        {images.length > subImages.length && (
-          <RevealFromBottom
-            onClick={() => setPreview(subImages.length)}
-            delay={3 * 0.1}
-            className={cn("aspect-video w-[150px] relative", "cursor-pointer")}
-          >
-            <Image
-              src={images[subImages.length]}
-              alt={images[subImages.length]}
-              width={300}
-              height={120}
-              priority
-              quality={100}
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=="
-              className={cn("aspect-auto size-full")}
-            />
-            <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
-              <p className="text-4xl font-medium text-white">
-                +{images.length - subImages.length}
-              </p>
-            </div>
-          </RevealFromBottom>
-        )}
-      </section>
-      {preview !== -1 && (
-        <GallerySlide
-          images={images}
-          index={preview}
-          onClose={() => setPreview(-1)}
-        />
-      )}
-    </>
-  );
+     <>
+        <section className={cn('flex flex-row flex-wrap gap-5')}>
+           {subImages.map((image, idx) => (
+              <RevealFromBottom
+                 delay={idx * 0.1}
+                 key={`image-${idx}`}
+                 onClick={() => previewImage(idx)}
+                 className={cn('aspect-video w-[150px]', 'cursor-pointer')}
+              >
+                 <Image
+                    src={image}
+                    alt={image}
+                    width={300}
+                    height={120}
+                    quality={100}
+                    placeholder='blur'
+                    blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
+                    className={cn('aspect-auto size-full')}
+                 />
+              </RevealFromBottom>
+           ))}
+           {images.length > subImages.length && (
+              <RevealFromBottom
+                 onClick={() => setPreview(subImages.length)}
+                 delay={3 * 0.1}
+                 className={cn('aspect-video w-[150px] relative', 'cursor-pointer')}
+              >
+                 <Image
+                    src={images[subImages.length]}
+                    alt={images[subImages.length]}
+                    width={300}
+                    height={120}
+                    priority
+                    quality={100}
+                    placeholder='blur'
+                    blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
+                    className={cn('aspect-auto size-full')}
+                 />
+                 <div className='absolute inset-0 bg-black/50 flex justify-center items-center'>
+                    <p className='text-4xl font-medium text-foreground'>+{images.length - subImages.length}</p>
+                 </div>
+              </RevealFromBottom>
+           )}
+        </section>
+        {preview !== -1 && <GallerySlide images={images} index={preview} onClose={() => setPreview(-1)} />}
+     </>
+  )
 };
 
 const GallerySlide = ({

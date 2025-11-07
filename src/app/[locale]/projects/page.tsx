@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Container } from "@src/components/container";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import PageTitle from '@src/components/page-title'
 import { ProjectItem } from "@src/components/projects/project-item";
 import { LocaleType } from '@src/i18n/routing'
 import { PROJECTS } from '@src/resources/data/projects'
@@ -52,19 +53,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
    const locale = (await params).locale
+   const t = await getTranslations({ locale, namespace: 'projects' })
 
    // Enable static rendering
    setRequestLocale(locale)
 
    return (
       <main>
-         <Container className={cn('grid grid-cols-1 md:grid-cols-2 gap-10 py-10 lg:py-20')}>
+         <Container className={cn('')} rootClassName={cn('pt-10 lg:pt-20 pb-6')}>
+            <PageTitle title={t('page_title')} description={t('page_description')} />
+         </Container>
+         <Container className={cn('grid grid-cols-1 md:grid-cols-2 gap-10')}>
             {PROJECTS.map((item, index) => (
                <RevealFromBottom delay={index < 4 ? index * 0.1 : 0.1} key={item.id}>
                   <ProjectItem item={item} locale={locale} />
                </RevealFromBottom>
             ))}
          </Container>
+         <div className={cn('h-16')} />
       </main>
    )
 }

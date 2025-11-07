@@ -3,7 +3,7 @@ import { Container } from "@src/components/container";
 import { ResumeSideBar } from '@src/components/resume/side-bar'
 
 type Props = {
-   params: Promise<{ locale: string; project_id: string }>
+   params: Promise<{ locale: string }>
    children: React.ReactNode
 }
 

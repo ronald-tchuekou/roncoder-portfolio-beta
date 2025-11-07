@@ -45,7 +45,7 @@ export default async function Page({ params }: Props) {
                                  'bg-card border border-input ',
                                  'flex justify-center items-center',
                                  'rounded-lg size-24 text-muted-foreground',
-                                 'hover:bg-accent/50 hover:text-white hover:border-muted-foreground',
+                                 'hover:bg-accent/50 hover:text-foreground hover:border-muted-foreground',
                                  'transition-all duration-300'
                               )}
                            >

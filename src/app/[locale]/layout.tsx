@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { Header } from '@src/components/header/header'
 import { QueryProvider } from '@src/components/providers/query-provider'
+import { ThemeProvider } from '@src/components/providers/theme-provider'
 import { routing } from '@src/i18n/routing'
 import { METADATA } from '@src/resources/data/metadata'
 import '@src/styles/style.css'
@@ -10,25 +11,12 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
-import { Barrio, JetBrains_Mono } from 'next/font/google'
 import { redirect } from 'next/navigation'
 
 type Props = Readonly<{
    children: React.ReactNode
    params: Promise<{ locale: string }>
 }>
-
-const jetBrainsMonoFont = JetBrains_Mono({
-   subsets: ['latin'],
-   weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
-   variable: '--font-jet-brains-mono',
-})
-
-const barrioFont = Barrio({
-   subsets: ['latin'],
-   weight: ['400'],
-   variable: '--font-barrio',
-})
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const locale = (await params).locale
@@ -98,13 +86,15 @@ export default async function RootLayout({ children, params }: Props) {
    return (
       <html lang={locale}>
          <GoogleTagManager gtmId='GTM-5X42BXF9' />
-         <body className={cn('min-h-screen font-mono antialiased', jetBrainsMonoFont.variable, barrioFont.variable)}>
-            <NextIntlClientProvider messages={messages}>
-               <Header />
-               <QueryProvider>{children}</QueryProvider>
-               <Toaster />
-               <Analytics />
-            </NextIntlClientProvider>
+         <body className={cn('min-h-screen antialiased font-sans')}>
+            <ThemeProvider>
+               <NextIntlClientProvider messages={messages}>
+                  <Header />
+                  <QueryProvider>{children}</QueryProvider>
+                  <Toaster />
+                  <Analytics />
+               </NextIntlClientProvider>
+            </ThemeProvider>
          </body>
          <GoogleAnalytics gaId='G-WBPHPE8X6B' />
       </html>

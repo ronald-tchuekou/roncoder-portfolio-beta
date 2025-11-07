@@ -1,12 +1,15 @@
+import { cn } from '@/lib/utils'
+import { Container } from '@src/components/container'
+import PageTitle from '@src/components/page-title'
 import { ServicesList } from '@src/components/services/services-list'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const locale = (await params).locale
-	const t = await getTranslations({ locale, namespace: 'services' })
+   const locale = (await params).locale
+   const t = await getTranslations({ locale, namespace: 'services' })
 
-	return {
+   return {
       title: t('page_title'),
       description: t('page_description'),
       keywords: [
@@ -35,18 +38,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 type Props = {
-	params: Promise<{ locale: string; project_id: string }>
+   params: Promise<{ locale: string; project_id: string }>
 }
 
 export default async function Page({ params }: Props) {
-	const locale = (await params).locale
+   const locale = (await params).locale
+   const t = await getTranslations({ locale, namespace: 'services' })
 
-	// Enable static rendering
-	setRequestLocale(locale)
+   // Enable static rendering
+   setRequestLocale(locale)
 
-	return (
-		<main>
-			<ServicesList />
-		</main>
-	)
+   return (
+      <main>
+         <Container className={cn('')} rootClassName={cn('pt-10 lg:pt-20 pb-6')}>
+            <PageTitle title={t('page_title')} description={t('page_description')} />
+         </Container>
+         <ServicesList />
+         <div className={cn('h-16')} />
+      </main>
+   )
 }

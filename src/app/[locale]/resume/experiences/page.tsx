@@ -47,7 +47,9 @@ export default async function Page({ params }: Props) {
             {EXPERIENCES_LIST.map((experience, index) => (
                <RevealFromBottom key={experience.id} delay={index * 0.1}>
                   <div className={cn('bg-card border border-input', 'rounded-lg p-5 size-full', 'flex flex-col gap-3')}>
-                     <h3 className={cn('text-xl font-bold text-white')}>{experience.title[locale]}</h3>
+                     <h3 className={cn('text-xl font-bold text-foreground font-mono tracking-tight')}>
+                        {experience.title[locale]}
+                     </h3>
                      <p className={cn('text-primary text-lg uppercase')}>{experience.company}</p>
                      <div className='flex items-center h-full'>
                         <DotIcon className='size-8 text-primary' />

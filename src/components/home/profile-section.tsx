@@ -11,7 +11,7 @@ export const ProfileSection: FC = () => {
         <div className='w-full relative'>
            <Image
               quality={100}
-              src={'/profile_2.webp'}
+              src={'/profile_3.webp'}
               alt='Ronald Tchuekou'
               width={500}
               height={500}
