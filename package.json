@@ -1,7 +1,7 @@
 {
    "name": "roncoder-portfolio-beta",
    "version": "1.2.0",
-   "private": true,
+   "private": false,
    "scripts": {
       "dev": "next dev",
       "build": "next build",
