@@ -35,43 +35,40 @@ A modern, multilingual portfolio website built with Next.js 16, React 19, and Ty
 
 ```
 roncoder-portfolio/
-├── @/                          # UI components library
-│   ├── components/ui/          # Reusable UI components
-│   ├── hooks/                  # Custom React hooks
-│   └── lib/                    # Utilities
-├── lang/                       # Translation files (JSON)
-│   ├── contact/               # Contact page translations
-│   ├── header/                # Header translations
-│   ├── home/                  # Home page translations
-│   ├── projects/              # Projects page translations
-│   ├── resume/                # Resume page translations
-│   └── services/              # Services page translations
-├── public/                     # Static assets
-│   ├── certificates/          # Certificate images
-│   ├── projects/              # Project screenshots
-│   └── resumes/               # PDF resumes
+├── @/                          # Local packages aliased to "@/..."
+│   ├── components/ui/          # Design system primitives (Radix-based)
+│   ├── hooks/                  # Shared React hooks
+│   └── lib/                    # Cross-cutting utilities
+├── lang/                       # Static translation dictionaries
+├── public/                     # Static assets (images, resumes, verification files)
 ├── src/
-│   ├── app/                   # Next.js app directory
-│   │   └── [locale]/          # Dynamic locale routing
-│   ├── components/            # React components
-│   │   ├── contact/           # Contact form components
-│   │   ├── header/            # Header components
-│   │   ├── home/              # Home page components
-│   │   ├── modals/            # Modal components
-│   │   ├── motions/           # Animation wrappers
-│   │   ├── projects/          # Project components
-│   │   ├── providers/         # Context providers
-│   │   ├── resume/            # Resume components
-│   │   └── services/          # Services components
-│   ├── i18n/                  # Internationalization config
-│   ├── lib/                   # Library code
-│   │   ├── env/               # Environment variables
-│   │   └── stores/            # Zustand stores
-│   ├── resources/             # Data and resources
-│   │   └── data/              # Static data files
-│   ├── services/              # API services
-│   └── styles/                # Global styles
-└── configuration files...
+│   ├── app/                    # Next.js App Router entrypoint
+│   │   ├── [locale]/           # Locale-aware pages and layouts
+│   │   │   ├── layout.tsx      # Root layout per locale
+│   │   │   ├── page.tsx        # Landing page
+│   │   │   ├── contact/        # Contact page route
+│   │   │   ├── projects/       # Projects listing and detail routes
+│   │   │   ├── resume/         # Resume sections
+│   │   │   └── services/       # Services page
+│   │   ├── api/
+│   │   │   └── github/         # Serverless GitHub helpers
+│   │   │       ├── contributions/route.ts
+│   │   │       └── stars/route.ts
+│   │   ├── favicon.ico         # Favicon served by Next.js
+│   │   ├── robots.ts           # Dynamic robots.txt generator
+│   │   └── sitemap.ts          # Locale-aware sitemap generator
+│   ├── components/             # Reusable UI building blocks
+│   │   ├── home/               # Homepage sections
+│   │   ├── projects/           # Projects cards & modals
+│   │   ├── resume/             # Resume section widgets
+│   │   └── services/           # Service listings
+│   ├── i18n/                   # next-intl configuration
+│   ├── lib/                    # Runtime helpers (env, stores, utils)
+│   ├── resources/              # Typed content data & schemas
+│   ├── services/               # Server-side integrations (GitHub, contact)
+│   └── styles/                 # Global styles and tokens
+├── tsconfig.json               # Path aliases and TypeScript config
+└── package.json                # Dependencies and scripts
 ```
 
 ## 🚦 Getting Started
@@ -193,14 +190,25 @@ The GitHub counters use the GitHub GraphQL API via dedicated API routes. Make su
 
 ## 🌐 API Routes
 
-The project exposes API routes that power parts of the UI:
+The portfolio ships with lightweight, server-side API routes that proxy GitHub data for the frontend counters. They are implemented in `src/app/api/github/*` and rely on the shared `GithubService` for caching and error handling.
 
-| Route | Method | Description |
-| --- | --- | --- |
-| `/api/github/contributions` | GET | Returns the total GitHub contributions for the configured user |
-| `/api/github/stars` | GET | Returns the sum of GitHub stars across the configured user's repositories |
+| Route | Method | Description | Response |
+| --- | --- | --- | --- |
+| `/api/github/contributions` | GET | Fetches the total contributions for `NEXT_PUBLIC_GITHUB_USERNAME` over the last 12 months. | `{ "contributions": number }` |
+| `/api/github/stars` | GET | Aggregates the star count across all public repositories for the configured user. | `{ "stars": number }` |
 
-These routes are consumed by the home page counters and can be reused by external clients if needed.
+### Authentication & Rate Limits
+- Both routes require a valid `GITHUB_TOKEN` set in the environment to avoid GitHub's anonymous rate limits.
+- Tokens are read only on the server through `src/services/github.service.ts`; they never leave the backend.
+
+### Example Usage
+
+```ts
+const response = await fetch('/api/github/stars', { next: { revalidate: 3600 } })
+const { stars } = await response.json()
+```
+
+You can call these endpoints from other clients (CLI tools, dashboards, etc.) as long as the deployment is configured with the same environment variables.
 
 ## 📝 Key Features Implementation
 
