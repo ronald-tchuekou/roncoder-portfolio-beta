@@ -13,6 +13,7 @@ A modern, multilingual portfolio website built with Next.js 16, React 19, and Ty
 - **🔧 Contact Form**: Integrated contact form with Discord webhook notifications
 - **📊 GitHub Integration**: Display GitHub contribution stats and repository stars
 - **📄 Resume Downloads**: Automatic resume downloads in multiple languages
+- **🗺️ SEO-Ready Sitemap**: Automated sitemap generation for every locale and dynamic route
 - **🖼️ Project Gallery**: Interactive project showcase with image galleries
 - **⚡ Performance Optimized**: Built with Next.js app router and optimized images
 
@@ -175,6 +176,31 @@ Theme configuration can be modified in:
 - `src/providers/theme-provider.tsx` for theme logic
 - `src/styles/style.css` for CSS variables
 - Tailwind configuration for color schemes
+
+### GitHub Integration
+
+The GitHub counters use the GitHub GraphQL API via dedicated API routes. Make sure to:
+
+- Set `NEXT_PUBLIC_GITHUB_USERNAME` to the profile you want to display
+- Provide a `GITHUB_TOKEN` with access to the GraphQL API (a classic token with `read:user` permission is sufficient)
+- The token is used only server-side through the `/api/github/*` routes
+
+### SEO & Sitemap
+
+- Configure `NEXT_PUBLIC_BASE_LINK` with your production URL (e.g. `https://your-domain.com`)
+- The sitemap automatically includes every static page, locale-prefixed route, and dynamic page (projects, educations, experiences)
+- The generated sitemap is available at `/sitemap.xml` and the robots file at `/robots.txt`
+
+## 🌐 API Routes
+
+The project exposes API routes that power parts of the UI:
+
+| Route | Method | Description |
+| --- | --- | --- |
+| `/api/github/contributions` | GET | Returns the total GitHub contributions for the configured user |
+| `/api/github/stars` | GET | Returns the sum of GitHub stars across the configured user's repositories |
+
+These routes are consumed by the home page counters and can be reused by external clients if needed.
 
 ## 📝 Key Features Implementation
 
