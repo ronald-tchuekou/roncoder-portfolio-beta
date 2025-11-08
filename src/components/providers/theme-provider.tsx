@@ -42,115 +42,115 @@ export function ThemeProvider({
   disableTransitionOnChange = false,
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
-  const [systemTheme, setSystemTheme] = useState<"dark" | "light">("light");
-  const [mounted, setMounted] = useState(false);
+   const [theme, setTheme] = useState<Theme>(defaultTheme)
+   const [systemTheme, setSystemTheme] = useState<'dark' | 'light'>('light')
+   const [mounted, setMounted] = useState(false)
 
-  // Get system theme preference
-  const getSystemTheme = (): "dark" | "light" => {
-    if (typeof window === "undefined") return "light";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
+   // Get system theme preference
+   const getSystemTheme = (): 'dark' | 'light' => {
+      if (typeof window === 'undefined') return 'light'
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+   }
 
-  // Apply theme to document with transition handling
-  const applyTheme = useCallback(
-    (newTheme: "dark" | "light") => {
-      const root = window.document.documentElement;
+   // Apply theme to document with transition handling
+   const applyTheme = useCallback(
+      (newTheme: 'dark' | 'light') => {
+         const root = window.document.documentElement
 
-      if (disableTransitionOnChange) {
-        root.style.setProperty("transition", "none");
-        root.classList.remove("light", "dark");
-        root.classList.add(newTheme);
-        // Force a reflow
-        // root.offsetHeight
-        root.style.removeProperty("transition");
-      } else {
-        root.classList.remove("light", "dark");
-        root.classList.add(newTheme);
-      }
+         if (disableTransitionOnChange) {
+            root.style.setProperty('transition', 'none')
+            root.classList.remove('light', 'dark')
+            root.classList.add(newTheme)
+            // Force a reflow
+            // root.offsetHeight
+            root.style.removeProperty('transition')
+         } else {
+            root.classList.remove('light', 'dark')
+            root.classList.add(newTheme)
+         }
 
-      // Update color-scheme
-      root.style.colorScheme = newTheme;
-    },
-    [disableTransitionOnChange],
-  );
+         // Update color-scheme
+         root.style.colorScheme = newTheme
+      },
+      [disableTransitionOnChange]
+   )
 
-  // Resolve the actual theme to apply
-  const resolvedTheme = theme === "system" ? systemTheme : theme;
+   // Resolve the actual theme to apply
+   const resolvedTheme = theme === 'system' ? systemTheme : theme
 
-  useEffect(() => {
-    // Set mounted state
-    setMounted(true);
+   // Initialize theme and system preferences
+   useEffect(() => {
+      // Defer all state updates to avoid synchronous setState in effect
+      queueMicrotask(() => {
+         setMounted(true)
 
-    // Get initial system theme
-    const initialSystemTheme = getSystemTheme();
-    setSystemTheme(initialSystemTheme);
+         // Get initial system theme
+         const initialSystemTheme = getSystemTheme()
+         setSystemTheme(initialSystemTheme)
 
-    // Load saved theme from localStorage
-    try {
-      const savedTheme = localStorage.getItem(storageKey) as Theme;
-      if (savedTheme && ["dark", "light", "system"].includes(savedTheme)) {
-        setTheme(savedTheme);
-      }
-    } catch (e) {
-      console.error(e);
-      // localStorage not available
-    }
-
-    // Listen for system theme changes
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      const newSystemTheme = e.matches ? "dark" : "light";
-      setSystemTheme(newSystemTheme);
-      if (theme === "system") {
-        applyTheme(newSystemTheme);
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [storageKey, theme, applyTheme]);
-
-  useEffect(() => {
-    if (!mounted) return;
-
-    const themeToApply = theme === "system" ? systemTheme : theme;
-
-    // Add a small delay to ensure smooth transitions
-    requestAnimationFrame(() => {
-      applyTheme(themeToApply);
-    });
-  }, [theme, systemTheme, mounted, applyTheme]);
-
-  // Prevent flash of incorrect theme
-  if (!mounted) {
-    return <div style={{ visibility: "hidden" }}>{children}</div>;
-  }
-
-  return (
-    <ThemeProviderContext.Provider
-      {...props}
-      value={{
-        theme,
-        setTheme(newTheme: Theme) {
-          try {
-            localStorage.setItem(storageKey, newTheme);
-          } catch (e) {
-            console.error(e);
+         // Load saved theme from localStorage
+         try {
+            const savedTheme = localStorage.getItem(storageKey) as Theme
+            if (savedTheme && ['dark', 'light', 'system'].includes(savedTheme)) {
+               setTheme(savedTheme)
+            }
+         } catch (e) {
+            console.error(e)
             // localStorage not available
-          }
-          setTheme(newTheme);
-        },
-        systemTheme,
-        resolvedTheme,
-      }}
-    >
-      {children}
-    </ThemeProviderContext.Provider>
-  );
+         }
+      })
+   }, [storageKey])
+
+   // Listen for system theme changes
+   useEffect(() => {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+      const handleChange = (e: MediaQueryListEvent) => {
+         const newSystemTheme = e.matches ? 'dark' : 'light'
+         setSystemTheme(newSystemTheme)
+      }
+
+      mediaQuery.addEventListener('change', handleChange)
+      return () => mediaQuery.removeEventListener('change', handleChange)
+   }, [])
+
+   useEffect(() => {
+      if (!mounted) return
+
+      const themeToApply = theme === 'system' ? systemTheme : theme
+
+      // Add a small delay to ensure smooth transitions
+      requestAnimationFrame(() => {
+         applyTheme(themeToApply)
+      })
+   }, [theme, systemTheme, mounted, applyTheme])
+
+   // Prevent flash of incorrect theme
+   if (!mounted) {
+      return <div style={{ visibility: 'hidden' }}>{children}</div>
+   }
+
+   return (
+      <ThemeProviderContext.Provider
+         {...props}
+         value={{
+            theme,
+            setTheme(newTheme: Theme) {
+               try {
+                  localStorage.setItem(storageKey, newTheme)
+               } catch (e) {
+                  console.error(e)
+                  // localStorage not available
+               }
+               setTheme(newTheme)
+            },
+            systemTheme,
+            resolvedTheme,
+         }}
+      >
+         {children}
+      </ThemeProviderContext.Provider>
+   )
 }
 
 export const useTheme = () => {
