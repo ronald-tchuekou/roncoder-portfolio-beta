@@ -15,18 +15,6 @@ export const SERVICES: Service[] = [
    },
    {
       id: '02',
-      key: 'ux_ui_design',
-      title: {
-         en: 'UX/UI Design',
-         fr: 'Design UX/UI',
-      },
-      description: {
-         en: 'Great design is invisible. I craft user experiences that your customers will love, reducing bounce rates by up to 60% and increasing conversions. With expertise in modern design systems, accessibility standards, and user psychology, I turn your vision into interfaces that not only look stunning but drive real business results.',
-         fr: "Un bon design est invisible. Je crée des expériences utilisateur que vos clients adoreront, réduisant les taux de rebond jusqu'à 60% et augmentant les conversions. Avec une expertise en systèmes de design modernes, normes d'accessibilité et psychologie utilisateur, je transforme votre vision en interfaces qui non seulement sont époustouflantes mais génèrent de vrais résultats commerciaux.",
-      },
-   },
-   {
-      id: '03',
       key: 'web_dev',
       title: {
          en: 'Web Development',
@@ -38,7 +26,7 @@ export const SERVICES: Service[] = [
       },
    },
    {
-      id: '04',
+      id: '03',
       key: 'mobile_dev',
       title: {
          en: 'Mobile Development',
@@ -50,7 +38,7 @@ export const SERVICES: Service[] = [
       },
    },
    {
-      id: '05',
+      id: '04',
       key: 'seo',
       title: {
          en: 'SEO (Search Engine Optimization)',
@@ -62,7 +50,7 @@ export const SERVICES: Service[] = [
       },
    },
    {
-      id: '06',
+      id: '05',
       key: 'pay_tools_integration',
       title: {
          en: 'Payment Tool Integration',
@@ -74,7 +62,7 @@ export const SERVICES: Service[] = [
       },
    },
    {
-      id: '07',
+      id: '06',
       key: 'devops',
       title: {
          en: 'DevOps & Cloud Infrastructure',

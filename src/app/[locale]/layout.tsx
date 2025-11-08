@@ -4,7 +4,8 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { Header } from '@src/components/header/header'
 import { QueryProvider } from '@src/components/providers/query-provider'
 import { ThemeProvider } from '@src/components/providers/theme-provider'
-import { routing } from '@src/i18n/routing'
+import { LocaleType, routing } from '@src/i18n/routing'
+import env from '@src/lib/env/client'
 import { METADATA } from '@src/resources/data/metadata'
 import '@src/styles/style.css'
 import { Analytics } from '@vercel/analytics/react'
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
          template: '%s | Ronald Tchuekou Portfolio',
       },
       description: t('page_description'),
-      metadataBase: new URL(process.env.BASE_LINK || 'https://roncoder-beta.vercel.app'),
+      metadataBase: new URL(env.NEXT_PUBLIC_BASE_LINK),
       alternates: {
          canonical: '/',
          languages: {
@@ -76,7 +77,7 @@ export default async function RootLayout({ children, params }: Props) {
    const locale = (await params).locale
 
    // Ensure that the incoming `locale` is valid.
-   if (!routing.locales.includes(locale as any)) redirect('/')
+   if (!routing.locales.includes(locale as LocaleType)) redirect('/')
 
    // Enable static rendering
    setRequestLocale(locale)
@@ -91,7 +92,7 @@ export default async function RootLayout({ children, params }: Props) {
                <NextIntlClientProvider messages={messages}>
                   <Header />
                   <QueryProvider>{children}</QueryProvider>
-                  <Toaster />
+                  <Toaster position='top-center' richColors duration={7000} />
                   <Analytics />
                </NextIntlClientProvider>
             </ThemeProvider>

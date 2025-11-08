@@ -31,25 +31,27 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item, locale }) => {
             />
          </div>
          <div className={cn('size-full px-5 pb-5 flex flex-col gap-5')}>
-            <h2 className={cn('scroll-m-20 text-2xl font-normal tracking-tight', 'text-foreground font-mono')}>
-               {item.title[locale]}
-            </h2>
-            <h3 className='text-primary uppercase font-semibold'>{item.company[locale]}</h3>
+            <div>
+               <h2 className={cn('scroll-m-20 text-2xl font-normal tracking-tight', 'text-foreground font-mono')}>
+                  {item.title[locale]}
+               </h2>
+               <h3 className='text-primary uppercase font-serif font-semibold'>{item.company[locale]}</h3>
+            </div>
             <p className='line-clamp-3 flex-none'>{item.description[locale]}</p>
             <ProjectTags tags={item.tags} />
             <div className='h-full flex items-end gap-5'>
-               <Link href={`/projects/${item.id}`}>
-                  <Button variant={'outline'} className={cn('rounded-full')}>
+               <Button variant={'outline'} className={cn('rounded-full flex-1')} asChild>
+                  <Link href={`/projects/${item.id}`}>
                      {t('view_more')}
                      <MoveRightIcon className='ml-3 size-4' />
-                  </Button>
-               </Link>
-               <Link target='_blank' href={`${item.links[0].link}`}>
-                  <Button className={cn('rounded-full')}>
+                  </Link>
+               </Button>
+               <Button className={cn('rounded-full flex-1')} asChild>
+                  <Link target='_blank' href={`${item.links[0].link}`}>
                      {t('consult')}
                      <MoveRightIcon className='ml-3 size-4' />
-                  </Button>
-               </Link>
+                  </Link>
+               </Button>
             </div>
          </div>
       </article>

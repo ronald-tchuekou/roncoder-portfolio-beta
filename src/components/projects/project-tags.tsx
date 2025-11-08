@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { FC, useMemo } from 'react'
+import { FC, useCallback, useMemo } from 'react'
 
 export type ProjectTagsProps = { tags: string[] }
 
@@ -97,10 +97,12 @@ const Tag: FC<{ tag: string }> = ({ tag }) => {
       []
    )
 
-   const randomColor = useMemo(() => {
+   const getRandomColor = useCallback(() => {
       const index = Math.floor(Math.random() * colors.length)
       return colors[index]
    }, [colors])
+
+   const randomColor = useMemo(() => getRandomColor(), [getRandomColor])
 
    return (
       <div

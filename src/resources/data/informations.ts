@@ -15,7 +15,7 @@ export const INFORMATIONS: Information[] = [
    {
       id: 'experience',
       label: { fr: 'Expérience', en: 'Experience' },
-      value: { fr: "6 ans d'expérience", en: '6 years of experience' },
+      value: { fr: "5 ans d'expérience", en: '5 years of experience' },
       isLong: false,
    },
    {

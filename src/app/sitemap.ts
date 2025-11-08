@@ -1,6 +1,7 @@
+import env from '@src/lib/env/client'
 import type { MetadataRoute } from 'next'
 
-const baseUrl = process.env.BASE_LINK
+const baseUrl = env.NEXT_PUBLIC_BASE_LINK
 
 const paths: MetadataRoute.Sitemap = [
    {
@@ -46,10 +47,10 @@ const paths: MetadataRoute.Sitemap = [
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	return paths.map((path) => ({
-		url: `${baseUrl}${path.url}`,
-		lastModified: new Date(),
-		changeFrequency: path.changeFrequency,
-		priority: path.priority,
-	}))
+   return paths.map((path) => ({
+      url: `${baseUrl}${path.url}`,
+      lastModified: new Date(),
+      changeFrequency: path.changeFrequency,
+      priority: path.priority,
+   }))
 }

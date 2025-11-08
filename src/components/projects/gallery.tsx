@@ -75,82 +75,57 @@ export const Gallery: FC<GalleryProps> = ({ images }) => {
   )
 };
 
-const GallerySlide = ({
-  images,
-  index,
-  onClose,
-}: {
-  images: string[];
-  index: number;
-  onClose: () => void;
-}) => {
-  const slideRef = useRef<Slider>(null);
+const GallerySlide = ({ images, index, onClose }: { images: string[]; index: number; onClose: VoidFunction }) => {
+   const slideRef = useRef<Slider>(null)
 
-  return (
-    <div
-      className={cn(
-        "z-20",
-        "fixed top-0 left-0 h-screen w-screen backdrop-blur bg-black/10",
-        "flex justify-center items-center"
-      )}
-    >
-      <div className={cn("max-w-screen-lg mx-auto flex flex-col", "w-full")}>
-        <div className="flex justify-end px-4">
-          <Button onClick={onClose} size={"icon"}>
-            <XIcon className="size-6" />
-          </Button>
-        </div>
-        <div className="flex w-full items-center">
-          <div className="flex-none flex justify-center items-center">
-            <Button
-              onClick={() => slideRef.current?.slickPrev()}
-              size={"icon"}
-              className="rounded-full"
-            >
-              <ArrowLeftIcon className="size-6" />
-            </Button>
-          </div>
+   return (
+      <div
+         className={cn(
+            'z-20',
+            'fixed top-0 left-0 h-screen w-screen backdrop-blur bg-black/10',
+            'flex justify-center items-center'
+         )}
+      >
+         <div className={cn('max-w-screen-lg mx-auto flex flex-col', 'w-full')}>
+            <div className='flex justify-end px-4'>
+               <Button onClick={onClose} size={'icon'}>
+                  <XIcon className='size-6' />
+               </Button>
+            </div>
+            <div className='flex w-full items-center'>
+               <div className='flex-none flex justify-center items-center'>
+                  <Button onClick={() => slideRef.current?.slickPrev()} size={'icon'} className='rounded-full'>
+                     <ArrowLeftIcon className='size-6' />
+                  </Button>
+               </div>
 
-          <div style={{ width: "calc(100% - 80px)" }}>
-            <Slider
-              ref={slideRef}
-              initialSlide={index}
-              prevArrow={<></>}
-              nextArrow={<></>}
-              className="w-full"
-            >
-              {images.map((image, idx) => (
-                <div
-                  key={`image-${idx}`}
-                  className="rounded-3xl w-full aspect-auto px-2 lg:px-5 lg:py-10"
-                >
-                  <Image
-                    priority
-                    unoptimized
-                    src={image}
-                    alt={image}
-                    width={300}
-                    height={120}
-                    placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=="
-                    className={cn("aspect-auto w-full rounded-3xl")}
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
+               <div style={{ width: 'calc(100% - 80px)' }}>
+                  <Slider ref={slideRef} initialSlide={index} prevArrow={<></>} nextArrow={<></>} className='w-full'>
+                     {images.map((image, idx) => (
+                        <div key={`image-${idx}`} className='rounded-3xl w-full aspect-auto px-2 lg:px-5 lg:py-10'>
+                           <Image
+                              priority
+                              unoptimized
+                              src={image}
+                              alt={image}
+                              width={300}
+                              height={120}
+                              placeholder='blur'
+                              blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
+                              className={cn('aspect-auto w-full rounded-3xl')}
+                           />
+                        </div>
+                     ))}
+                  </Slider>
+               </div>
 
-          <div className="flex-none flex justify-center items-center">
-            <Button
-              onClick={() => slideRef.current?.slickNext()}
-              size={"icon"}
-              className="rounded-full"
-            >
-              <ArrowRightIcon className="size-6" />
-            </Button>
-          </div>
-        </div>
+               <div className='flex-none flex justify-center items-center'>
+                  <Button onClick={() => slideRef.current?.slickNext()} size={'icon'} className='rounded-full'>
+                     <ArrowRightIcon className='size-6' />
+                  </Button>
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
-  );
-};
+   )
+}

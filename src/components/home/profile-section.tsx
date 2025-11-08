@@ -15,6 +15,7 @@ export const ProfileSection: FC = () => {
               alt='Ronald Tchuekou'
               width={500}
               height={500}
+              loading={'eager'}
               className={cn('aspect-square w-full h-auto rounded-full p-1')}
            />
            <motion.svg

@@ -5,11 +5,11 @@ import { motion, useAnimation, useInView } from "framer-motion";
 import { FC, PropsWithChildren, useEffect, useRef } from "react";
 
 type Props = {
-  className?: string;
-  delay?: number;
-  elt?: MotionTag;
-  onClick?: () => void;
-};
+   className?: string
+   delay?: number
+   elt?: MotionTag
+   onClick?: VoidFunction
+}
 
 export const RevealFromBottom: FC<PropsWithChildren<Props>> = ({
   children,

@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { NAV_LINKS } from '@src/resources/data/nav-links'
 import { isCurrentPath } from '@src/resources/util-functions'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
@@ -16,6 +16,7 @@ import { PhoneNavVersion } from './phone-version'
 export const Header: FC = () => {
    const t = useTranslations('header')
    const path = usePathname()
+   const locale = useLocale()
 
    return (
       <Container rootClassName={cn('z-10', 'sticky top-0 backdrop-blur bg-transparent')}>
@@ -35,7 +36,10 @@ export const Header: FC = () => {
                <ul className={cn('hidden md:flex')}>
                   {NAV_LINKS.map(({ url, label }) => (
                      <li key={url}>
-                        <Link className={cn('nav-link', isCurrentPath(path, url) && 'active')} href={url}>
+                        <Link
+                           className={cn('nav-link', isCurrentPath(path, url, locale === 'en') && 'active')}
+                           href={url}
+                        >
                            <span className='nav-link-label'>{t(label)}</span>
                            <span className={'nav-link-indicator'}></span>
                         </Link>
