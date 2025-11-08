@@ -9,7 +9,8 @@
       "moari",
       "privie",
       "Reacharts",
-      "ronald"
+      "ronald",
+      "vercel"
    ],
    "typescript.tsdk": "node_modules/typescript/lib",
    "typescript.preferences.autoImportSpecifierExcludeRegexes": [
