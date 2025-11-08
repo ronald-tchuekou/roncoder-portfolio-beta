@@ -1,7 +1,6 @@
-import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
-import { FC, Suspense } from 'react'
+import { FC } from 'react'
 import { Container } from '../container'
 import { GitHubContributionCount } from '../github-contribution-count'
 import { GitHubStarsCount } from '../github-stars-count'
@@ -28,15 +27,11 @@ export const CounterSection: FC = () => {
             </RevealFromBottom>
 
             <RevealFromBottom delay={0.3} className='flex gap-3'>
-               <Suspense fallback={<Skeleton className='h-[48px] w-full' />}>
-                  <GitHubStarsCount t={t} />
-               </Suspense>
+               <GitHubStarsCount />
             </RevealFromBottom>
 
             <RevealFromBottom delay={0.4} className='flex gap-3'>
-               <Suspense fallback={<Skeleton className='h-[48px] w-full' />}>
-                  <GitHubContributionCount />
-               </Suspense>
+               <GitHubContributionCount />
             </RevealFromBottom>
          </section>
       </Container>
