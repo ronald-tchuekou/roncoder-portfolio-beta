@@ -14,6 +14,8 @@ export type ProjectItemProps = { item: Project; locale: LocaleType }
 
 export const ProjectItem: FC<ProjectItemProps> = ({ item, locale }) => {
    const t = useTranslations('projects')
+   const previewLink = item.links?.[0]?.link
+   const previewHref = previewLink ? `/projects/preview/${encodeURIComponent(previewLink)}` : undefined
 
    return (
       <article className={cn('bg-card rounded-xl border border-input', 'size-full', 'flex flex-col gap-5')}>
@@ -46,8 +48,8 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item, locale }) => {
                      <MoveRightIcon className='ml-3 size-4' />
                   </Link>
                </Button>
-               <Button className={cn('rounded-full flex-1')} asChild>
-                  <Link target='_blank' href={`${item.links[0].link}`}>
+               <Button className={cn('rounded-full flex-1')} asChild disabled={!previewHref}>
+                  <Link href={previewHref ?? '#'}>
                      {t('consult')}
                      <MoveRightIcon className='ml-3 size-4' />
                   </Link>

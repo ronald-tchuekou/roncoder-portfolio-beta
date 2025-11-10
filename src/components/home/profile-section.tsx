@@ -10,11 +10,11 @@ export const ProfileSection: FC = () => {
      <section className='py-10 order-1  md:order-2'>
         <div className='w-full relative'>
            <Image
-              quality={100}
+              priority
               src={'/profile_3.webp'}
               alt='Ronald Tchuekou'
-              width={500}
-              height={500}
+              width={960}
+              height={960}
               loading={'eager'}
               className={cn('aspect-square w-full h-auto rounded-full p-1')}
            />

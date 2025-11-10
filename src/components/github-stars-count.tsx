@@ -11,7 +11,6 @@ export const GitHubStarsCount = () => {
       async queryFn() {
          const res = await fetch('/api/github/stars')
          const data = await res.json()
-         console.log(data)
          return data.stars as number
       },
    })

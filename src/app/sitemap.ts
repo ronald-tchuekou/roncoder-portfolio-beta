@@ -75,6 +75,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
                changeFrequency: 'weekly',
                priority: 0.7,
             })
+            if (project.links?.[0]?.link) {
+               urls.push({
+                  url: `${baseUrl}/projects/preview/${project.links?.[0]?.link}`,
+                  lastModified: new Date(),
+                  changeFrequency: 'weekly',
+                  priority: 0.7,
+               })
+            }
          } else {
             urls.push({
                url: `${baseUrl}/${locale}/projects/${project.id}`,
@@ -82,6 +90,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
                changeFrequency: 'weekly',
                priority: 0.7,
             })
+            if (project.links?.[0]?.link) {
+               urls.push({
+                  url: `${baseUrl}/${locale}/projects/preview/${project.links?.[0]?.link}`,
+                  lastModified: new Date(),
+                  changeFrequency: 'weekly',
+                  priority: 0.7,
+               })
+            }
          }
       })
    })

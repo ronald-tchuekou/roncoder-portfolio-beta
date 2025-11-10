@@ -1,11 +1,9 @@
 import { cn } from "@/lib/utils";
 import { Container } from "@src/components/container";
-import { GitHubContributionCount } from '@src/components/github-contribution-count'
 import { CounterSection } from '@src/components/home/counter-section'
 import { InfoSection } from '@src/components/home/info-section'
 import { ProfileSection } from '@src/components/home/profile-section'
 import { setRequestLocale } from 'next-intl/server'
-import { Suspense } from 'react'
 
 type Props = {
 	params: Promise<{ locale: string }>
