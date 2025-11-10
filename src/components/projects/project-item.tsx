@@ -14,8 +14,7 @@ export type ProjectItemProps = { item: Project; locale: LocaleType }
 
 export const ProjectItem: FC<ProjectItemProps> = ({ item, locale }) => {
    const t = useTranslations('projects')
-   const previewLink = item.links?.[0]?.link
-   const previewHref = previewLink ? `/projects/preview/${encodeURIComponent(previewLink)}` : undefined
+   const previewHref = `/projects/preview/${item.id}`
 
    return (
       <article className={cn('bg-card rounded-xl border border-input', 'size-full', 'flex flex-col gap-5')}>

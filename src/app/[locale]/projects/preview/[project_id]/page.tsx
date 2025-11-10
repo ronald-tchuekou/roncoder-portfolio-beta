@@ -10,7 +10,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
 type Props = {
-   params: Promise<{ locale: LocaleType; project_link: string }>
+   params: Promise<{ locale: LocaleType; project_id: string }>
 }
 
 type ProjectLinkEntry = {
@@ -96,8 +96,22 @@ const resolveProjectLink = (projectLinkParam: string): ResolvedProjectLink | nul
    return fallback ? { url: fallback } : null
 }
 
+const resolveProjectId = (projectId: string): string | null => {
+   const project = PROJECTS.find((project) => project.id === projectId)
+   if (!project) return null
+   return project.links?.[0]?.link ?? null
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const { locale, project_link } = await params
+   const { locale, project_id } = await params
+   const project_link = resolveProjectId(project_id)
+
+   if (!project_link) {
+      return {
+         title: 'Project preview',
+      }
+   }
+
    const resolved = resolveProjectLink(project_link)
 
    if (!resolved) {
@@ -136,7 +150,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-   const { locale, project_link } = await params
+   const { locale, project_id } = await params
+
+   const project_link = resolveProjectId(project_id)
+
+   if (!project_link) {
+      notFound()
+   }
 
    setRequestLocale(locale)
 
