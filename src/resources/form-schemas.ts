@@ -9,7 +9,7 @@ export const contactFormSchema = z.object({
    message: z.string().trim().min(1, 'set_a_message').max(4000),
    locale: z.enum(['en', 'fr']).optional().default('en'),
    /** Honeypot — hidden in the UI, must stay empty. */
-   website: z.string().max(0).optional(),
+   website: z.string().optional(),
 })
 
 export type ContactFormSchema = z.infer<typeof contactFormSchema>
