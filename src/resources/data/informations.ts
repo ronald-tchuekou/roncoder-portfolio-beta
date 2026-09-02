@@ -1,4 +1,10 @@
 import { Information } from '../util-types'
+
+/** First professional experience (see experiences.ts). Years of experience are derived from it. */
+export const CAREER_START_YEAR = 2018
+
+/** Projects delivered to date. PROJECTS only lists the ones showcased with screenshots. */
+export const COMPLETED_PROJECTS_COUNT = 13
 export const INFORMATIONS: Information[] = [
    {
       id: 'name',

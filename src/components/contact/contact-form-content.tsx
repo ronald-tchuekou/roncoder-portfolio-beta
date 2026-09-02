@@ -10,9 +10,8 @@ import { LocaleType } from '@src/i18n/routing'
 import { SERVICES } from '@src/resources/data/services'
 import { contactFormSchema, ContactFormSchema, defaultContactFormValues } from '@src/resources/form-schemas'
 import { ContactService } from '@src/services/contact.service'
-import { useMutation } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
-import { Ref, useEffect, useImperativeHandle } from 'react'
+import { Ref, useEffect, useImperativeHandle, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -42,30 +41,29 @@ export const ContactFormContent = ({ locale, serviceKey, onCompleted, onPendingC
       defaultValues,
    })
 
-   const { mutate, isPending } = useMutation({
-      async mutationFn(body: ContactFormSchema) {
-         await ContactService.send(body)
-      },
-      onSuccess() {
-         form.reset(defaultValues)
-         onCompleted?.()
-         toast.success(t('your_message_is_successfully_sent'), {
-            description: t('thanks_to_contacted_me'),
-         })
-      },
-      onError() {
-         toast.error(t('error_has_provided'), {
-            description: t('please_try_again'),
-         })
-      },
-   })
+   const [isPending, setIsPending] = useState(false)
 
    useEffect(() => {
       onPendingChange?.(isPending)
    }, [isPending, onPendingChange])
 
-   const submit = form.handleSubmit((data) => {
-      if (!isPending) mutate(data)
+   const submit = form.handleSubmit(async (data) => {
+      if (isPending) return
+      setIsPending(true)
+      try {
+         await ContactService.send(data)
+         form.reset(defaultValues)
+         onCompleted?.()
+         toast.success(t('your_message_is_successfully_sent'), {
+            description: t('thanks_to_contacted_me'),
+         })
+      } catch {
+         toast.error(t('error_has_provided'), {
+            description: t('please_try_again'),
+         })
+      } finally {
+         setIsPending(false)
+      }
    })
 
    useImperativeHandle(ref, () => ({

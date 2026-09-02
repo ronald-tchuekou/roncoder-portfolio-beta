@@ -2,7 +2,6 @@ import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { Header } from '@src/components/header/header'
-import { QueryProvider } from '@src/components/providers/query-provider'
 import { ThemeProvider } from '@src/components/providers/theme-provider'
 import { LocaleType, routing } from '@src/i18n/routing'
 import { fontMono, fontSans, fontSerif } from '@src/fonts'
@@ -87,7 +86,7 @@ export default async function RootLayout({ children, params }: Props) {
             <ThemeProvider>
                <NextIntlClientProvider messages={messages}>
                   <Header />
-                  <QueryProvider>{children}</QueryProvider>
+                  {children}
                   <Toaster position='top-center' richColors duration={7000} />
                   <Analytics />
                </NextIntlClientProvider>
