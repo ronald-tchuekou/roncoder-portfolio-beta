@@ -5,6 +5,7 @@ import { Header } from '@src/components/header/header'
 import { QueryProvider } from '@src/components/providers/query-provider'
 import { ThemeProvider } from '@src/components/providers/theme-provider'
 import { LocaleType, routing } from '@src/i18n/routing'
+import { fontMono, fontSans, fontSerif } from '@src/fonts'
 import env from '@src/lib/env/client'
 import { METADATA } from '@src/resources/data/metadata'
 import '@src/styles/style.css'
@@ -85,7 +86,7 @@ export default async function RootLayout({ children, params }: Props) {
    const messages = await getMessages()
 
    return (
-      <html lang={locale}>
+      <html lang={locale} className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)}>
          <GoogleTagManager gtmId='GTM-5X42BXF9' />
          <body className={cn('min-h-screen antialiased font-sans')}>
             <ThemeProvider>
