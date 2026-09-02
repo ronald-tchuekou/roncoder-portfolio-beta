@@ -81,7 +81,7 @@ export default async function RootLayout({ children, params }: Props) {
    const messages = await getMessages()
 
    return (
-      <html lang={locale} className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)}>
+      <html lang={locale} className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)} suppressHydrationWarning>
          <GoogleTagManager gtmId='GTM-5X42BXF9' />
          <body className={cn('min-h-screen antialiased font-sans')}>
             <ThemeProvider>
