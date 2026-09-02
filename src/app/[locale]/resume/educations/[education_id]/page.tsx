@@ -80,13 +80,11 @@ export default async function Page({ params }: Props) {
          {education.imageLink && (
             <RevealFromBottom delay={0.2} className={cn('w-full aspect-auto', 'rounded-lg', 'bg-secondary/10')}>
                <Image
-                  quality={100}
+                  sizes='(min-width: 768px) 60vw, 100vw'
                   src={education.imageLink}
                   alt={education.title[locale]}
                   width={1000}
                   height={600}
-                  placeholder='blur'
-                  blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
                   className={cn('rounded-lg w-full aspect-auto')}
                />
             </RevealFromBottom>

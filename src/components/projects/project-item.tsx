@@ -10,9 +10,9 @@ import Image from 'next/image'
 import { FC } from "react";
 import { ProjectTags } from "./project-tags";
 
-export type ProjectItemProps = { item: Project; locale: LocaleType }
+export type ProjectItemProps = { item: Project; locale: LocaleType; priority?: boolean }
 
-export const ProjectItem: FC<ProjectItemProps> = ({ item, locale }) => {
+export const ProjectItem: FC<ProjectItemProps> = ({ item, locale, priority = false }) => {
    const t = useTranslations('projects')
    const previewHref = `/projects/preview/${item.id}`
 
@@ -20,15 +20,13 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item, locale }) => {
       <article className={cn('bg-card rounded-xl border border-input', 'size-full', 'flex flex-col gap-5')}>
          <div className={cn('w-full h-auto aspect-video', 'rounded-t-xl', 'bg-secondary/10')}>
             <Image
-               priority
-               unoptimized
+               priority={priority}
                src={item.image}
                alt={item.title[locale]}
-               width={400}
-               height={300}
-               placeholder='blur'
-               blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
-               className={cn('w-full aspect-video', 'rounded-t-xl')}
+               width={1280}
+               height={720}
+               sizes='(min-width: 768px) 50vw, 100vw'
+               className={cn('w-full aspect-video object-cover', 'rounded-t-xl')}
             />
          </div>
          <div className={cn('size-full px-5 pb-5 flex flex-col gap-5')}>

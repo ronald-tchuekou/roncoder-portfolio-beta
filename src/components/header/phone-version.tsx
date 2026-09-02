@@ -37,8 +37,7 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
                   <Link href={'/'} aria-label='Ronald Tchuekou'>
                      <Image
                         priority
-                        quality={100}
-                        src={'/line-logo.png'}
+                              src={'/line-logo.png'}
                         alt='Ronald Tchuekou'
                         height={232}
                         width={692}

@@ -24,7 +24,6 @@ export const Header: FC = () => {
             <Link href={'/'} aria-label='Ronald Tchuekou'>
                <Image
                   priority
-                  quality={100}
                   src={'/line-logo.png'}
                   alt='Ronald Tchuekou portfolio'
                   height={232}

@@ -41,8 +41,6 @@ export const Gallery: FC<GalleryProps> = ({ images }) => {
                     width={300}
                     height={120}
                     quality={100}
-                    placeholder='blur'
-                    blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
                     className={cn('aspect-auto size-full')}
                  />
               </RevealFromBottom>
@@ -60,8 +58,6 @@ export const Gallery: FC<GalleryProps> = ({ images }) => {
                     height={120}
                     priority
                     quality={100}
-                    placeholder='blur'
-                    blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
                     className={cn('aspect-auto size-full')}
                  />
                  <div className='absolute inset-0 bg-black/50 flex justify-center items-center'>
@@ -110,8 +106,6 @@ const GallerySlide = ({ images, index, onClose }: { images: string[]; index: num
                               alt={image}
                               width={300}
                               height={120}
-                              placeholder='blur'
-                              blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
                               className={cn('aspect-auto w-full rounded-3xl')}
                            />
                         </div>

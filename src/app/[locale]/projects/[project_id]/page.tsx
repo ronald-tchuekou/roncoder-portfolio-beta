@@ -81,14 +81,12 @@ export default async function Page({ params }: Props) {
                >
                   <Image
                      priority
-                     unoptimized
                      src={project.image}
                      alt={project.title[locale]}
-                     width={400}
-                     height={300}
-                     placeholder='blur'
-                     blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
-                     className={cn('w-full aspect-video', 'rounded-xl')}
+                     width={1280}
+                     height={720}
+                     sizes='(min-width: 1280px) 1216px, 100vw'
+                     className={cn('w-full aspect-video object-cover', 'rounded-xl')}
                   />
                </RevealFromBottom>
                <RevealFromBottom delay={0.2} className={cn('flex')}>

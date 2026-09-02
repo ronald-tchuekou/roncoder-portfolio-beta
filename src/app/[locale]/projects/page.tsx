@@ -68,7 +68,7 @@ export default async function Page({ params }: Props) {
          <Container className={cn('grid grid-cols-1 md:grid-cols-2 gap-10')}>
             {PROJECTS.map((item, index) => (
                <RevealFromBottom delay={index < 4 ? index * 0.1 : 0.1} key={item.id}>
-                  <ProjectItem item={item} locale={locale} />
+                  <ProjectItem item={item} locale={locale} priority={index === 0} />
                </RevealFromBottom>
             ))}
          </Container>
