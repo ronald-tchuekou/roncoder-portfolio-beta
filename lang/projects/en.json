@@ -5,5 +5,9 @@
    "demo_credentials": "Demo credentials for staging version",
    "username": "Username:",
    "password": "Password:",
-   "consult": "Consult"
+   "consult": "Consult",
+   "close": "Close",
+   "previous": "Previous image",
+   "next": "Next image",
+   "gallery_of": "Screenshot {index} of {total}"
 }

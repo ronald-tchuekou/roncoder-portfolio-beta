@@ -4,25 +4,36 @@ import { Container } from '@src/components/container'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { Link } from '@src/i18n/routing'
 import { METADATA } from '@src/resources/data/metadata'
+import { LocaleType } from '@src/i18n/routing'
+import { localizedAlternates } from '@src/lib/seo'
 import { Metadata } from 'next'
-import { setRequestLocale } from 'next-intl/server'
-
-export const metadata: Metadata = {
-   title: 'Contact moi pour une meilleur prise en charge en développement de projets. | roncoder',
-   description:
-      'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
-   keywords: [
-      'roncoder portfolio contact',
-      'contact roncoder',
-      'contact roncoder portfolio',
-      'Ronald Tchuekou Contact',
-      'Contact Ronald Tchuekou',
-   ],
-   ...METADATA,
-}
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 type Props = {
    params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+   const locale = (await params).locale as LocaleType
+   const t = await getTranslations({ locale, namespace: 'contact' })
+
+   return {
+      title: t('page_title'),
+      description: t('page_description'),
+      alternates: localizedAlternates(locale, '/contact'),
+      keywords: [
+         'roncoder portfolio contact',
+         'contact roncoder',
+         'contact roncoder portfolio',
+         'Ronald Tchuekou Contact',
+         'Contact Ronald Tchuekou',
+      ],
+      twitter: {
+         ...METADATA.twitter,
+         title: t('page_title'),
+         description: t('page_description'),
+      },
+   }
 }
 
 export default async function Page({ params }: Props) {
@@ -44,6 +55,7 @@ export default async function Page({ params }: Props) {
                   <Link
                      href={'https://wa.me/+237658172868'}
                      target='_blank'
+                     rel='noopener noreferrer'
                      className='flex items-center gap-3 group hover:bg-accent/20 rounded-xl transition duration-300'
                   >
                      <div className='flex justify-center items-center rounded-xl bg-accent/40 flex-none p-5'>
@@ -81,6 +93,7 @@ export default async function Page({ params }: Props) {
                   <Link
                      href={'mailto:ronaldtchuekou@gmail.com'}
                      target='_blank'
+                     rel='noopener noreferrer'
                      className='flex items-center gap-3 group hover:bg-accent/20 rounded-xl transition duration-300'
                   >
                      <div className='flex justify-center items-center rounded-xl bg-accent/40 flex-none p-5'>

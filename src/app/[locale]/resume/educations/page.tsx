@@ -5,6 +5,7 @@ import { SectionHeader } from '@src/components/resume/section-header'
 import { Link, LocaleType } from '@src/i18n/routing'
 import { EDUCATIONS_LIST } from '@src/resources/data/educations'
 import { DotIcon, MoveRightIcon } from "lucide-react";
+import { localizedAlternates } from '@src/lib/seo'
 import { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
@@ -13,12 +14,13 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'resume' })
 
    return {
       title: t('page_title_educations'),
       description: t('page_description_educations'),
+      alternates: localizedAlternates(locale, '/resume/educations'),
       keywords: [
          'Compétences',
          'Certifications',
@@ -56,12 +58,12 @@ export default async function Page({ params }: Props) {
                         <small className={cn('text-muted-foreground')}>{education.date[locale]}</small>
                      </div>
                      <div>
-                        <Link href={`/resume/educations/${education.id}`}>
-                           <Button variant={'outline'} size={'sm'} className={cn('text-xs', 'rounded-full')}>
+                        <Button asChild variant={'outline'} size={'sm'} className={cn('text-xs', 'rounded-full')}>
+                           <Link href={`/resume/educations/${education.id}`}>
                               {t('consult')}
                               <MoveRightIcon className='size-5 ml-2' />
-                           </Button>
-                        </Link>
+                           </Link>
+                        </Button>
                      </div>
                   </div>
                </RevealFromBottom>

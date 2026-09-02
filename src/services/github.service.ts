@@ -1,78 +1,62 @@
 import envClient from '@src/lib/env/client'
 import env from '@src/lib/env/server'
 
-const token = env.GITHUB_TOKEN
-const username = envClient.NEXT_PUBLIC_GITHUB_USERNAME
+const GITHUB_GRAPHQL = 'https://api.github.com/graphql'
+const REVALIDATE_SECONDS = 60 * 60
 
-console.log('token', token)
-console.log('username', username)
-
-export const GithubService = {
-   async getGitHubContributions(): Promise<number> {
-      try {
-         const query = `{
-   user(login: "${username}") {
-      contributionsCollection {
-         contributionCalendar {
-         totalContributions
-         }
+async function graphql<T>(query: string): Promise<T | null> {
+   try {
+      const res = await fetch(GITHUB_GRAPHQL, {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${env.GITHUB_TOKEN}`,
+         },
+         body: JSON.stringify({ query }),
+         next: { revalidate: REVALIDATE_SECONDS },
+      })
+      if (!res.ok) {
+         console.error('GitHub GraphQL error:', res.status)
+         return null
       }
+      const json = await res.json()
+      return (json.data as T) ?? null
+   } catch (error) {
+      console.error('GitHub GraphQL request failed:', error)
+      return null
    }
 }
-`
 
-         const res = await fetch('https://api.github.com/graphql', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-               Authorization: `bearer ${token}`,
-            },
-            body: JSON.stringify({ query }),
-         })
+type ContributionsData = {
+   user?: { contributionsCollection?: { contributionCalendar?: { totalContributions?: number } } }
+}
 
-         const data = await res.json()
+type StarsData = {
+   user?: { repositories?: { nodes?: { stargazerCount: number }[] } }
+}
 
-         return data.data?.user?.contributionsCollection?.contributionCalendar?.totalContributions || 0
-      } catch (error) {
-         console.error('Error fetching GitHub contributions:', error)
-         return 0
-      }
+export const GithubService = {
+   /** Total contributions over the last year, or null when GitHub is unreachable. */
+   async getGitHubContributions(): Promise<number | null> {
+      const data = await graphql<ContributionsData>(`{
+         user(login: "${envClient.NEXT_PUBLIC_GITHUB_USERNAME}") {
+            contributionsCollection { contributionCalendar { totalContributions } }
+         }
+      }`)
+      return data?.user?.contributionsCollection?.contributionCalendar?.totalContributions ?? null
    },
-   async getGitHubStars(): Promise<number> {
-      try {
-         const query = `
-    {
-      user(login: "${username}") {
-        repositories(first: 100, ownerAffiliations: OWNER, isFork: false) {
-          nodes {
-            stargazerCount
-          }
-        }
-      }
-    }
-  `
 
-         const res = await fetch('https://api.github.com/graphql', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-               Authorization: `bearer ${token}`,
-            },
-            body: JSON.stringify({ query }),
-         })
-
-         const json = await res.json()
-
-         const stars =
-            json.data?.user?.repositories?.nodes?.reduce(
-               (acc: number, repo: { stargazerCount: number }) => acc + repo.stargazerCount,
-               0
-            ) || 0
-
-         return stars
-      } catch (error) {
-         console.error('Error fetching GitHub stars:', error)
-         return 0
-      }
+   /** Sum of stars across owned, non-fork repositories, or null when GitHub is unreachable. */
+   async getGitHubStars(): Promise<number | null> {
+      const data = await graphql<StarsData>(`{
+         user(login: "${envClient.NEXT_PUBLIC_GITHUB_USERNAME}") {
+            repositories(first: 100, ownerAffiliations: OWNER, isFork: false) {
+               nodes { stargazerCount }
+            }
+         }
+      }`)
+      const nodes = data?.user?.repositories?.nodes
+      if (!nodes) return null
+      return nodes.reduce((acc, repo) => acc + repo.stargazerCount, 0)
    },
 }

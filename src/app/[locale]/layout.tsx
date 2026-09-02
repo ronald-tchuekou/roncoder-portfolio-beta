@@ -2,10 +2,11 @@ import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { Header } from '@src/components/header/header'
-import { QueryProvider } from '@src/components/providers/query-provider'
 import { ThemeProvider } from '@src/components/providers/theme-provider'
 import { LocaleType, routing } from '@src/i18n/routing'
+import { fontMono, fontSans, fontSerif } from '@src/fonts'
 import env from '@src/lib/env/client'
+import { localizedAlternates } from '@src/lib/seo'
 import { METADATA } from '@src/resources/data/metadata'
 import '@src/styles/style.css'
 import { Analytics } from '@vercel/analytics/react'
@@ -20,7 +21,7 @@ type Props = Readonly<{
 }>
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'home' })
 
    return {
@@ -30,13 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       description: t('page_description'),
       metadataBase: new URL(env.NEXT_PUBLIC_BASE_LINK),
-      alternates: {
-         canonical: '/',
-         languages: {
-            'en-US': '/en-US',
-            'fr-FR': '/fr-FR',
-         },
-      },
+      alternates: localizedAlternates(locale, '/'),
       openGraph: {
          images: ['/ronald-tchuekou-profile.jpg'],
       },
@@ -85,13 +80,13 @@ export default async function RootLayout({ children, params }: Props) {
    const messages = await getMessages()
 
    return (
-      <html lang={locale}>
+      <html lang={locale} className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)} suppressHydrationWarning>
          <GoogleTagManager gtmId='GTM-5X42BXF9' />
          <body className={cn('min-h-screen antialiased font-sans')}>
             <ThemeProvider>
                <NextIntlClientProvider messages={messages}>
                   <Header />
-                  <QueryProvider>{children}</QueryProvider>
+                  {children}
                   <Toaster position='top-center' richColors duration={7000} />
                   <Analytics />
                </NextIntlClientProvider>

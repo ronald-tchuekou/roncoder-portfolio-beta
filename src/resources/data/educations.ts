@@ -34,7 +34,7 @@ export const EDUCATIONS_LIST: Experience[] = [
             en: 'Develop asynchronous callback functions and promises to perform asynchronous operations.',
          },
       ],
-      imageLink: '/certificates/backend_dev_nodejs_coursera.png',
+      imageLink: '/certificates/backend_dev_nodejs_coursera.webp',
       keywords: [
          'Node.js',
          'Backend Development',
@@ -89,7 +89,7 @@ export const EDUCATIONS_LIST: Experience[] = [
             en: 'Redux Hooks and sharing values globally with the context API.',
          },
       ],
-      imageLink: '/certificates/react_js_alphorm.jpeg',
+      imageLink: '/certificates/react_js_alphorm.webp',
       keywords: ['ReactJS', 'Redux', 'TypeScript', 'Alphorm', 'Hooks', 'TailwindCSS', 'HeadlessUI', 'Redux Toolkit'],
    },
    {
@@ -133,7 +133,7 @@ export const EDUCATIONS_LIST: Experience[] = [
             en: 'For deployment, I discovered how to use Docker to quickly set up a Restful server.',
          },
       ],
-      imageLink: '/certificates/advanced_angular.jpeg',
+      imageLink: '/certificates/advanced_angular.webp',
       keywords: ['Angular', 'ReactiveForms', 'Dependency Injection', 'Guards', 'Lazy Loading', 'Docker', 'Alphorm'],
    },
    {
@@ -177,7 +177,7 @@ export const EDUCATIONS_LIST: Experience[] = [
             en: 'Best practices for securing containers.',
          },
       ],
-      imageLink: '/certificates/advance_docker.jpeg',
+      imageLink: '/certificates/advance_docker.webp',
       keywords: ['Docker', 'Docker Compose', 'Docker Machine', 'Data Volume Management', 'Alphorm'],
    },
    {
@@ -205,7 +205,7 @@ export const EDUCATIONS_LIST: Experience[] = [
          { fr: 'Création des interfaces utilisateur', en: 'User interface creation' },
          { fr: 'Création des applications web', en: 'Web application creation' },
       ],
-      imageLink: '/certificates/react-essential.png',
+      imageLink: '/certificates/react-essential.webp',
       keywords: [
          'React.js',
          'Component Creation',
@@ -240,7 +240,7 @@ export const EDUCATIONS_LIST: Experience[] = [
          { fr: 'Authentification et autorisation', en: 'Authentication and authorization' },
          { fr: "Déploiement d'applications", en: 'Application deployment' },
       ],
-      imageLink: '/certificates/node_js_3rd_edition.jpeg',
+      imageLink: '/certificates/node_js_3rd_edition.webp',
       keywords: ['NodeJs', 'REST APIs', 'Express', 'MongoDB', 'MySQL', 'Udemy'],
    },
    {
@@ -272,7 +272,7 @@ export const EDUCATIONS_LIST: Experience[] = [
          { fr: 'Gestion des fichiers', en: 'File management' },
          { fr: "Déploiement d'applications sur Play Store", en: 'Deploying applications on Play Store' },
       ],
-      imageLink: '/certificates/android_attestation.png',
+      imageLink: '/certificates/android_attestation.webp',
       keywords: ['Android Development', 'Java', 'Android Studio', 'Orange Digital Center', 'Play Store'],
    },
    {

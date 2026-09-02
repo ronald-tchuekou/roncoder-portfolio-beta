@@ -7,13 +7,11 @@ import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LocaleType } from '@src/i18n/routing'
-import { useContactFormStore } from '@src/lib/stores/contact-form.store'
 import { SERVICES } from '@src/resources/data/services'
 import { contactFormSchema, ContactFormSchema, defaultContactFormValues } from '@src/resources/form-schemas'
 import { ContactService } from '@src/services/contact.service'
-import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from 'next-intl'
-import { Ref, useImperativeHandle } from 'react'
+import { Ref, useEffect, useImperativeHandle, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -25,12 +23,13 @@ type Props = {
    locale: LocaleType
    serviceKey?: string
    onCompleted?: VoidFunction
+   /** Lets the parent mirror the pending state on its own submit button. */
+   onPendingChange?: (isPending: boolean) => void
    ref?: Ref<ContactFormContentRef>
 }
 
-export const ContactFormContent = ({ locale, serviceKey, onCompleted, ref }: Props) => {
+export const ContactFormContent = ({ locale, serviceKey, onCompleted, onPendingChange, ref }: Props) => {
    const t = useTranslations('services')
-   const setLoading = useContactFormStore((s) => s.setLoading)
    const defaultValues = {
       ...defaultContactFormValues,
       service: serviceKey || '',
@@ -42,31 +41,28 @@ export const ContactFormContent = ({ locale, serviceKey, onCompleted, ref }: Pro
       defaultValues,
    })
 
-   const { mutate, isPending } = useMutation({
-      async mutationFn(body: ContactFormSchema) {
-         await ContactService.notifyDiscord(body)
-      },
-      onSuccess() {
+   const [isPending, setIsPending] = useState(false)
+
+   useEffect(() => {
+      onPendingChange?.(isPending)
+   }, [isPending, onPendingChange])
+
+   const submit = form.handleSubmit(async (data) => {
+      if (isPending) return
+      setIsPending(true)
+      try {
+         await ContactService.send(data)
          form.reset(defaultValues)
          onCompleted?.()
          toast.success(t('your_message_is_successfully_sent'), {
             description: t('thanks_to_contacted_me'),
          })
-         setLoading(false)
-      },
-      onError(error) {
-         console.log('Request error', error)
+      } catch {
          toast.error(t('error_has_provided'), {
             description: t('please_try_again'),
          })
-         setLoading(false)
-      },
-   })
-
-   const submit = form.handleSubmit((data) => {
-      if (!isPending) {
-         setLoading(true)
-         mutate(data)
+      } finally {
+         setIsPending(false)
       }
    })
 
@@ -211,6 +207,15 @@ export const ContactFormContent = ({ locale, serviceKey, onCompleted, ref }: Pro
                      <FormMessage />
                   </FormItem>
                )}
+            />
+            {/* Honeypot: hidden from humans, filled by bots. Stays empty for real submissions. */}
+            <input
+               type='text'
+               tabIndex={-1}
+               autoComplete='off'
+               aria-hidden='true'
+               className='hidden'
+               {...form.register('website')}
             />
             <button className='absolute bottom-0 right-0 invisible w-0 h-0' type='submit' disabled={isPending} />
          </form>

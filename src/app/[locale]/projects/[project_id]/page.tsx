@@ -5,15 +5,20 @@ import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { Gallery } from "@src/components/projects/gallery";
 import { ProjectTags } from "@src/components/projects/project-tags";
 import { Link, LocaleType } from '@src/i18n/routing'
+import { localizedAlternates } from '@src/lib/seo'
 import { PROJECTS } from '@src/resources/data/projects'
 import { DotIcon } from "lucide-react";
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 
 type Props = {
    params: Promise<{ locale: LocaleType; project_id: string }>
 }
+
+// Anything outside generateStaticParams is a 404, never an empty page.
+export const dynamicParams = false
 
 export async function generateStaticParams() {
 	return PROJECTS.map((project) => ({
@@ -24,17 +29,20 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const { project_id, locale } = await params
    const project = PROJECTS.find((project) => project.id === project_id)
+   if (!project) return {}
 
    return {
-      title: project?.title[locale],
-      description: project?.description[locale],
+      title: project.title[locale],
+      description: project.description[locale],
+      alternates: localizedAlternates(locale, `/projects/${project.id}`),
       openGraph: {
-         images: [project?.image ?? ''],
+         images: [project.image],
       },
-      keywords: [...(project?.tags ?? [])],
+      keywords: [...project.tags],
       twitter: {
-         title: project?.title[locale],
-         description: project?.description[locale],
+         title: project.title[locale],
+         description: project.description[locale],
+         images: [project.image],
       },
    }
 }
@@ -47,6 +55,7 @@ export default async function Page({ params }: Props) {
    setRequestLocale(locale)
 
    const project = PROJECTS.find((project) => project.id === project_id)
+   if (!project) notFound()
 
    return (
       <main>
@@ -61,7 +70,7 @@ export default async function Page({ params }: Props) {
                      'text-foreground font-mono tracking-tight'
                   )}
                >
-                  {project?.title[locale]}
+                  {project.title[locale]}
                </RevealFromBottom>
             </section>
 
@@ -72,38 +81,36 @@ export default async function Page({ params }: Props) {
                >
                   <Image
                      priority
-                     unoptimized
-                     src={project?.image || ''}
-                     alt={project?.title[locale] || ''}
-                     width={400}
-                     height={300}
-                     placeholder='blur'
-                     blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0XL+lHgAEwgIVSfhUvgAAAABJRU5ErkJggg=='
-                     className={cn('w-full aspect-video', 'rounded-xl')}
+                     src={project.image}
+                     alt={project.title[locale]}
+                     width={1280}
+                     height={720}
+                     sizes='(min-width: 1280px) 1216px, 100vw'
+                     className={cn('w-full aspect-video object-cover', 'rounded-xl')}
                   />
                </RevealFromBottom>
                <RevealFromBottom delay={0.2} className={cn('flex')}>
-                  <p className={cn('text-primary text-lg uppercase')}>{project?.company[locale]}</p>
+                  <p className={cn('text-primary text-lg uppercase')}>{project.company[locale]}</p>
                   <div className='flex items-center h-full'>
                      <DotIcon className='size-8 text-primary' />
-                     <small className={cn('text-muted-foreground')}>{project?.date[locale]}</small>
+                     <small className={cn('text-muted-foreground')}>{project.date[locale]}</small>
                   </div>
                </RevealFromBottom>
             </section>
 
             <section>
                <RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
-                  {project?.description[locale]}
+                  {project.description[locale]}
                </RevealFromBottom>
             </section>
 
-            <Gallery images={project?.gallery || []} />
+            <Gallery images={project.gallery} title={project.title[locale]} />
 
             <RevealFromBottom>
-               <ProjectTags tags={project?.tags || []} />
+               <ProjectTags tags={project.tags} />
             </RevealFromBottom>
 
-            {project?.authentication && (
+            {project.authentication && (
                <section>
                   <RevealFromBottom delay={0.1}>
                      <h3>{t('demo_credentials')}</h3>
@@ -124,7 +131,7 @@ export default async function Page({ params }: Props) {
             )}
 
             <div className={cn('w-full grid grid-cols-1 gap-8 lg:grid-cols-2')}>
-               {project?.links
+               {project.links.length
                   ? project.links.map((link, index) => (
                        <RevealFromBottom key={`link-${index}`} delay={index * 0.1} className={cn('flex gap-3')}>
                           <div className='flex items-center justify-center gap-2 flex-none'>
@@ -136,6 +143,7 @@ export default async function Page({ params }: Props) {
                           <Link
                              href={link.link}
                              target='_blank'
+                             rel='noopener noreferrer'
                              className='block text-base font-semibold w-full truncate text-primary'
                           >
                              {link.link}

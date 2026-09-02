@@ -3,16 +3,18 @@ import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { SectionHeader } from '@src/components/resume/section-header'
 import { Link, LocaleType } from '@src/i18n/routing'
 import { INFORMATIONS } from '@src/resources/data/informations'
+import { localizedAlternates } from '@src/lib/seo'
 import { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'resume' })
 
    return {
       title: t('page_title_about'),
       description: t('page_description_about'),
+      alternates: localizedAlternates(locale, '/resume/about'),
       keywords: ['Compétences', 'Certifications', 'Expériences professionnelles', 'about', 'Professional experiences'],
       twitter: {
          title: t('page_title_about'),
@@ -46,6 +48,7 @@ export default async function Page({ params }: Props) {
                      <Link
                         href={information.link}
                         target='_blank'
+                        rel='noopener noreferrer'
                         className='block text-base font-semibold w-full truncate text-primary'
                      >
                         {information.value[locale]}

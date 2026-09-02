@@ -1,19 +1,21 @@
-import React from "react";
+import { useCallback, useSyncExternalStore } from 'react'
 
+/**
+ * Subscribes to a CSS media query. Returns `false` during SSR and hydration,
+ * then the real match once the browser value is read (no setState-in-effect).
+ */
 export const useMediaQuery = (query: string) => {
-  const [value, setValue] = React.useState(false);
+   const subscribe = useCallback(
+      (onStoreChange: () => void) => {
+         const mql = window.matchMedia(query)
+         mql.addEventListener('change', onStoreChange)
+         return () => mql.removeEventListener('change', onStoreChange)
+      },
+      [query]
+   )
 
-  React.useEffect(() => {
-    function onChange(event: MediaQueryListEvent) {
-      setValue(event.matches);
-    }
+   const getSnapshot = () => window.matchMedia(query).matches
+   const getServerSnapshot = () => false
 
-    const result = matchMedia(query);
-    result.addEventListener("change", onChange);
-    setValue(result.matches);
-
-    return () => result.removeEventListener("change", onChange);
-  }, [query]);
-
-  return value;
-};
+   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}

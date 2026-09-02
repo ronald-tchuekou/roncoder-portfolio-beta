@@ -2,16 +2,19 @@ import { cn } from '@/lib/utils'
 import { Container } from '@src/components/container'
 import PageTitle from '@src/components/page-title'
 import { ServicesList } from '@src/components/services/services-list'
+import { LocaleType } from '@src/i18n/routing'
+import { localizedAlternates } from '@src/lib/seo'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'services' })
 
    return {
       title: t('page_title'),
       description: t('page_description'),
+      alternates: localizedAlternates(locale, '/services'),
       keywords: [
          'roncoder portfolio services',
          'services roncoder',

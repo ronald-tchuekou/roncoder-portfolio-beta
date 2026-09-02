@@ -38,9 +38,9 @@
    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
    --color-sidebar-border: var(--sidebar-border);
    --color-sidebar-ring: var(--sidebar-ring);
-   --font-sans: Josefin Sans, ui-sans-serif, sans-serif, system-ui;
-   --font-mono: JetBrains Mono, ui-monospace, monospace;
-   --font-serif: Andada Pro, ui-serif, serif;
+   --font-sans: var(--font-josefin), ui-sans-serif, system-ui, sans-serif;
+   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+   --font-serif: var(--font-andada), ui-serif, Georgia, serif;
    --radius: 0.8rem;
    --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
    --tracking-tight: calc(var(--tracking-normal) - 0.025em);
@@ -101,9 +101,9 @@
    --sidebar-border: oklch(0.9276 0.0058 264.5313);
    --sidebar-ring: oklch(0.6716 0.1368 48.513);
    --destructive-foreground: oklch(1 0 0);
-   --font-sans: Josefin Sans, ui-sans-serif, sans-serif, system-ui;
-   --font-serif: Andada Pro, ui-serif, serif;
-   --font-mono: JetBrains Mono, ui-monospace, monospace;
+   --font-sans: var(--font-josefin), ui-sans-serif, system-ui, sans-serif;
+   --font-serif: var(--font-andada), ui-serif, Georgia, serif;
+   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
    --shadow-color: #000000;
    --shadow-opacity: 0.05;
    --shadow-blur: 4px;
@@ -157,9 +157,9 @@
    --sidebar-ring: oklch(0.7214 0.1337 49.9802);
    --destructive-foreground: oklch(1 0 0);
    --radius: 0.8rem;
-   --font-sans: Josefin Sans, ui-sans-serif, sans-serif, system-ui;
-   --font-serif: Andada Pro, ui-serif, serif;
-   --font-mono: JetBrains Mono, ui-monospace, monospace;
+   --font-sans: var(--font-josefin), ui-sans-serif, system-ui, sans-serif;
+   --font-serif: var(--font-andada), ui-serif, Georgia, serif;
+   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
    --shadow-color: #000000;
    --shadow-opacity: 0.05;
    --shadow-blur: 4px;
@@ -205,9 +205,5 @@
    .nav-link:hover .nav-link-indicator,
    .nav-link.active .nav-link-indicator {
       @apply w-full;
-   }
-
-   .slick-arrow {
-      display: none !important;
    }
 }

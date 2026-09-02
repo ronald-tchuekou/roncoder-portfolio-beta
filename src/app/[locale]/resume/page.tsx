@@ -3,6 +3,8 @@ import { cn } from '@/lib/utils'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { SectionHeader } from '@src/components/resume/section-header'
 import { SKILLS_LIST } from '@src/resources/data/skills'
+import { LocaleType } from '@src/i18n/routing'
+import { localizedAlternates } from '@src/lib/seo'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
@@ -11,12 +13,13 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'resume' })
 
    return {
       title: t('page_title_skills'),
       description: t('page_description_skills'),
+      alternates: localizedAlternates(locale, '/resume'),
       keywords: ['Compétences', 'Certifications', 'Expériences professionnelles', 'Skills', 'Professional experiences'],
       twitter: {
          title: t('page_title_skills'),
