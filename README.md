@@ -26,7 +26,6 @@ A modern, multilingual portfolio website built with Next.js 16, React 19, and Ty
 - **Components**: Custom UI components built with [Radix UI](https://www.radix-ui.com/) primitives
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Forms**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://zod.dev/) validation
-- **State Management**: [Zustand](https://zustand-demo.pmnd.rs/)
 - **Internationalization**: [next-intl](https://next-intl-docs.vercel.app/)
 - **Environment Variables**: Type-safe with [@t3-oss/env-nextjs](https://env.t3.gg/)
 - **Analytics**: [Vercel Analytics](https://vercel.com/analytics)
@@ -103,17 +102,17 @@ cp .env.example .env
 
 4. Configure environment variables in `.env`:
 ```env
-# Discord webhook for contact form
-NEXT_PUBLIC_DISCORD_WEBHOOK=your_discord_webhook_url
-
 # Base URL for the website
 NEXT_PUBLIC_BASE_LINK=http://localhost:3000
 
 # GitHub username for stats
 NEXT_PUBLIC_GITHUB_USERNAME=your_github_username
 
-# GitHub token for API access (server-side only)
+# GitHub token for API access (server-side only, read:user scope is enough)
 GITHUB_TOKEN=your_github_token
+
+# Discord webhook for the contact form (server-side only — never expose it with NEXT_PUBLIC_)
+DISCORD_WEBHOOK=your_discord_webhook_url
 ```
 
 ### Development

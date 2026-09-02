@@ -5,7 +5,6 @@ import { Credenza, CredenzaContent, CredenzaFooter, CredenzaHeader, CredenzaTitl
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import { LocaleType } from '@src/i18n/routing'
-import { useContactFormStore } from '@src/lib/stores/contact-form.store'
 import { LoaderIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react'
@@ -21,7 +20,7 @@ export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(({}, 
    const contactFormRef = useRef<ContactFormContentRef>(null)
    const t = useTranslations('services')
    const locale = useLocale() as LocaleType
-   const isLoading = useContactFormStore((s) => s.isLoading)
+   const [isLoading, setIsLoading] = useState(false)
 
    const [open, setOpen] = useState(false)
    const [serviceKey, setServiceKey] = useState<string>()
@@ -72,6 +71,7 @@ export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(({}, 
                      serviceKey={serviceKey}
                      locale={locale}
                      onCompleted={closeModal}
+                     onPendingChange={setIsLoading}
                   />
                </div>
             </ScrollArea>

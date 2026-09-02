@@ -3,19 +3,16 @@
 import { Button } from '@/components/ui/button'
 import { cn } from "@/lib/utils";
 import { LocaleType } from '@src/i18n/routing'
-import { useContactFormStore } from '@src/lib/stores/contact-form.store'
 import { LoaderIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useRef } from 'react'
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import { useRef, useState } from 'react'
 import { ContactFormContent, ContactFormContentRef } from './contact-form-content'
 
 export const ContactForm = () => {
    const contactFormRef = useRef<ContactFormContentRef>(null)
    const t = useTranslations('services')
    const locale = useLocale() as LocaleType
-   const isLoading = useContactFormStore((s) => s.isLoading)
+   const [isLoading, setIsLoading] = useState(false)
 
    return (
       <div className={cn('w-full bg-card border border-input', 'rounded-xl p-5', 'flex flex-col gap-8')}>
@@ -26,7 +23,7 @@ export const ContactForm = () => {
             {t('you_have_a_project')} <br />
             {t('let_talk_about_it')}
          </p>
-         <ContactFormContent ref={contactFormRef} locale={locale} />
+         <ContactFormContent ref={contactFormRef} locale={locale} onPendingChange={setIsLoading} />
          <div className='flex justify-end'>
             <Button
                className='rounded-full relative w-full md:w-auto'
