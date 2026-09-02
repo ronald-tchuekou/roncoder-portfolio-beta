@@ -4,6 +4,8 @@ import { Container } from '@src/components/container'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { Link } from '@src/i18n/routing'
 import { METADATA } from '@src/resources/data/metadata'
+import { LocaleType } from '@src/i18n/routing'
+import { localizedAlternates } from '@src/lib/seo'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
@@ -12,12 +14,13 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'contact' })
 
    return {
       title: t('page_title'),
       description: t('page_description'),
+      alternates: localizedAlternates(locale, '/contact'),
       keywords: [
          'roncoder portfolio contact',
          'contact roncoder',

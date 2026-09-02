@@ -2,11 +2,15 @@ import { cn } from "@/lib/utils";
 import { BackButton } from "@src/components/back-button";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { LocaleType } from '@src/i18n/routing'
+import { localizedAlternates } from '@src/lib/seo'
 import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
 import { DotIcon } from 'lucide-react';
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 
+
+export const dynamicParams = false
 
 export async function generateStaticParams() {
 	return EXPERIENCES_LIST.map((exp) => ({
@@ -17,18 +21,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const { exp_id, locale } = await params
    const exp = EXPERIENCES_LIST.find((exp) => exp.id === exp_id)
+   if (!exp) return {}
 
    return {
-      title: exp?.title[locale],
-      description: exp?.description[locale],
-      openGraph: {
-         images: [exp?.imageLink ?? ''],
-      },
-      keywords: exp?.keywords,
+      title: exp.title[locale],
+      description: exp.description[locale],
+      alternates: localizedAlternates(locale, `/resume/experiences/${exp.id}`),
+      openGraph: exp.imageLink ? { images: [exp.imageLink] } : undefined,
+      keywords: exp.keywords,
       twitter: {
-         title: exp?.title[locale],
-         description: exp?.description[locale],
-         images: [exp?.imageLink ?? ''],
+         title: exp.title[locale],
+         description: exp.description[locale],
+         images: exp.imageLink ? [exp.imageLink] : undefined,
       },
    }
 }
@@ -47,6 +51,7 @@ export default async function Page({ params }: Props) {
 
    const expId = (await params).exp_id
    const experience = EXPERIENCES_LIST.find((exp) => exp.id === expId)
+   if (!experience) notFound()
 
    return (
       <section className='w-full flex flex-col gap-5'>
@@ -60,24 +65,24 @@ export default async function Page({ params }: Props) {
                   'text-foreground font-mono tracking-tight'
                )}
             >
-               {experience?.title[locale]}
+               {experience.title[locale]}
             </RevealFromBottom>
          </div>
          <RevealFromBottom delay={0.2} className={cn('flex')}>
-            <p className={cn('text-primary text-lg uppercase')}>{experience?.company}</p>
+            <p className={cn('text-primary text-lg uppercase')}>{experience.company}</p>
             <div className='flex items-center h-full'>
                <DotIcon className='size-8 text-primary' />
-               <small className={cn('text-muted-foreground')}>{experience?.date[locale]}</small>
+               <small className={cn('text-muted-foreground')}>{experience.date[locale]}</small>
             </div>
          </RevealFromBottom>
          <RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
-            {experience?.description[locale]}
+            {experience.description[locale]}
          </RevealFromBottom>
          <RevealFromBottom elt={'h3'} delay={0.3} className={cn('text-lg text-accent-foreground')}>
             {t('tasks')}
          </RevealFromBottom>
          <ul className={cn('list-disc pl-8 space-y-3')}>
-            {experience?.tasks.map((task, idx) => (
+            {experience.tasks.map((task, idx) => (
                <RevealFromBottom delay={(idx + 1) * 0.1} elt={'li'} key={idx}>
                   {task[locale]}
                </RevealFromBottom>

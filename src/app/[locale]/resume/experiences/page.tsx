@@ -5,6 +5,7 @@ import { SectionHeader } from '@src/components/resume/section-header'
 import { Link, LocaleType } from '@src/i18n/routing'
 import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
 import { DotIcon, MoveRightIcon } from "lucide-react";
+import { localizedAlternates } from '@src/lib/seo'
 import { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
@@ -13,12 +14,13 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'resume' })
 
    return {
       title: t('page_title_experiences'),
       description: t('page_description_experiences'),
+      alternates: localizedAlternates(locale, '/resume/experiences'),
       keywords: [
          'Compétences',
          'Certifications',

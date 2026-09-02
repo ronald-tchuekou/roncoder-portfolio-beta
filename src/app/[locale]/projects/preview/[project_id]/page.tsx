@@ -106,18 +106,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const { locale, project_id } = await params
    const project_link = resolveProjectId(project_id)
 
+   // Preview pages embed a third-party site in an iframe: nothing worth indexing.
+   const robots = { index: false, follow: true }
+
    if (!project_link) {
-      return {
-         title: 'Project preview',
-      }
+      return { title: 'Project preview', robots }
    }
 
    const resolved = resolveProjectLink(project_link)
 
    if (!resolved) {
-      return {
-         title: 'Project preview',
-      }
+      return { title: 'Project preview', robots }
    }
 
    if (resolved.project) {
@@ -130,6 +129,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       return {
          title,
          description,
+         robots,
          openGraph: {
             title,
             description,
@@ -146,6 +146,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
    return {
       title: hostname ? `${hostname} – Preview` : 'Project preview',
+      robots,
    }
 }
 

@@ -7,6 +7,7 @@ import { ThemeProvider } from '@src/components/providers/theme-provider'
 import { LocaleType, routing } from '@src/i18n/routing'
 import { fontMono, fontSans, fontSerif } from '@src/fonts'
 import env from '@src/lib/env/client'
+import { localizedAlternates } from '@src/lib/seo'
 import { METADATA } from '@src/resources/data/metadata'
 import '@src/styles/style.css'
 import { Analytics } from '@vercel/analytics/react'
@@ -21,7 +22,7 @@ type Props = Readonly<{
 }>
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'home' })
 
    return {
@@ -31,13 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       description: t('page_description'),
       metadataBase: new URL(env.NEXT_PUBLIC_BASE_LINK),
-      alternates: {
-         canonical: '/',
-         languages: {
-            'en-US': '/en-US',
-            'fr-FR': '/fr-FR',
-         },
-      },
+      alternates: localizedAlternates(locale, '/'),
       openGraph: {
          images: ['/ronald-tchuekou-profile.jpg'],
       },

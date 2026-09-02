@@ -2,11 +2,15 @@ import { cn } from "@/lib/utils";
 import { BackButton } from "@src/components/back-button";
 import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
 import { LocaleType } from '@src/i18n/routing'
+import { localizedAlternates } from '@src/lib/seo'
 import { EDUCATIONS_LIST } from '@src/resources/data/educations'
 import { DotIcon } from "lucide-react";
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import Image from 'next/image';
+import Image from 'next/image'
+import { notFound } from 'next/navigation'
+
+export const dynamicParams = false
 
 export async function generateStaticParams() {
 	return EDUCATIONS_LIST.map((education) => ({
@@ -17,18 +21,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const { education_id, locale } = await params
    const education = EDUCATIONS_LIST.find((exp) => exp.id === education_id)
+   if (!education) return {}
 
    return {
-      title: education?.title[locale],
-      description: education?.description[locale],
-      openGraph: {
-         images: [education?.imageLink ?? ''],
-      },
-      keywords: education?.keywords,
+      title: education.title[locale],
+      description: education.description[locale],
+      alternates: localizedAlternates(locale, `/resume/educations/${education.id}`),
+      openGraph: education.imageLink ? { images: [education.imageLink] } : undefined,
+      keywords: education.keywords,
       twitter: {
-         title: education?.title[locale],
-         description: education?.description[locale],
-         images: [education?.imageLink ?? ''],
+         title: education.title[locale],
+         description: education.description[locale],
+         images: education.imageLink ? [education.imageLink] : undefined,
       },
    }
 }
@@ -46,6 +50,7 @@ export default async function Page({ params }: Props) {
 
    const educationId = (await params).education_id
    const education = EDUCATIONS_LIST.find((exp) => exp.id === educationId)
+   if (!education) notFound()
 
    return (
       <section className='w-full flex flex-col gap-5'>
@@ -59,20 +64,20 @@ export default async function Page({ params }: Props) {
                   'text-foreground font-mono tracking-tight'
                )}
             >
-               {education?.title[locale]}
+               {education.title[locale]}
             </RevealFromBottom>
          </div>
          <RevealFromBottom delay={0.2} className={cn('flex')}>
-            <p className={cn('text-primary text-lg uppercase')}>{education?.company}</p>
+            <p className={cn('text-primary text-lg uppercase')}>{education.company}</p>
             <div className='flex items-center h-full'>
                <DotIcon className='size-8 text-primary' />
-               <small className={cn('text-muted-foreground')}>{education?.date[locale]}</small>
+               <small className={cn('text-muted-foreground')}>{education.date[locale]}</small>
             </div>
          </RevealFromBottom>
          <RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
-            {education?.description[locale]}
+            {education.description[locale]}
          </RevealFromBottom>
-         {education?.imageLink && (
+         {education.imageLink && (
             <RevealFromBottom delay={0.2} className={cn('w-full aspect-auto', 'rounded-lg', 'bg-secondary/10')}>
                <Image
                   quality={100}
@@ -90,7 +95,7 @@ export default async function Page({ params }: Props) {
             {t('training_content')}
          </RevealFromBottom>
          <ul className={cn('list-disc pl-8 space-y-3')}>
-            {education?.tasks.map((task, idx) => (
+            {education.tasks.map((task, idx) => (
                <RevealFromBottom delay={(idx + 1) * 0.1} elt={'li'} key={idx}>
                   {task[locale]}
                </RevealFromBottom>

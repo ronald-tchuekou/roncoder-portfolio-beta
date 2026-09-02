@@ -5,6 +5,7 @@ import PageTitle from '@src/components/page-title'
 import { ProjectItem } from "@src/components/projects/project-item";
 import { LocaleType } from '@src/i18n/routing'
 import { PROJECTS } from '@src/resources/data/projects'
+import { localizedAlternates } from '@src/lib/seo'
 import { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
@@ -13,12 +14,13 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-   const locale = (await params).locale
+   const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'projects' })
 
    return {
       title: t('page_title'),
       description: t('page_description'),
+      alternates: localizedAlternates(locale, '/projects'),
       keywords: [
          'roncoder projects',
          'roncoder projet',
