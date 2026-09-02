@@ -5,24 +5,32 @@ import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { Link } from '@src/i18n/routing'
 import { METADATA } from '@src/resources/data/metadata'
 import { Metadata } from 'next'
-import { setRequestLocale } from 'next-intl/server'
-
-export const metadata: Metadata = {
-   title: 'Contact moi pour une meilleur prise en charge en développement de projets. | roncoder',
-   description:
-      'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
-   keywords: [
-      'roncoder portfolio contact',
-      'contact roncoder',
-      'contact roncoder portfolio',
-      'Ronald Tchuekou Contact',
-      'Contact Ronald Tchuekou',
-   ],
-   ...METADATA,
-}
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 type Props = {
    params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+   const locale = (await params).locale
+   const t = await getTranslations({ locale, namespace: 'contact' })
+
+   return {
+      title: t('page_title'),
+      description: t('page_description'),
+      keywords: [
+         'roncoder portfolio contact',
+         'contact roncoder',
+         'contact roncoder portfolio',
+         'Ronald Tchuekou Contact',
+         'Contact Ronald Tchuekou',
+      ],
+      twitter: {
+         ...METADATA.twitter,
+         title: t('page_title'),
+         description: t('page_description'),
+      },
+   }
 }
 
 export default async function Page({ params }: Props) {

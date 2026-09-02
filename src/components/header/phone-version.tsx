@@ -7,7 +7,7 @@ import { NAV_LINKS } from '@src/resources/data/nav-links'
 import { isCurrentPath } from '@src/resources/util-functions'
 import { motion } from 'framer-motion'
 import { MenuIcon, XIcon } from 'lucide-react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { FC, useCallback, useState } from 'react'
 import { Container } from '../container'
@@ -16,6 +16,7 @@ import { LocaleButton } from './locale-button'
 export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) => {
    const [isOpen, setIsOpen] = useState(false)
    const locale = useLocale()
+   const t = useTranslations('header')
 
    const toggleMenu = useCallback(() => {
       setIsOpen((prev) => !prev)
@@ -33,7 +34,7 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
                className={cn('fixed top-0 left-0 right-0', 'bg-card')}
             >
                <Container className={cn('flex justify-between items-center', 'pt-5 pb-3')}>
-                  <Link href={'/'} arial-label='Ronald Tchuekou'>
+                  <Link href={'/'} aria-label='Ronald Tchuekou'>
                      <Image
                         priority
                         quality={100}
@@ -64,7 +65,7 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
                            onClick={toggleMenu}
                            className={cn('nav-link', isCurrentPath(currentPath, url, locale === 'en') && 'active')}
                         >
-                           <span className='nav-link-label'>{label}</span>
+                           <span className='nav-link-label'>{t(label)}</span>
                            <span className={'nav-link-indicator'}></span>
                         </Link>
                      </motion.div>

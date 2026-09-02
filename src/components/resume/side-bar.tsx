@@ -119,7 +119,7 @@ export const ResumeSideBar: FC = () => {
                               )}
                            >
                               {item.icon}&nbsp;&nbsp;
-                              {item.label}
+                              {t(item.label)}
                            </Button>
                         </Link>
                      </div>

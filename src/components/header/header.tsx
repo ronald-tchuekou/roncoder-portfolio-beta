@@ -21,7 +21,7 @@ export const Header: FC = () => {
    return (
       <Container rootClassName={cn('z-10', 'sticky top-0 backdrop-blur bg-transparent')}>
          <header className={cn('flex justify-between items-center', 'pt-5 pb-3 lg:pb-0')}>
-            <Link href={'/'} arial-label='Ronald Tchuekou'>
+            <Link href={'/'} aria-label='Ronald Tchuekou'>
                <Image
                   priority
                   quality={100}
