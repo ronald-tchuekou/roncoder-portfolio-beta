@@ -104,7 +104,7 @@ export default async function Page({ params }: Props) {
                </RevealFromBottom>
             </section>
 
-            <Gallery images={project.gallery} />
+            <Gallery images={project.gallery} title={project.title[locale]} />
 
             <RevealFromBottom>
                <ProjectTags tags={project.tags} />
@@ -143,6 +143,7 @@ export default async function Page({ params }: Props) {
                           <Link
                              href={link.link}
                              target='_blank'
+                             rel='noopener noreferrer'
                              className='block text-base font-semibold w-full truncate text-primary'
                           >
                              {link.link}

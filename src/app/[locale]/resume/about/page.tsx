@@ -48,6 +48,7 @@ export default async function Page({ params }: Props) {
                      <Link
                         href={information.link}
                         target='_blank'
+                        rel='noopener noreferrer'
                         className='block text-base font-semibold w-full truncate text-primary'
                      >
                         {information.value[locale]}

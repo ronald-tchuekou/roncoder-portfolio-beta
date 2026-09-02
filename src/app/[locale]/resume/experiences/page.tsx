@@ -58,12 +58,12 @@ export default async function Page({ params }: Props) {
                         <small className={cn('text-muted-foreground')}>{experience.date[locale]}</small>
                      </div>
                      <div>
-                        <Link href={`/resume/experiences/${experience.id}`}>
-                           <Button variant={'outline'} size={'sm'} className={cn('text-xs', 'rounded-full')}>
+                        <Button asChild variant={'outline'} size={'sm'} className={cn('text-xs', 'rounded-full')}>
+                           <Link href={`/resume/experiences/${experience.id}`}>
                               {t('consult')}
                               <MoveRightIcon className='size-5 ml-2' />
-                           </Button>
-                        </Link>
+                           </Link>
+                        </Button>
                      </div>
                   </div>
                </RevealFromBottom>

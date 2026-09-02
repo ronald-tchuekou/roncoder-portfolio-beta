@@ -1,124 +1,139 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { ArrowLeftIcon, ArrowRightIcon, XIcon } from "lucide-react";
-import Image from "next/image";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
-import { RevealFromBottom } from "../motions/reveal-from-bottom";
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
+import { cn } from '@/lib/utils'
+import useEmblaCarousel from 'embla-carousel-react'
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+import { FC, useCallback, useEffect, useState } from 'react'
+import { RevealFromBottom } from '../motions/reveal-from-bottom'
 
-export type GalleryProps = { images: string[] };
+const THUMBNAILS = 3
 
-export const Gallery: FC<GalleryProps> = ({ images }) => {
-  const [subImages, setSubImages] = useState<string[]>([]);
+export type GalleryProps = { images: string[]; title: string }
 
-  const [preview, setPreview] = useState<number>(-1);
+export const Gallery: FC<GalleryProps> = ({ images, title }) => {
+   const t = useTranslations('projects')
+   const [openAt, setOpenAt] = useState<number | null>(null)
 
-  const previewImage = useCallback((index: number) => {
-    setPreview(index);
-  }, []);
+   if (images.length === 0) return null
 
-  useEffect(() => {
-    setSubImages(images.slice(0, 3));
-  }, [images]);
-
-  return (
-     <>
-        <section className={cn('flex flex-row flex-wrap gap-5')}>
-           {subImages.map((image, idx) => (
-              <RevealFromBottom
-                 delay={idx * 0.1}
-                 key={`image-${idx}`}
-                 onClick={() => previewImage(idx)}
-                 className={cn('aspect-video w-[150px]', 'cursor-pointer')}
-              >
-                 <Image
-                    src={image}
-                    alt={image}
-                    width={300}
-                    height={120}
-                    quality={100}
-                    className={cn('aspect-auto size-full')}
-                 />
-              </RevealFromBottom>
-           ))}
-           {images.length > subImages.length && (
-              <RevealFromBottom
-                 onClick={() => setPreview(subImages.length)}
-                 delay={3 * 0.1}
-                 className={cn('aspect-video w-[150px] relative', 'cursor-pointer')}
-              >
-                 <Image
-                    src={images[subImages.length]}
-                    alt={images[subImages.length]}
-                    width={300}
-                    height={120}
-                    priority
-                    quality={100}
-                    className={cn('aspect-auto size-full')}
-                 />
-                 <div className='absolute inset-0 bg-black/50 flex justify-center items-center'>
-                    <p className='text-4xl font-medium text-foreground'>+{images.length - subImages.length}</p>
-                 </div>
-              </RevealFromBottom>
-           )}
-        </section>
-        {preview !== -1 && <GallerySlide images={images} index={preview} onClose={() => setPreview(-1)} />}
-     </>
-  )
-};
-
-const GallerySlide = ({ images, index, onClose }: { images: string[]; index: number; onClose: VoidFunction }) => {
-   const slideRef = useRef<Slider>(null)
+   const thumbnails = images.slice(0, THUMBNAILS)
+   const remaining = images.length - thumbnails.length
 
    return (
-      <div
-         className={cn(
-            'z-20',
-            'fixed top-0 left-0 h-screen w-screen backdrop-blur bg-black/10',
-            'flex justify-center items-center'
-         )}
-      >
-         <div className={cn('max-w-screen-lg mx-auto flex flex-col', 'w-full')}>
-            <div className='flex justify-end px-4'>
-               <Button onClick={onClose} size={'icon'}>
-                  <XIcon className='size-6' />
-               </Button>
-            </div>
-            <div className='flex w-full items-center'>
-               <div className='flex-none flex justify-center items-center'>
-                  <Button onClick={() => slideRef.current?.slickPrev()} size={'icon'} className='rounded-full'>
-                     <ArrowLeftIcon className='size-6' />
-                  </Button>
-               </div>
+      <>
+         <section className={cn('flex flex-row flex-wrap gap-5')} aria-label={title}>
+            {thumbnails.map((image, idx) => (
+               <RevealFromBottom delay={idx * 0.1} key={image}>
+                  <button
+                     type='button'
+                     onClick={() => setOpenAt(idx)}
+                     aria-label={t('gallery_of', { index: idx + 1, total: images.length })}
+                     className={cn(
+                        'aspect-video w-[150px] overflow-hidden rounded-md',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+                     )}
+                  >
+                     <Image
+                        src={image}
+                        alt=''
+                        width={300}
+                        height={169}
+                        sizes='150px'
+                        className='size-full object-cover'
+                     />
+                  </button>
+               </RevealFromBottom>
+            ))}
+            {remaining > 0 && (
+               <RevealFromBottom delay={THUMBNAILS * 0.1}>
+                  <button
+                     type='button'
+                     onClick={() => setOpenAt(THUMBNAILS)}
+                     aria-label={t('gallery_of', { index: THUMBNAILS + 1, total: images.length })}
+                     className={cn(
+                        'relative aspect-video w-[150px] overflow-hidden rounded-md',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+                     )}
+                  >
+                     <Image
+                        src={images[THUMBNAILS]}
+                        alt=''
+                        width={300}
+                        height={169}
+                        sizes='150px'
+                        className='size-full object-cover'
+                     />
+                     <span className='absolute inset-0 flex items-center justify-center bg-black/50 text-4xl font-medium text-white'>
+                        +{remaining}
+                     </span>
+                  </button>
+               </RevealFromBottom>
+            )}
+         </section>
 
-               <div style={{ width: 'calc(100% - 80px)' }}>
-                  <Slider ref={slideRef} initialSlide={index} prevArrow={<></>} nextArrow={<></>} className='w-full'>
-                     {images.map((image, idx) => (
-                        <div key={`image-${idx}`} className='rounded-3xl w-full aspect-auto px-2 lg:px-5 lg:py-10'>
-                           <Image
-                              priority
-                              unoptimized
-                              src={image}
-                              alt={image}
-                              width={300}
-                              height={120}
-                              className={cn('aspect-auto w-full rounded-3xl')}
-                           />
-                        </div>
-                     ))}
-                  </Slider>
-               </div>
+         <Dialog open={openAt !== null} onOpenChange={(open) => !open && setOpenAt(null)}>
+            <DialogContent
+               className={cn('max-w-screen-lg w-[calc(100vw-2rem)] p-2 sm:p-4 bg-background/95 backdrop-blur')}
+               aria-describedby={undefined}
+            >
+               <DialogTitle className='sr-only'>{title}</DialogTitle>
+               {openAt !== null && <Lightbox images={images} startIndex={openAt} />}
+            </DialogContent>
+         </Dialog>
+      </>
+   )
+}
 
-               <div className='flex-none flex justify-center items-center'>
-                  <Button onClick={() => slideRef.current?.slickNext()} size={'icon'} className='rounded-full'>
-                     <ArrowRightIcon className='size-6' />
-                  </Button>
-               </div>
+const Lightbox = ({ images, startIndex }: { images: string[]; startIndex: number }) => {
+   const t = useTranslations('projects')
+   const [emblaRef, embla] = useEmblaCarousel({ startIndex, loop: images.length > 1 })
+   const [current, setCurrent] = useState(startIndex)
+
+   useEffect(() => {
+      if (!embla) return
+      const onSelect = () => setCurrent(embla.selectedScrollSnap())
+      embla.on('select', onSelect)
+      return () => {
+         embla.off('select', onSelect)
+      }
+   }, [embla])
+
+   const prev = useCallback(() => embla?.scrollPrev(), [embla])
+   const next = useCallback(() => embla?.scrollNext(), [embla])
+
+   return (
+      <div className='flex flex-col gap-3'>
+         <div ref={emblaRef} className='overflow-hidden rounded-xl'>
+            <div className='flex'>
+               {images.map((image, idx) => (
+                  <div key={image} className='min-w-0 flex-[0_0_100%]'>
+                     <Image
+                        src={image}
+                        alt={t('gallery_of', { index: idx + 1, total: images.length })}
+                        width={1920}
+                        height={1080}
+                        sizes='(min-width: 1024px) 1024px, 100vw'
+                        priority={idx === startIndex}
+                        className='w-full h-auto max-h-[75vh] object-contain'
+                     />
+                  </div>
+               ))}
             </div>
+         </div>
+         <div className='flex items-center justify-between gap-3 px-1'>
+            <Button onClick={prev} size='icon' variant='outline' className='rounded-full' aria-label={t('previous')}>
+               <ArrowLeftIcon className='size-5' />
+            </Button>
+            <p className='text-sm text-muted-foreground tabular-nums' aria-live='polite'>
+               {t('gallery_of', { index: current + 1, total: images.length })}
+            </p>
+            <Button onClick={next} size='icon' variant='outline' className='rounded-full' aria-label={t('next')}>
+               <ArrowRightIcon className='size-5' />
+            </Button>
          </div>
       </div>
    )

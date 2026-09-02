@@ -206,8 +206,4 @@
    .nav-link.active .nav-link-indicator {
       @apply w-full;
    }
-
-   .slick-arrow {
-      display: none !important;
-   }
 }

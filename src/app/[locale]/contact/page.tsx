@@ -55,6 +55,7 @@ export default async function Page({ params }: Props) {
                   <Link
                      href={'https://wa.me/+237658172868'}
                      target='_blank'
+                     rel='noopener noreferrer'
                      className='flex items-center gap-3 group hover:bg-accent/20 rounded-xl transition duration-300'
                   >
                      <div className='flex justify-center items-center rounded-xl bg-accent/40 flex-none p-5'>
@@ -92,6 +93,7 @@ export default async function Page({ params }: Props) {
                   <Link
                      href={'mailto:ronaldtchuekou@gmail.com'}
                      target='_blank'
+                     rel='noopener noreferrer'
                      className='flex items-center gap-3 group hover:bg-accent/20 rounded-xl transition duration-300'
                   >
                      <div className='flex justify-center items-center rounded-xl bg-accent/40 flex-none p-5'>

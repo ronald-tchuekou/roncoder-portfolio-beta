@@ -200,6 +200,7 @@ export default async function Page({ params }: Props) {
                      <Link
                         href={resolved.url}
                         target='_blank'
+                        rel='noopener noreferrer'
                         className='text-primary font-semibold underline-offset-4 hover:underline'
                      >
                         {previewLabel ?? t('consult')}
