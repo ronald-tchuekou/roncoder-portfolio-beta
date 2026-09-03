@@ -17,5 +17,11 @@
       "contact_title": "Contact",
       "copyright": "© {year} Ronald Tchuekou. All rights reserved.",
       "legal": "Legal notice"
+   },
+   "not_found": {
+      "not_found_title": "This page does not exist or has moved.",
+      "not_found_description": "The link may be outdated or the address mistyped.",
+      "back_home": "Back to home",
+      "see_background": "See my background"
    }
 }

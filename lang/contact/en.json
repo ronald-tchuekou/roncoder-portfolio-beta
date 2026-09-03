@@ -1,15 +1,10 @@
 {
    "page_title": "Get in touch",
    "page_description": "A role or assignment to discuss? Reply within one business day, in French or English.",
-   "not_found_title": "This page does not exist.",
-   "not_found_description": "The link may be outdated or the address mistyped.",
-   "back_home": "Back to home",
-
    "form_title": "Get in touch",
    "form_subtitle": "Describe the role or assignment, I reply within one business day with my availability.",
    "optional": "optional",
    "send_the_message": "Send the message",
-
    "first_name": "First name",
    "last_name": "Last name",
    "email": "Email",
@@ -19,7 +14,6 @@
    "work_mode": "Work mode",
    "offer_url": "Link to the job posting",
    "message": "Message",
-
    "enter_your_first_name": "Your first name",
    "enter_your_last_name": "Your last name",
    "enter_your_email": "you@company.com",
@@ -29,16 +23,13 @@
    "select_the_work_mode": "Choose a work mode",
    "enter_the_offer_url": "https://example.com/job",
    "enter_your_message": "Role context, technical stack, team, next step.",
-
    "contract_permanent": "Permanent",
    "contract_freelance": "Freelance",
    "contract_long_term": "Long term contract",
    "contract_other": "Other",
-
    "work_remote": "Fully remote",
    "work_hybrid": "Hybrid",
    "work_onsite": "On site",
-
    "set_your_first_name": "Enter your first name.",
    "set_your_last_name": "Enter your last name.",
    "set_a_valid_email": "Enter a valid email address.",
@@ -49,12 +40,10 @@
    "set_a_valid_offer_url": "Enter a valid link starting with https.",
    "set_a_message": "Write a message.",
    "message_is_too_long": "The message must not exceed 2,000 characters.",
-
    "success_title": "Message sent",
    "success_description": "Thank you, I reply within one business day.",
    "error_title": "Sending failed",
    "error_description": "Try again in a moment or write directly to ronaldtchuekou@gmail.com.",
-
    "side_title": "Other ways to reach me",
    "email_label": "Email",
    "email_aria": "Send an email to Ronald Tchuekou",

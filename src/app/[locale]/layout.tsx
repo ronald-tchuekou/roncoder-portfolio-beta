@@ -8,6 +8,7 @@ import { LocaleType, routing } from '@src/i18n/routing'
 import { fontMono, fontSans, fontSerif } from '@src/fonts'
 import env from '@src/lib/env/client'
 import { localizedAlternates } from '@src/lib/seo'
+import { PersonJsonLd } from '@src/components/person-json-ld'
 import { METADATA } from '@src/resources/data/metadata'
 import '@src/styles/style.css'
 import { Analytics } from '@vercel/analytics/react'
@@ -34,31 +35,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       metadataBase: new URL(env.NEXT_PUBLIC_BASE_LINK),
       alternates: localizedAlternates(locale, '/'),
       openGraph: {
-         images: ['/ronald-tchuekou-profile.jpg'],
+         type: 'profile',
+         locale,
+         siteName: 'Ronald Tchuekou',
+         title: t('page_title'),
+         description: t('page_description'),
       },
-      keywords: [
-         'roncoder',
-         'roncoder portfolio',
-         'portfolio roncoder',
-         'Ronald',
-         'Tchuekou',
-         'Ronald Tchuekou',
-         'Tchuekou Ronald',
-         'Ronald Tchuekou Portfolio',
-         'Portfolio Ronald',
-         'Ronald Portfolio',
-         'BTCPay Sever',
-         'Création de site web',
-         "Développeur d'application web et mobile",
-         'Web and mobile developer',
-         'Web developer',
-         'Développeur web',
-         'Mobile developer',
-         'Recherche développeur mobile expérimenté',
-      ],
       ...METADATA,
       twitter: {
-         ...METADATA.twitter,
+         card: 'summary_large_image',
+         creator: '@TchuekouRonald',
          title: t('page_title'),
          description: t('page_description'),
       },
@@ -101,6 +87,7 @@ export default async function RootLayout({ children, params }: Props) {
                   >
                      {t('skip_to_content')}
                   </a>
+                  <PersonJsonLd locale={locale as LocaleType} />
                   <Header />
                   <div id='main-content' tabIndex={-1} className='outline-none'>
                      {children}

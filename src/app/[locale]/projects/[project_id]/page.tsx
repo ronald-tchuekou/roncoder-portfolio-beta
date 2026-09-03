@@ -1,3 +1,4 @@
+import { ProjectJsonLd } from '@src/components/projects/project-json-ld'
 import { cn } from '@/lib/utils'
 import { BackButton } from '@src/components/back-button'
 import { Container } from '@src/components/container'
@@ -66,6 +67,7 @@ export default async function Page({ params }: Props) {
 
    return (
       <main>
+         <ProjectJsonLd project={project} locale={locale as LocaleType} />
          <Container className={cn('flex flex-col gap-10 py-10 lg:py-20')}>
             <section className={cn('flex gap-3 items-center')}>
                <BackButton />

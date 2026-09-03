@@ -1,15 +1,10 @@
 {
    "page_title": "Me contacter",
    "page_description": "Poste ou mission à proposer ? Réponse sous 24 heures ouvrées, en français ou en anglais.",
-   "not_found_title": "Cette page n'existe pas.",
-   "not_found_description": "Le lien est peut-être obsolète ou l'adresse mal saisie.",
-   "back_home": "Retour à l'accueil",
-
    "form_title": "Me contacter",
    "form_subtitle": "Décrivez le poste ou la mission, je réponds sous 24 heures ouvrées avec ma disponibilité.",
    "optional": "facultatif",
    "send_the_message": "Envoyer le message",
-
    "first_name": "Prénom",
    "last_name": "Nom",
    "email": "Email",
@@ -19,7 +14,6 @@
    "work_mode": "Mode de travail",
    "offer_url": "Lien vers l'offre",
    "message": "Message",
-
    "enter_your_first_name": "Votre prénom",
    "enter_your_last_name": "Votre nom",
    "enter_your_email": "vous@entreprise.com",
@@ -29,16 +23,13 @@
    "select_the_work_mode": "Choisir un mode de travail",
    "enter_the_offer_url": "https://exemple.com/offre",
    "enter_your_message": "Contexte du poste, stack technique, équipe, prochaine étape.",
-
    "contract_permanent": "CDI",
    "contract_freelance": "Freelance",
    "contract_long_term": "Mission longue",
    "contract_other": "Autre",
-
    "work_remote": "Full remote",
    "work_hybrid": "Hybride",
    "work_onsite": "Sur site",
-
    "set_your_first_name": "Indiquez votre prénom.",
    "set_your_last_name": "Indiquez votre nom.",
    "set_a_valid_email": "Indiquez une adresse email valide.",
@@ -49,12 +40,10 @@
    "set_a_valid_offer_url": "Indiquez un lien valide commençant par https.",
    "set_a_message": "Écrivez un message.",
    "message_is_too_long": "Le message ne doit pas dépasser 2 000 caractères.",
-
    "success_title": "Message envoyé",
    "success_description": "Merci, je réponds sous 24 heures ouvrées.",
    "error_title": "L'envoi a échoué",
    "error_description": "Réessayez dans un instant ou écrivez directement à ronaldtchuekou@gmail.com.",
-
    "side_title": "Autres moyens de me joindre",
    "email_label": "Email",
    "email_aria": "Écrire un email à Ronald Tchuekou",
