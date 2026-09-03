@@ -1,0 +1,40 @@
+name: CI
+
+on:
+   pull_request:
+   push:
+      branches: [main]
+
+jobs:
+   quality:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v4
+
+         - name: Enable corepack
+           run: corepack enable
+
+         - uses: actions/setup-node@v4
+           with:
+              node-version: 22
+              cache: pnpm
+
+         - name: Install dependencies
+           run: pnpm install --frozen-lockfile
+
+         - name: Lint
+           run: pnpm lint
+
+         - name: Typecheck
+           run: pnpm typecheck
+
+         - name: Build
+           run: pnpm build
+           env:
+              NEXT_PUBLIC_BASE_LINK: https://roncoder-beta.vercel.app
+              NEXT_PUBLIC_GITHUB_USERNAME: ronald-tchuekou
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              DISCORD_WEBHOOK: https://discord.com/api/webhooks/placeholder/ci
+
+         - name: Audit production dependencies
+           run: pnpm audit --prod

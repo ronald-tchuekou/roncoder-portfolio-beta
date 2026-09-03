@@ -12,6 +12,6 @@ export function localizedAlternates(locale: LocaleType, href: string): NonNullab
 
    return {
       canonical: getPathname({ locale, href }),
-      languages: { ...languages, 'x-default': getPathname({ locale: routing.defaultLocale, href }) },
+      languages: { ...languages, 'x-default': getPathname({ locale: 'fr', href }) },
    }
 }
