@@ -23,7 +23,6 @@ export const EngineeringSection = async () => {
                {ITEMS.map((key, index) => (
                   <li key={key} className='size-full'>
                      <RevealFromBottom
-                        delay={0.1 * index}
                         className={cn('flex size-full gap-4 rounded-xl border border-input bg-card p-5 lg:p-6')}
                      >
                         <span aria-hidden className='mt-2 size-2 shrink-0 rounded-full bg-primary' />

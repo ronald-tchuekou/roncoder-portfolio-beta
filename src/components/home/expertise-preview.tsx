@@ -24,7 +24,7 @@ export const ExpertisePreview = async () => {
             <ul className={cn('grid grid-cols-1 md:grid-cols-3 gap-5')}>
                {ITEMS.map((key, index) => (
                   <li key={key} className='size-full'>
-                     <RevealFromBottom delay={0.1 * index} className='size-full'>
+                     <RevealFromBottom className='size-full'>
                         <Link
                            href='/expertises'
                            className={cn(

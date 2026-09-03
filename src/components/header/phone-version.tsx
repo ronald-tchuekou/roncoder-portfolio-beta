@@ -24,8 +24,15 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
 
    return (
       <>
-         <Button onClick={toggleMenu} size={'icon'} variant={'outline'} className='rounded-full md:hidden'>
-            <MenuIcon className='size-6' />
+         <Button
+            onClick={toggleMenu}
+            size={'icon'}
+            variant={'outline'}
+            className='rounded-full md:hidden'
+            aria-label={t('open_menu')}
+            aria-expanded={isOpen}
+         >
+            <MenuIcon className='size-6' aria-hidden='true' />
          </Button>
          {isOpen && (
             <motion.section
@@ -37,7 +44,7 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
                   <Link href={'/'} aria-label='Ronald Tchuekou'>
                      <Image
                         priority
-                              src={'/line-logo.png'}
+                        src={'/line-logo.png'}
                         alt='Ronald Tchuekou'
                         height={232}
                         width={692}
@@ -46,8 +53,14 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
                   </Link>
                   <div className={cn('flex items-center gap-3')}>
                      <LocaleButton />
-                     <Button onClick={toggleMenu} size={'icon'} variant={'outline'} className='rounded-full'>
-                        <XIcon className='size-6' />
+                     <Button
+                        onClick={toggleMenu}
+                        size={'icon'}
+                        variant={'outline'}
+                        className='rounded-full'
+                        aria-label={t('close_menu')}
+                     >
+                        <XIcon className='size-6' aria-hidden='true' />
                      </Button>
                   </div>
                </Container>

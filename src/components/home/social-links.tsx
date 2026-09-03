@@ -76,7 +76,7 @@ export const SocialLinks: FC<{ className?: string }> = ({ className }) => {
    return (
       <div className={cn('flex gap-3', className)}>
          {items.map((item, index) => (
-            <RevealFromBottom key={item.key} delay={0.4 + index * 0.1}>
+            <RevealFromBottom key={item.key}>
                <Button asChild size='icon' variant='outline' className='border-primary rounded-full text-primary'>
                   <a
                      href={item.href}

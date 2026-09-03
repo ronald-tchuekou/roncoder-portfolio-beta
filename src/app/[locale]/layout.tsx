@@ -1,6 +1,5 @@
 import { Toaster } from '@src/components/ui/sonner'
 import { cn } from '@src/lib/utils'
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { Footer } from '@src/components/footer'
 import { Header } from '@src/components/header/header'
 import { ThemeProvider } from '@src/components/providers/theme-provider'
@@ -73,14 +72,13 @@ export default async function RootLayout({ children, params }: Props) {
          className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)}
          suppressHydrationWarning
       >
-         <GoogleTagManager gtmId='GTM-5X42BXF9' />
          <body className={cn('min-h-screen antialiased font-sans')}>
             <ThemeProvider>
                <NextIntlClientProvider messages={messages}>
                   <a
                      href='#main-content'
                      className={cn(
-                        'sr-only focus:not-sr-only',
+                        'sr-only bg-background text-foreground focus:not-sr-only',
                         'focus:fixed focus:z-50 focus:top-3 focus:left-3',
                         'focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground',
                      )}
@@ -98,7 +96,6 @@ export default async function RootLayout({ children, params }: Props) {
                </NextIntlClientProvider>
             </ThemeProvider>
          </body>
-         <GoogleAnalytics gaId='G-WBPHPE8X6B' />
       </html>
    )
 }

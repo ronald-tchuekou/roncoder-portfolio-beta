@@ -42,7 +42,7 @@ export default async function Page({ params }: Props) {
          <SectionHeader title='my_experiences' description='my_experiences_description' />
          <div className={cn('w-full grid grid-cols-1 gap-8 lg:grid-cols-2')}>
             {EXPERIENCES_LIST.map((experience, index) => (
-               <RevealFromBottom key={experience.id} delay={index * 0.1}>
+               <RevealFromBottom key={experience.id}>
                   <div className={cn('bg-card border border-input', 'rounded-lg p-5 size-full', 'flex flex-col gap-3')}>
                      <h3 className={cn('text-xl font-bold text-foreground font-mono tracking-tight')}>
                         {experience.title[locale]}

@@ -38,7 +38,7 @@ export default async function Page({ params }: Props) {
    return (
       <section className='w-full flex flex-col gap-5'>
          <SectionHeader title='my_info' description='my_info_description' />
-         <RevealFromBottom elt={'h3'} delay={0.1} className={cn('text-lg font-mono tracking-tight text-foreground')}>
+         <RevealFromBottom elt={'h3'} className={cn('text-lg font-mono tracking-tight text-foreground')}>
             {t('contact_details')}
          </RevealFromBottom>
          <div className={cn('w-full grid grid-cols-1 gap-8 lg:grid-cols-2')}>
@@ -53,7 +53,6 @@ export default async function Page({ params }: Props) {
                return (
                   <RevealFromBottom
                      key={information.id}
-                     delay={index * 0.1}
                      className={cn(information.isLong && 'lg:col-span-2', 'flex gap-3')}
                   >
                      <p className='text-muted-foreground text-sm flex-none'>{information.label[locale]}</p>

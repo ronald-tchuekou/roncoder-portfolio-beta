@@ -27,7 +27,7 @@ export const ResumeSideBar: FC = () => {
    const navButtonClass = (active: boolean) =>
       cn(
          'w-full justify-start transition duration-300',
-         'bg-accent text-muted-foreground hover:text-accent-foreground hover:bg-accent',
+         'bg-accent text-accent-foreground hover:bg-accent/80',
          active && 'bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground',
       )
 
@@ -39,15 +39,13 @@ export const ResumeSideBar: FC = () => {
          >
             {t('my_background')}
          </RevealFromBottom>
-         <RevealFromBottom elt={'p'} delay={0.1}>
-            {t('my_background_intro')}
-         </RevealFromBottom>
+         <RevealFromBottom elt={'p'}>{t('my_background_intro')}</RevealFromBottom>
 
          {/* Desktop: vertical list */}
          <nav aria-label={t('my_background')} className='hidden md:block'>
             <ul className={cn('w-full flex flex-col gap-3')}>
                {RESUME_NAV_LINKS.map((item, index) => (
-                  <RevealFromBottom delay={(index + 1) * 0.1} elt={'li'} key={item.url}>
+                  <RevealFromBottom elt={'li'} key={item.url}>
                      <Button asChild variant={'default'} className={navButtonClass(isActive(item.url))}>
                         <Link href={item.url} aria-current={isActive(item.url) ? 'page' : undefined}>
                            {item.icon}&nbsp;&nbsp;

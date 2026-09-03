@@ -239,7 +239,7 @@ const EDUCATIONS: Experience[] = [
          en: 'The fundamentals of computer science and applied mathematics.',
       },
       tasks: [
-         { fr: "Programmation et algorithmique.", en: 'Programming and algorithms.' },
+         { fr: 'Programmation et algorithmique.', en: 'Programming and algorithms.' },
          { fr: 'JavaScript et développement web.', en: 'JavaScript and web development.' },
          { fr: 'Bases de données relationnelles et SQL.', en: 'Relational databases and SQL.' },
          { fr: "Systèmes d'information.", en: 'Information systems.' },
@@ -249,7 +249,6 @@ const EDUCATIONS: Experience[] = [
       keywords: ['Informatique', 'Algorithmique', 'JavaScript', 'SQL', 'UML', 'Université de Douala'],
    },
 ]
-
 
 /** Certifications sorted by date, most recent first. */
 export const EDUCATIONS_LIST: Experience[] = [...EDUCATIONS].sort((a, b) => b.sortDate.localeCompare(a.sortDate))

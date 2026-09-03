@@ -76,7 +76,8 @@
    --popover: oklch(0.9933 0.0011 197.139);
    --popover-foreground: oklch(0.2258 0.0145 203.8455);
    --primary: oklch(0.6902 0.1057 198.9725);
-   --primary-foreground: oklch(1 0 0);
+   /* Dark ink on the teal brand colour: white only reached 2.65:1, below AA. */
+   --primary-foreground: oklch(0.19 0.0225 205);
    --secondary: oklch(0.9309 0.0141 207.8749);
    --secondary-foreground: oklch(0.3474 0.0333 204.759);
    --muted: oklch(0.9403 0.0045 214.3289);
@@ -131,7 +132,8 @@
    --popover: oklch(0.1241 0.0176 203.2785);
    --popover-foreground: oklch(0.8937 0.0153 207.1026);
    --primary: oklch(0.6902 0.1057 198.9725);
-   --primary-foreground: oklch(1 0 0);
+   /* Dark ink on the teal brand colour: white only reached 2.65:1, below AA. */
+   --primary-foreground: oklch(0.19 0.0225 205);
    --secondary: oklch(0.8279 0.0366 205.2095);
    --secondary-foreground: oklch(0.2895 0.0263 207.7818);
    --muted: oklch(0.2749 0.0106 216.8518);
@@ -186,8 +188,35 @@
       @apply bg-background text-foreground;
       letter-spacing: var(--tracking-normal);
    }
+   .reveal-from-bottom {
+      opacity: 1;
+   }
+
+   @supports (animation-timeline: view()) {
+      @media (prefers-reduced-motion: no-preference) {
+         .reveal-from-bottom {
+            animation: reveal-from-bottom linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 22%;
+         }
+      }
+   }
+
+   .profile-ring {
+      transform-origin: center;
+   }
+
+   @media (prefers-reduced-motion: no-preference) {
+      .profile-ring {
+         animation: profile-ring-spin 20s linear infinite;
+      }
+   }
+
    .nav-link {
-      @apply block p-5 text-base font-medium transition duration-300 space-y-1;
+      /* `text-foreground` is explicit: without it the anchor falls back to the
+         browser's default link colour, which fails contrast. min-h-11 keeps the
+         tap target at 44px. */
+      @apply flex min-h-11 flex-col justify-center gap-1 px-4 py-3 text-base font-medium text-foreground transition duration-300;
    }
 
    .nav-link .nav-link-label {
@@ -205,5 +234,25 @@
    .nav-link:hover .nav-link-indicator,
    .nav-link.active .nav-link-indicator {
       @apply w-full;
+   }
+}
+
+@keyframes reveal-from-bottom {
+   from {
+      opacity: 0;
+      transform: translateY(50px);
+   }
+   to {
+      opacity: 1;
+      transform: none;
+   }
+}
+
+@keyframes profile-ring-spin {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
    }
 }

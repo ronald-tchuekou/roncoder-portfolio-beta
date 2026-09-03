@@ -26,24 +26,22 @@ export const InfoSection: FC = () => {
             {t('hero.role')}
          </RevealFromBottom>
 
-         <RevealFromBottom elt='p' delay={0.1} className='text-muted-foreground'>
+         <RevealFromBottom elt='p' className='text-muted-foreground'>
             {t('hero.hi_is')} <span className='font-medium text-foreground'>Ronald Tchuekou</span>
          </RevealFromBottom>
 
          <RevealFromBottom
             elt='h1'
-            delay={0.2}
             className={cn('scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-5xl font-mono')}
          >
             {t('hero.headline')}
          </RevealFromBottom>
 
-         <RevealFromBottom elt='p' delay={0.3} className='text-base text-muted-foreground max-w-2xl'>
+         <RevealFromBottom elt='p' className='text-base text-muted-foreground max-w-2xl'>
             {t('hero.subheadline')}
          </RevealFromBottom>
 
          <RevealFromBottom
-            delay={0.35}
             className={cn(
                'flex items-start gap-3 text-sm text-foreground/90 max-w-2xl',
                'justify-center md:justify-start',
@@ -53,7 +51,7 @@ export const InfoSection: FC = () => {
             <span>{t('hero.availability')}</span>
          </RevealFromBottom>
 
-         <RevealFromBottom delay={0.4} className='flex flex-wrap gap-3 justify-center md:justify-start'>
+         <RevealFromBottom className='flex flex-wrap gap-3 justify-center md:justify-start'>
             <ResumeDownloadButton location='hero' label={t('hero.cta_primary')} />
             <Button asChild variant='outline' className='rounded-full'>
                <Link href='/resume' onClick={() => track('cta_click', { location: 'hero' })}>

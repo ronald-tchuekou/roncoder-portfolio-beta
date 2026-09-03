@@ -10,11 +10,14 @@ export const fontSans = localFont({
    display: 'swap',
 })
 
+// Mono and serif are accents, not body copy: preloading all three families cost
+// about 100 KB on the critical path for no visible gain.
 export const fontMono = localFont({
    src: './jetbrains-mono-latin-wght-normal.woff2',
    weight: '100 800',
    variable: '--font-jetbrains',
    display: 'swap',
+   preload: false,
 })
 
 export const fontSerif = localFont({
@@ -22,4 +25,5 @@ export const fontSerif = localFont({
    weight: '400 840',
    variable: '--font-andada',
    display: 'swap',
+   preload: false,
 })

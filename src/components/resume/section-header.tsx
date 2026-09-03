@@ -15,9 +15,7 @@ export const SectionHeader = ({ title, description }: { title: string; descripti
          >
             {t(title)}
          </RevealFromBottom>
-         <RevealFromBottom elt={'p'} delay={0.1}>
-            {t(description)}
-         </RevealFromBottom>
+         <RevealFromBottom elt={'p'}>{t(description)}</RevealFromBottom>
       </>
    )
 }

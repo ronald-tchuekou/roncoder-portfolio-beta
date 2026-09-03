@@ -57,7 +57,6 @@ export default async function Page({ params }: Props) {
          <div className={cn('flex gap-3 items-center')}>
             <BackButton />
             <RevealFromBottom
-               delay={0.1}
                elt={'h2'}
                className={cn(
                   'scroll-m-20 text-xl lg:text-3xl tracking-tight ',
@@ -67,25 +66,25 @@ export default async function Page({ params }: Props) {
                {experience.title[locale]}
             </RevealFromBottom>
          </div>
-         <RevealFromBottom delay={0.2} className={cn('flex')}>
+         <RevealFromBottom className={cn('flex')}>
             <p className={cn('text-primary text-lg uppercase')}>{experience.company}</p>
             <div className='flex items-center h-full'>
                <DotIcon className='size-8 text-primary' />
                <small className={cn('text-muted-foreground')}>{experience.date[locale]}</small>
             </div>
          </RevealFromBottom>
-         <RevealFromBottom elt={'p'} delay={0.2} className={cn('text-sm text-muted-foreground')}>
+         <RevealFromBottom elt={'p'} className={cn('text-sm text-muted-foreground')}>
             {experience.context[locale]}
          </RevealFromBottom>
-         <RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
+         <RevealFromBottom elt={'p'} className={cn('')}>
             {experience.description[locale]}
          </RevealFromBottom>
-         <RevealFromBottom elt={'h3'} delay={0.3} className={cn('text-lg text-accent-foreground')}>
+         <RevealFromBottom elt={'h3'} className={cn('text-lg text-accent-foreground')}>
             {t('tasks')}
          </RevealFromBottom>
          <ul className={cn('list-disc pl-8 space-y-3')}>
             {experience.tasks.map((task, idx) => (
-               <RevealFromBottom delay={(idx + 1) * 0.1} elt={'li'} key={idx}>
+               <RevealFromBottom elt={'li'} key={idx}>
                   {task[locale]}
                </RevealFromBottom>
             ))}

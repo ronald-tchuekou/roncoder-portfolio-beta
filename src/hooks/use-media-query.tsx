@@ -11,7 +11,7 @@ export const useMediaQuery = (query: string) => {
          mql.addEventListener('change', onStoreChange)
          return () => mql.removeEventListener('change', onStoreChange)
       },
-      [query]
+      [query],
    )
 
    const getSnapshot = () => window.matchMedia(query).matches

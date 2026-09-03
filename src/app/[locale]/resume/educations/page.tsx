@@ -42,7 +42,7 @@ export default async function Page({ params }: Props) {
          <SectionHeader title='my_education' description='my_education_description' />
          <div className={cn('w-full grid grid-cols-1 gap-8 lg:grid-cols-2')}>
             {EDUCATIONS_LIST.map((education, index) => (
-               <RevealFromBottom key={education.id} delay={index < 3 ? index * 0.1 : 0.1}>
+               <RevealFromBottom key={education.id}>
                   <div className={cn('bg-card border border-input', 'rounded-lg p-5 size-full', 'flex flex-col gap-3')}>
                      <h3 className={cn('text-xl font-bold text-foreground font-mono tracking-tight')}>
                         {education.title[locale]}

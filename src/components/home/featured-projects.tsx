@@ -31,7 +31,7 @@ export const FeaturedProjects = async () => {
             <ul className={cn('grid grid-cols-1 md:grid-cols-3 gap-5')}>
                {featured.map((project, index) => (
                   <li key={project.id} className='size-full'>
-                     <RevealFromBottom delay={0.1 * index} className='size-full'>
+                     <RevealFromBottom className='size-full'>
                         <article
                            className={cn(
                               'flex size-full flex-col gap-4 rounded-xl border border-input bg-card p-5 lg:p-7',
@@ -76,7 +76,7 @@ export const FeaturedProjects = async () => {
                ))}
             </ul>
 
-            <RevealFromBottom delay={0.3}>
+            <RevealFromBottom>
                <Button asChild variant='outline' className='rounded-full'>
                   <Link href='/projects'>
                      {t('featured.cta')}

@@ -81,7 +81,6 @@ export default async function Page({ params }: Props) {
                <div className='flex flex-wrap items-center gap-3'>
                   <BackButton />
                   <RevealFromBottom
-                     delay={0.1}
                      elt={'h1'}
                      className={cn(
                         'scroll-m-20 text-2xl lg:text-4xl tracking-tight',
@@ -91,7 +90,7 @@ export default async function Page({ params }: Props) {
                      {heading}
                   </RevealFromBottom>
                </div>
-               <RevealFromBottom delay={0.2}>
+               <RevealFromBottom>
                   <Button asChild variant={'secondary'}>
                      <Link
                         href={link.link}
@@ -104,7 +103,7 @@ export default async function Page({ params }: Props) {
                   </Button>
                </RevealFromBottom>
             </section>
-            <RevealFromBottom delay={0.25}>
+            <RevealFromBottom>
                <div className='w-full overflow-hidden rounded-2xl border border-input bg-muted'>
                   <iframe
                      key={link.link}

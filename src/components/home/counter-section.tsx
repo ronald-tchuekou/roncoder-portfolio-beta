@@ -14,7 +14,7 @@ const Counter = ({ value, suffix, label, delay }: CounterProps) => {
    // No fabricated fallback: a tile with nothing reliable to show is not rendered.
    if (value === null) return null
    return (
-      <RevealFromBottom delay={delay} className='flex gap-3'>
+      <RevealFromBottom className='flex gap-3'>
          <p className='text-5xl font-extrabold text-foreground'>
             <span className='tabular-nums'>{value}</span>
             {suffix ? <span aria-hidden>{suffix}</span> : null}
@@ -42,7 +42,6 @@ export const CounterSection = async () => {
                }
             />
             <Counter
-               delay={0.2}
                value={COMPLETED_PROJECTS_COUNT}
                label={
                   <>
@@ -51,7 +50,6 @@ export const CounterSection = async () => {
                }
             />
             <Counter
-               delay={0.3}
                value={APPS_ON_STORES_COUNT}
                label={
                   <>
@@ -60,7 +58,6 @@ export const CounterSection = async () => {
                }
             />
             <Counter
-               delay={0.4}
                value={contributions}
                label={
                   <>

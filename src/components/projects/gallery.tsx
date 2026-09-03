@@ -37,7 +37,7 @@ export const Gallery: FC<GalleryProps> = ({ images, title, platform }) => {
       <>
          <section className={cn('flex flex-row flex-wrap gap-5')} aria-label={title}>
             {thumbnails.map((image, idx) => (
-               <RevealFromBottom delay={idx * 0.1} key={image}>
+               <RevealFromBottom key={image}>
                   <button
                      type='button'
                      onClick={() => setOpenAt(idx)}
@@ -60,7 +60,7 @@ export const Gallery: FC<GalleryProps> = ({ images, title, platform }) => {
                </RevealFromBottom>
             ))}
             {remaining > 0 && (
-               <RevealFromBottom delay={THUMBNAILS * 0.1}>
+               <RevealFromBottom>
                   <button
                      type='button'
                      onClick={() => setOpenAt(THUMBNAILS)}

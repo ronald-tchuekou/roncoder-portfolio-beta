@@ -49,17 +49,13 @@ export default async function Page({ params }: Props) {
 
             return (
                <div key={group} className={cn('w-full flex flex-col gap-4')}>
-                  <RevealFromBottom
-                     elt={'h3'}
-                     delay={groupIndex * 0.05}
-                     className={cn('text-lg font-mono tracking-tight text-foreground')}
-                  >
+                  <RevealFromBottom elt={'h3'} className={cn('text-lg font-mono tracking-tight text-foreground')}>
                      {t(`skill_group_${group}`)}
                   </RevealFromBottom>
 
                   <div className={cn('w-full flex flex-row flex-wrap gap-4')}>
                      {skills.map((skill, index) => (
-                        <RevealFromBottom key={skill.id} delay={index * 0.05}>
+                        <RevealFromBottom key={skill.id}>
                            <TooltipProvider>
                               <Tooltip delayDuration={200}>
                                  <TooltipTrigger asChild>
@@ -86,7 +82,7 @@ export default async function Page({ params }: Props) {
                   </div>
 
                   {seniority && (
-                     <RevealFromBottom elt={'p'} delay={0.1} className={cn('text-sm text-muted-foreground')}>
+                     <RevealFromBottom elt={'p'} className={cn('text-sm text-muted-foreground')}>
                         {seniority}
                      </RevealFromBottom>
                   )}

@@ -57,7 +57,6 @@ export default async function Page({ params }: Props) {
          <div className={cn('flex gap-3 items-center')}>
             <BackButton />
             <RevealFromBottom
-               delay={0.1}
                elt={'h2'}
                className={cn(
                   'scroll-m-20 text-xl lg:text-3xl tracking-tight ',
@@ -67,18 +66,18 @@ export default async function Page({ params }: Props) {
                {education.title[locale]}
             </RevealFromBottom>
          </div>
-         <RevealFromBottom delay={0.2} className={cn('flex')}>
+         <RevealFromBottom className={cn('flex')}>
             <p className={cn('text-primary text-lg uppercase')}>{education.company}</p>
             <div className='flex items-center h-full'>
                <DotIcon className='size-8 text-primary' />
                <small className={cn('text-muted-foreground')}>{education.date[locale]}</small>
             </div>
          </RevealFromBottom>
-         <RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
+         <RevealFromBottom elt={'p'} className={cn('')}>
             {education.description[locale]}
          </RevealFromBottom>
          {education.imageLink && (
-            <RevealFromBottom delay={0.2} className={cn('w-full aspect-auto', 'rounded-lg', 'bg-secondary/10')}>
+            <RevealFromBottom className={cn('w-full aspect-auto', 'rounded-lg', 'bg-secondary/10')}>
                <Image
                   sizes='(min-width: 768px) 60vw, 100vw'
                   src={education.imageLink}
@@ -89,12 +88,12 @@ export default async function Page({ params }: Props) {
                />
             </RevealFromBottom>
          )}
-         <RevealFromBottom elt={'h3'} delay={0.3} className={cn('text-lg text-accent-foreground')}>
+         <RevealFromBottom elt={'h3'} className={cn('text-lg text-accent-foreground')}>
             {t('training_content')}
          </RevealFromBottom>
          <ul className={cn('list-disc pl-8 space-y-3')}>
             {education.tasks.map((task, idx) => (
-               <RevealFromBottom delay={(idx + 1) * 0.1} elt={'li'} key={idx}>
+               <RevealFromBottom elt={'li'} key={idx}>
                   {task[locale]}
                </RevealFromBottom>
             ))}

@@ -17,9 +17,9 @@ const CSP = [
    "object-src 'none'",
    "img-src 'self' data: https:",
    "font-src 'self' data:",
-   "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://www.googletagmanager.com https://www.google-analytics.com",
+   "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
    "style-src 'self' 'unsafe-inline'",
-   "connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://api.github.com",
+   "connect-src 'self' https://vitals.vercel-insights.com https://api.github.com",
    'frame-src https:',
    "frame-ancestors 'none'",
 ].join('; ')

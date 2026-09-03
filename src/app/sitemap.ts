@@ -45,6 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             languages: Object.fromEntries(routing.locales.map((l) => [l, absolute(l, href)])),
          },
          ...rest,
-      }))
+      })),
    )
 }
