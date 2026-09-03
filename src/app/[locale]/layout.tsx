@@ -1,3 +1,4 @@
+import { BackgroundGrid } from '@src/components/background-grid'
 import { Toaster } from '@src/components/ui/sonner'
 import { cn } from '@src/lib/utils'
 import { Footer } from '@src/components/footer'
@@ -72,8 +73,9 @@ export default async function RootLayout({ children, params }: Props) {
          className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)}
          suppressHydrationWarning
       >
-         <body className={cn('min-h-screen antialiased font-sans')}>
+         <body className={cn('min-h-dvh antialiased font-sans')}>
             <ThemeProvider>
+               <BackgroundGrid />
                <NextIntlClientProvider messages={messages}>
                   <a
                      href='#main-content'

@@ -6,7 +6,8 @@ import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { EXPERIENCE_YEARS } from '@src/resources/data/informations'
 import { RESUME_FILES, RESUME_LOCALES } from '@src/resources/data/resumes'
-import { DownloadIcon, GithubIcon, LinkedinIcon, MailIcon, YoutubeIcon } from 'lucide-react'
+import { GithubBrandIcon, LinkedinBrandIcon, YoutubeBrandIcon } from '@src/components/icons/brand-icons'
+import { DownloadIcon, MailIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 import { RevealFromBottom } from '../motions/reveal-from-bottom'
@@ -38,18 +39,23 @@ export const CandidateCard: FC = () => {
    ]
 
    const socials = [
-      { id: 'github', href: PROFILE_LINKS.github, label: t('github_aria'), icon: <GithubIcon className='size-5' /> },
+      {
+         id: 'github',
+         href: PROFILE_LINKS.github,
+         label: t('github_aria'),
+         icon: <GithubBrandIcon className='size-5' />,
+      },
       {
          id: 'linkedin',
          href: PROFILE_LINKS.linkedin,
          label: t('linkedin_aria'),
-         icon: <LinkedinIcon className='size-5' />,
+         icon: <LinkedinBrandIcon className='size-5' />,
       },
       {
          id: 'youtube',
          href: PROFILE_LINKS.youtube,
          label: t('youtube_aria'),
-         icon: <YoutubeIcon className='size-5' />,
+         icon: <YoutubeBrandIcon className='size-5' />,
       },
    ]
 

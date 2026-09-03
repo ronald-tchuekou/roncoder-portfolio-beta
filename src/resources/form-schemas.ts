@@ -56,6 +56,12 @@ export const contactFormSchema = z.object({
 
 export type ContactFormSchema = z.infer<typeof contactFormSchema>
 
+/**
+ * Form-side shape of the schema. It differs from `ContactFormSchema` because `locale`
+ * carries a default, so it is optional on the way in and always set on the way out.
+ */
+export type ContactFormInput = z.input<typeof contactFormSchema>
+
 export const defaultContactFormValues: ContactFormSchema = {
    firstName: '',
    lastName: '',

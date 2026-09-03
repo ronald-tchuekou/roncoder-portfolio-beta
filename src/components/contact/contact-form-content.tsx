@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { LocaleType } from '@src/i18n/routing'
 import {
    CONTRACT_TYPES,
+   ContactFormInput,
    ContactFormSchema,
    WORK_MODES,
    contactFormSchema,
@@ -52,7 +53,7 @@ export const ContactFormContent = ({ locale, onCompleted, onPendingChange, ref }
 
    const defaultValues = useMemo(() => ({ ...defaultContactFormValues, locale }), [locale])
 
-   const form = useForm<ContactFormSchema>({
+   const form = useForm<ContactFormInput, unknown, ContactFormSchema>({
       resolver: zodResolver(contactFormSchema),
       defaultValues,
    })
