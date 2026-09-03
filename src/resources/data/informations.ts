@@ -1,7 +1,8 @@
 import { Information } from '../util-types'
 
-/** First professional experience (see experiences.ts). Years of experience are derived from it. */
-export const CAREER_START_YEAR = 2018
+/** Years of experience displayed. Reference value of the resume and LinkedIn profile.
+ *  Increment manually (next update: 2027). */
+export const EXPERIENCE_YEARS = 6
 
 /** Projects delivered to date. PROJECTS only lists the ones showcased with screenshots. */
 export const COMPLETED_PROJECTS_COUNT = 13
@@ -21,13 +22,7 @@ export const INFORMATIONS: Information[] = [
    {
       id: 'experience',
       label: { fr: 'Expérience', en: 'Experience' },
-      value: { fr: "5 ans d'expérience", en: '5 years of experience' },
-      isLong: false,
-   },
-   {
-      id: 'origin',
-      label: { fr: 'Nationalité', en: 'Nationality' },
-      value: { fr: 'Camerounaise', en: 'Cameroonian' },
+      value: { fr: `${EXPERIENCE_YEARS} ans et plus`, en: `${EXPERIENCE_YEARS}+ years` },
       isLong: false,
    },
    {
@@ -40,7 +35,10 @@ export const INFORMATIONS: Information[] = [
    {
       id: 'language',
       label: { fr: 'Langue', en: 'Language' },
-      value: { fr: 'Français / English', en: 'French / English' },
+      value: {
+         fr: 'Français (langue maternelle), anglais (professionnel)',
+         en: 'French (native), English (professional)',
+      },
       isLong: false,
    },
    {
@@ -53,8 +51,8 @@ export const INFORMATIONS: Information[] = [
    {
       id: 'linked_in',
       label: { fr: 'LinkedIn', en: 'LinkedIn' },
-      value: { fr: 'https://linkedin.com/in/ronald-tchuekou', en: 'https://linkedin.com/in/ronald-tchuekou' },
+      value: { fr: 'https://www.linkedin.com/in/ronaldtchuekou', en: 'https://www.linkedin.com/in/ronaldtchuekou' },
       isLong: true,
-      link: 'https://linkedin.com/in/ronald-tchuekou',
+      link: 'https://www.linkedin.com/in/ronaldtchuekou',
    },
 ] as const
