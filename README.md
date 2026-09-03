@@ -296,7 +296,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Ronald Tchuekou**
 
-- LinkedIn: [@ronald-tchuekou](https://linkedin.com/in/ronald-tchuekou)
+- LinkedIn: [@ronald-tchuekou](https://www.linkedin.com/in/ronald-tchuekou)
 - GitHub: [@ronald-tchuekou](https://github.com/ronald-tchuekou)
 - Portfolio: [roncoder-beta.vercel.app](https://roncoder-beta.vercel.app)
 

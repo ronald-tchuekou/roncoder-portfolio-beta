@@ -27,7 +27,7 @@ intitulés, les mêmes dates et le même nombre d'années.
 | Ligne de titre (fr) | Senior Frontend Engineer \| Développeur Full-Stack Web & Mobile | **Senior Frontend Engineer \| Développeur Full Stack** |
 | Ligne de titre (en) | Senior Frontend Engineer \| Full-Stack Web & Mobile Developer | **Senior Frontend Engineer \| Full Stack Developer** |
 | Téléphone | +237 658 172 868 / +237 650 427 749 | **+237 658 172 868** seul. Le site n'affiche que celui-là, deux numéros font hésiter |
-| LinkedIn | linkedin.com/in/ronald-tchuekou | **linkedin.com/in/ronaldtchuekou** |
+| LinkedIn | linkedin.com/in/ronald-tchuekou | inchangé, c'est la bonne URL. C'est le site qui a été corrigé pour la reprendre |
 | YouTube | absent | **youtube.com/@ronaldtchuekou** à ajouter sur la ligne des liens |
 
 À ajouter sous la ligne des liens, une ligne de disponibilité reprise mot pour mot du site :

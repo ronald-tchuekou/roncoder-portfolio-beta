@@ -14,7 +14,7 @@ type Props = {
 }
 
 const EMAIL = 'ronaldtchuekou@gmail.com'
-const LINKEDIN_URL = 'https://www.linkedin.com/in/ronaldtchuekou'
+const LINKEDIN_URL = 'https://www.linkedin.com/in/ronald-tchuekou'
 const GITHUB_URL = 'https://github.com/ronald-tchuekou'
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

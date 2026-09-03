@@ -51,8 +51,8 @@ export const INFORMATIONS: Information[] = [
    {
       id: 'linked_in',
       label: { fr: 'LinkedIn', en: 'LinkedIn' },
-      value: { fr: 'https://www.linkedin.com/in/ronaldtchuekou', en: 'https://www.linkedin.com/in/ronaldtchuekou' },
+      value: { fr: 'https://www.linkedin.com/in/ronald-tchuekou', en: 'https://www.linkedin.com/in/ronald-tchuekou' },
       isLong: true,
-      link: 'https://www.linkedin.com/in/ronaldtchuekou',
+      link: 'https://www.linkedin.com/in/ronald-tchuekou',
    },
 ] as const

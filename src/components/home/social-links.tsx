@@ -9,7 +9,7 @@ import { FC, SVGProps } from 'react'
 import { RevealFromBottom } from '../motions/reveal-from-bottom'
 
 export const SOCIAL_LINKS = {
-   linkedin: 'https://www.linkedin.com/in/ronaldtchuekou',
+   linkedin: 'https://www.linkedin.com/in/ronald-tchuekou',
    github: 'https://github.com/ronald-tchuekou',
    x: 'https://x.com/TchuekouRonald',
    youtube: 'https://youtube.com/@ronaldtchuekou',

@@ -26,7 +26,7 @@ const KNOWS_ABOUT = [
 ]
 
 const SAME_AS = [
-   'https://www.linkedin.com/in/ronaldtchuekou',
+   'https://www.linkedin.com/in/ronald-tchuekou',
    'https://github.com/ronald-tchuekou',
    'https://x.com/TchuekouRonald',
    'https://www.youtube.com/@ronaldtchuekou',

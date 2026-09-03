@@ -14,7 +14,7 @@ import { RevealFromBottom } from '../motions/reveal-from-bottom'
 /** Public profiles shown under the card. Kept local so the resume page stays self contained. */
 const PROFILE_LINKS = {
    github: 'https://github.com/ronald-tchuekou',
-   linkedin: 'https://www.linkedin.com/in/ronaldtchuekou',
+   linkedin: 'https://www.linkedin.com/in/ronald-tchuekou',
    youtube: 'https://youtube.com/@ronaldtchuekou',
 } as const
 
