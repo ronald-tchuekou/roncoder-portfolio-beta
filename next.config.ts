@@ -38,13 +38,11 @@ const nextConfig: NextConfig = {
             headers: [
                ...SECURITY_HEADERS,
                { key: 'Content-Security-Policy-Report-Only', value: CSP },
+               // Applies to this site being framed elsewhere, which we never want.
+               // Framing third party sites in the project preview is governed by
+               // `frame-src` in the policy above, not by this header.
                { key: 'X-Frame-Options', value: 'DENY' },
             ],
-         },
-         {
-            // Third party sites are loaded in an iframe here, so framing must stay allowed.
-            source: '/:path*/projects/preview/:project*',
-            headers: [...SECURITY_HEADERS, { key: 'Content-Security-Policy-Report-Only', value: CSP }],
          },
       ]
    },

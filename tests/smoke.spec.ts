@@ -6,6 +6,10 @@ const LOCALES = ['', '/fr'] as const
 /** A raw next-intl key leaks as `namespace.key` when a translation is missing. */
 const RAW_KEY = /\b(home|header|contact|projects|resume|expertises|legal|common)\.[a-z0-9_]+\b/i
 
+/** Vercel Analytics only serves its script from the Vercel edge, so a local run
+ *  always logs a 404 for it. It says nothing about the pages themselves. */
+const KNOWN_LOCAL_NOISE = [/_vercel\/insights/, /Failed to load resource: the server responded with a status of 404/]
+
 for (const locale of LOCALES) {
    for (const path of PAGES) {
       const url = `${locale}${path}`.replace(/\/$/, '') || '/'
@@ -13,7 +17,10 @@ for (const locale of LOCALES) {
       test(`${url} renders without raw keys or console errors`, async ({ page }, testInfo) => {
          const errors: string[] = []
          page.on('console', (message) => {
-            if (message.type() === 'error') errors.push(message.text())
+            if (message.type() !== 'error') return
+            const text = message.text()
+            if (KNOWN_LOCAL_NOISE.some((pattern) => pattern.test(text))) return
+            errors.push(text)
          })
          page.on('pageerror', (error) => errors.push(error.message))
 
