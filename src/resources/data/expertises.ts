@@ -32,7 +32,7 @@ export const EXPERTISES: Expertise[] = [
          },
       ],
       stack: ['React', 'Next.js', 'Angular', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Framer Motion'],
-      projects: ['cosumaf', 'privie', 'amizone'],
+      projects: ['cosumaf', 'harmonycar', 'carporea'],
    },
    {
       id: '02',
@@ -107,7 +107,7 @@ export const EXPERTISES: Expertise[] = [
          'Clerk',
          'Mistral AI',
       ],
-      projects: ['privie', 'lafya', 'amizone'],
+      projects: ['privie', 'harmonycar', 'lafya'],
    },
    {
       id: '04',

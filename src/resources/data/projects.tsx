@@ -95,7 +95,6 @@ export const PROJECTS: Project[] = [
       tags: ['Angular', 'TypeScript', 'Figma', 'Design system'],
       gallery: [],
       links: [],
-      date: { fr: "Déc 2025 à aujourd'hui", en: 'Dec 2025 to today' },
    },
    {
       id: 'lafya',
@@ -151,7 +150,6 @@ export const PROJECTS: Project[] = [
          },
          { icon: <LinkIcon className='size-6' />, label: SITE_LABEL, link: 'https://lafya.fr' },
       ],
-      date: { fr: '2023 à 2025', en: '2023 to 2025' },
    },
    {
       id: 'mappeos',
@@ -195,7 +193,6 @@ export const PROJECTS: Project[] = [
       tags: ['Next.js', 'Node.js', 'Express', 'TypeScript', 'CTO'],
       gallery: [],
       links: [],
-      date: { fr: 'Oct 2024 à Sept 2025', en: 'Oct 2024 to Sept 2025' },
    },
    {
       id: 'zakadia',
@@ -242,7 +239,6 @@ export const PROJECTS: Project[] = [
             link: 'https://play.google.com/store/apps/details?id=com.agyltech.zakadia',
          },
       ],
-      date: { fr: '2024 à 2025', en: '2024 to 2025' },
    },
    {
       id: 'les-vadrouilleurs',
@@ -294,11 +290,96 @@ export const PROJECTS: Project[] = [
          },
          { icon: <LinkIcon className='size-6' />, label: SITE_LABEL, link: 'https://les-vadrouilleurs.fr' },
       ],
-      date: { fr: '2023 à 2025', en: '2023 to 2025' },
+   },
+   {
+      id: 'harmonycar',
+      order: 6,
+      featured: false,
+      platform: 'web',
+      image: '/projects/harmonycar/cover.svg',
+      title: { fr: 'HarmonyCar, démarches de carte grise', en: 'HarmonyCar, vehicle registration formalities' },
+      company: { fr: 'HarmonyCar, France', en: 'HarmonyCar, France' },
+      context: {
+         fr: 'Mission freelance pour HarmonyCar, France.',
+         en: 'Freelance engagement for HarmonyCar, France.',
+      },
+      role: { fr: 'Développeur Full Stack', en: 'Full Stack developer' },
+      description: {
+         fr: "Plateforme d'accompagnement aux démarches de carte grise en ligne : changement de titulaire, duplicata, changement d'adresse, déclaration de cession. Le parcours guide l'usager étape par étape à la place du site officiel de l'ANTS.",
+         en: 'Platform guiding French drivers through vehicle registration formalities online: change of owner, duplicate, change of address, transfer declaration. The flow walks the user step by step instead of the official ANTS website.',
+      },
+      contributions: [
+         {
+            fr: 'Développement des interfaces Next.js : site public, parcours de demande et espace « Mon compte ».',
+            en: 'Built the Next.js interfaces: public site, request flow and the account area.',
+         },
+         {
+            fr: "Conception et réalisation de l'API AdonisJS qui porte les demandes et les pièces justificatives.",
+            en: 'Designed and built the AdonisJS API carrying the requests and their supporting documents.',
+         },
+         {
+            fr: 'Formulaires en plusieurs étapes avec validation et téléversement de documents.',
+            en: 'Multi step forms with validation and document upload.',
+         },
+         {
+            fr: "Suivi de l'état d'avancement des démarches côté usager.",
+            en: 'Request progress tracking on the user side.',
+         },
+      ],
+      result: {
+         fr: 'Plateforme en production, ouverte au public sur harmonycar.fr.',
+         en: 'Platform in production, publicly available at harmonycar.fr.',
+      },
+      tags: ['Next.js', 'TypeScript', 'AdonisJS', 'API REST'],
+      gallery: [],
+      links: [{ icon: <LinkIcon className='size-6' />, label: SITE_LABEL, link: 'https://harmonycar.fr' }],
+   },
+   {
+      id: 'carporea',
+      order: 7,
+      featured: false,
+      platform: 'web',
+      image: '/projects/carporea/cover.svg',
+      title: { fr: 'Carporea, carports solaires', en: 'Carporea, solar carports' },
+      company: { fr: 'Carporea, France', en: 'Carporea, France' },
+      context: {
+         fr: 'Mission freelance pour Carporea, France.',
+         en: 'Freelance engagement for Carporea, France.',
+      },
+      role: { fr: 'Développeur Full Stack', en: 'Full Stack developer' },
+      description: {
+         fr: 'Plateforme de vente de carports solaires photovoltaïques sur mesure. Le visiteur simule son projet en ligne, reçoit une étude et signe électroniquement son devis.',
+         en: 'Sales platform for made to measure photovoltaic solar carports. Visitors simulate their project online, receive a study and sign their quote electronically.',
+      },
+      contributions: [
+         {
+            fr: 'Développement du site et du simulateur de projet en Next.js.',
+            en: 'Built the site and the project simulator in Next.js.',
+         },
+         {
+            fr: 'Intégration de la signature électronique des devis avec YouSign.',
+            en: 'Integrated electronic quote signing with YouSign.',
+         },
+         {
+            fr: 'Génération des documents PDF côté client avec jsPDF.',
+            en: 'Client side PDF document generation with jsPDF.',
+         },
+         {
+            fr: 'Parcours de demande de devis, du formulaire à la restitution du chiffrage.',
+            en: 'Quote request flow, from the form to the pricing summary.',
+         },
+      ],
+      result: {
+         fr: 'Plateforme en production, ouverte au public sur carporea.fr.',
+         en: 'Platform in production, publicly available at carporea.fr.',
+      },
+      tags: ['Next.js', 'TypeScript', 'YouSign', 'jsPDF'],
+      gallery: [],
+      links: [{ icon: <LinkIcon className='size-6' />, label: SITE_LABEL, link: 'https://carporea.fr' }],
    },
    {
       id: 'privie',
-      order: 6,
+      order: 8,
       featured: false,
       platform: 'web',
       image: '/projects/privie/privie-web-cover.webp',
@@ -348,11 +429,10 @@ export const PROJECTS: Project[] = [
          '/projects/privie/privie-img-12.webp',
       ],
       links: [{ icon: <LinkIcon className='size-6' />, label: SITE_LABEL, link: 'https://privie.io' }],
-      date: { fr: '2023 à 2025', en: '2023 to 2025' },
    },
    {
       id: 'amizone',
-      order: 7,
+      order: 9,
       featured: false,
       platform: 'web',
       image: '/projects/amizone/amizone-cover.webp',
@@ -404,11 +484,10 @@ export const PROJECTS: Project[] = [
             link: 'https://amizonecm-beta.vercel.app',
          },
       ],
-      date: { fr: '2021 à 2022', en: '2021 to 2022' },
    },
    {
       id: 'localtik-web',
-      order: 8,
+      order: 10,
       featured: false,
       platform: 'web',
       image: '/projects/localtik-web/localtik-web-cover.webp',
@@ -451,11 +530,10 @@ export const PROJECTS: Project[] = [
             link: 'https://localtik-web-beta.vercel.app/cloud',
          },
       ],
-      date: { fr: '2022', en: '2022' },
    },
    {
       id: 'maori',
-      order: 9,
+      order: 11,
       featured: false,
       platform: 'web',
       image: '/projects/maori/maori-cover.webp',
@@ -497,11 +575,10 @@ export const PROJECTS: Project[] = [
          '/projects/maori/moari-img-08.webp',
       ],
       links: [{ icon: <LinkIcon className='size-6' />, label: SITE_LABEL, link: 'https://maori-delta.vercel.app' }],
-      date: { fr: '2021', en: '2021' },
    },
    {
       id: 'bon-paiement',
-      order: 10,
+      order: 12,
       featured: false,
       platform: 'web',
       image: '/projects/bon-paiement/bon-paiement-cover.webp',
@@ -559,6 +636,5 @@ export const PROJECTS: Project[] = [
             link: 'https://github.com/ronald-tchuekou/bon-paiement',
          },
       ],
-      date: { fr: '2022', en: '2022' },
    },
 ]

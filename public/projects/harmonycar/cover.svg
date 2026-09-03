@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img">
+   <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+         <stop offset="0%" stop-color="#031417" />
+         <stop offset="100%" stop-color="#0c4e5a" />
+      </linearGradient>
+      <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+         <stop offset="0%" stop-color="#31afb4" stop-opacity="0.5" />
+         <stop offset="100%" stop-color="#31afb4" stop-opacity="0" />
+      </radialGradient>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+         <path d="M40 0 L0 0 0 40" fill="none" stroke="#31afb4" stroke-opacity="0.08" stroke-width="1" />
+      </pattern>
+   </defs>
+   <rect width="1280" height="720" fill="url(#bg)" />
+   <rect width="1280" height="720" fill="url(#grid)" />
+   <circle cx="240" cy="180" r="340" fill="url(#glow)" />
+   <g opacity="0.9">
+      <rect x="150" y="150" width="420" height="270" rx="28" fill="none" stroke="#31afb4" stroke-opacity="0.5" stroke-width="2" />
+      <rect x="150" y="150" width="420" height="58" rx="28" fill="#31afb4" opacity="0.14" />
+      <rect x="196" y="252" width="240" height="14" rx="7" fill="#31afb4" opacity="0.42" />
+      <rect x="196" y="290" width="328" height="14" rx="7" fill="#31afb4" opacity="0.26" />
+      <rect x="196" y="328" width="180" height="14" rx="7" fill="#fbcb97" opacity="0.34" />
+      <rect x="196" y="366" width="120" height="26" rx="13" fill="#e78a53" opacity="0.4" />
+   </g>
+   <g opacity="0.9">
+      <rect x="660" y="300" width="470" height="270" rx="28" fill="none" stroke="#fbcb97" stroke-opacity="0.34" stroke-width="2" />
+      <rect x="706" y="352" width="290" height="14" rx="7" fill="#31afb4" opacity="0.34" />
+      <rect x="706" y="390" width="378" height="14" rx="7" fill="#31afb4" opacity="0.22" />
+      <rect x="706" y="428" width="220" height="14" rx="7" fill="#31afb4" opacity="0.3" />
+      <rect x="706" y="488" width="160" height="26" rx="13" fill="#31afb4" opacity="0.32" />
+   </g>
+   <g fill="none" stroke="#31afb4" stroke-opacity="0.5" stroke-width="3">
+      <circle cx="300" cy="560" r="38" />
+      <circle cx="470" cy="560" r="38" />
+      <circle cx="640" cy="560" r="38" />
+      <path d="M338 560 H432" />
+      <path d="M508 560 H602" />
+   </g>
+   <rect x="0" y="690" width="1280" height="30" fill="#31afb4" opacity="0.12" />
+</svg>

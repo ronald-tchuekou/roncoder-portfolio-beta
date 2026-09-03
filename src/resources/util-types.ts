@@ -84,7 +84,6 @@ export type Project = {
    company: Record<LocaleType, string>
    gallery: string[]
    links: ProjectLink[]
-   date: Record<LocaleType, string>
    featured: boolean
    order: number
 }

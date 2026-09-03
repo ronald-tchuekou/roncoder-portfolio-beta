@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img">
+   <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+         <stop offset="0%" stop-color="#031417" />
+         <stop offset="100%" stop-color="#0c4e5a" />
+      </linearGradient>
+      <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+         <stop offset="0%" stop-color="#fbcb97" stop-opacity="0.4" />
+         <stop offset="100%" stop-color="#fbcb97" stop-opacity="0" />
+      </radialGradient>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+         <path d="M40 0 L0 0 0 40" fill="none" stroke="#31afb4" stroke-opacity="0.08" stroke-width="1" />
+      </pattern>
+      <pattern id="cells" width="88" height="56" patternUnits="userSpaceOnUse">
+         <rect x="4" y="4" width="80" height="48" rx="6" fill="#31afb4" opacity="0.16" />
+         <rect x="4" y="4" width="80" height="48" rx="6" fill="none" stroke="#31afb4" stroke-opacity="0.4" stroke-width="1.5" />
+      </pattern>
+   </defs>
+   <rect width="1280" height="720" fill="url(#bg)" />
+   <rect width="1280" height="720" fill="url(#grid)" />
+   <circle cx="1000" cy="160" r="360" fill="url(#glow)" />
+   <g transform="skewX(-14)">
+      <rect x="300" y="180" width="704" height="224" rx="10" fill="url(#cells)" />
+      <rect x="300" y="180" width="704" height="224" rx="10" fill="none" stroke="#fbcb97" stroke-opacity="0.4" stroke-width="2.5" />
+   </g>
+   <g stroke="#31afb4" stroke-opacity="0.45" stroke-width="8" stroke-linecap="round">
+      <path d="M250 430 V600" />
+      <path d="M980 430 V600" />
+   </g>
+   <g fill="none" stroke="#e78a53" stroke-opacity="0.55" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M636 452 L596 540 H648 L608 628" />
+   </g>
+   <g opacity="0.55">
+      <rect x="1040" y="470" width="30" height="130" rx="15" fill="#31afb4" opacity="0.3" />
+      <rect x="1090" y="420" width="30" height="180" rx="15" fill="#31afb4" opacity="0.42" />
+      <rect x="1140" y="370" width="30" height="230" rx="15" fill="#fbcb97" opacity="0.4" />
+   </g>
+   <rect x="0" y="690" width="1280" height="30" fill="#31afb4" opacity="0.12" />
+</svg>
