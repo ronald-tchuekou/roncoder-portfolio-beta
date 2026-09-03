@@ -5,6 +5,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@src/c
 import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { EXPERIENCE_YEARS } from '@src/resources/data/informations'
+import { RESUME_FILES, RESUME_LOCALES } from '@src/resources/data/resumes'
 import { DownloadIcon, GithubIcon, LinkedinIcon, MailIcon, YoutubeIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'
@@ -17,15 +18,7 @@ const PROFILE_LINKS = {
    youtube: 'https://youtube.com/@ronaldtchuekou',
 } as const
 
-/**
- * Resume files. `available` stays false until the PDFs are actually in `public/cv/`,
- * see `public/cv/README.md`. The buttons are never hidden, only disabled.
- * `pages` is filled in once the real files exist, never guessed.
- */
-const CV_FILES = [
-   { id: 'fr', labelKey: 'cv_fr_label', href: '/cv/ronald-tchuekou-cv-fr.pdf', available: false, pages: null },
-   { id: 'en', labelKey: 'cv_en_label', href: '/cv/ronald-tchuekou-cv-en.pdf', available: false, pages: null },
-] as const
+const CV_FILES = RESUME_LOCALES.map((id) => ({ id, ...RESUME_FILES[id] }))
 
 export const CandidateCard: FC = () => {
    const t = useTranslations('resume')

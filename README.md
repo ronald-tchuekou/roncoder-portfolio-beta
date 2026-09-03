@@ -146,9 +146,10 @@ style forbids em dashes and en dashes; write "Oct 2023 à Déc 2025" / "Oct 2023
 
 ## 📄 Resume PDFs
 
-`public/cv/` must hold `ronald-tchuekou-cv-fr.pdf` and `ronald-tchuekou-cv-en.pdf`. See
-`public/cv/README.md` for the rules the files have to satisfy and for how to enable the download
-buttons, which stay visible but disabled until then.
+`public/resumes/` holds `ronald-tchuekou-resume-fr.pdf` and `ronald-tchuekou-resume-en.pdf`. They are
+declared once in `src/resources/data/resumes.ts`, which every download button reads. See
+`public/resumes/README.md` for the rules a replacement file must satisfy, including the page count to
+update there.
 
 ### Development
 

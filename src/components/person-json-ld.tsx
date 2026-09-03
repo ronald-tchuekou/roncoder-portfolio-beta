@@ -29,7 +29,7 @@ const SAME_AS = [
    'https://www.linkedin.com/in/ronaldtchuekou',
    'https://github.com/ronald-tchuekou',
    'https://x.com/TchuekouRonald',
-   'https://www.youtube.com/@roncoder',
+   'https://www.youtube.com/@ronaldtchuekou',
 ]
 
 /** Structured data describing the candidate. Validate any change with the

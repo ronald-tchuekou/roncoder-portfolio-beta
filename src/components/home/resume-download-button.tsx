@@ -7,9 +7,7 @@ import { track } from '@vercel/analytics'
 import { CloudDownloadIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { ComponentProps, FC, useCallback } from 'react'
-
-/** The two PDF files are not in `public/cv/` yet. Set to true once they are published. */
-export const RESUME_AVAILABLE: boolean = false
+import { resumeFor } from '@src/resources/data/resumes'
 
 export type CtaLocation = 'hero' | 'looking_for' | 'final' | 'footer'
 
@@ -27,20 +25,21 @@ export const ResumeDownloadButton: FC<Props> = ({ location, label, className, va
    const locale = useLocale()
    const text = label ?? t('resume.download')
 
-   const downloadResume = useCallback(() => {
+   const resume = resumeFor(locale)
+
+   const reportDownload = useCallback(() => {
       track('cta_click', { location })
       track('resume_download', { locale })
-      const anchor = document.createElement('a')
-      anchor.setAttribute('href', `/cv/ronald-tchuekou-cv-${locale}.pdf`)
-      anchor.setAttribute('download', `ronald-tchuekou-cv-${locale}.pdf`)
-      anchor.click()
    }, [locale, location])
 
-   if (RESUME_AVAILABLE) {
+   if (resume.available) {
+      // A real anchor, so the download still works if the analytics call fails.
       return (
-         <Button onClick={downloadResume} variant={variant} size={size} className={cn('rounded-full', className)}>
-            {text}
-            <CloudDownloadIcon className='size-4' aria-hidden />
+         <Button asChild variant={variant} size={size} className={cn('rounded-full', className)}>
+            <a href={resume.href} download={resume.fileName} onClick={reportDownload}>
+               {text}
+               <CloudDownloadIcon className='size-4' aria-hidden />
+            </a>
          </Button>
       )
    }
