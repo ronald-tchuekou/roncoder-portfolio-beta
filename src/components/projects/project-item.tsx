@@ -36,7 +36,12 @@ export const ProjectItem: FC<ProjectItemProps> = ({ item, locale, priority = fal
          <div className={cn('size-full px-5 pb-5 flex flex-col gap-5')}>
             <div>
                <h2 className={cn('scroll-m-20 text-2xl font-normal tracking-tight', 'text-foreground font-mono')}>
-                  {item.title[locale]}
+                  <Link
+                     href={`/projects/${item.id}`}
+                     className='rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring'
+                  >
+                     {item.title[locale]}
+                  </Link>
                </h2>
                <p className='text-primary uppercase font-serif font-semibold'>{item.role[locale]}</p>
                <p className='text-muted-foreground text-sm'>{item.context[locale]}</p>
