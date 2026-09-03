@@ -1,21 +1,20 @@
-import { cn } from "@/lib/utils";
-import { BackButton } from "@src/components/back-button";
-import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import { cn } from '@/lib/utils'
+import { BackButton } from '@src/components/back-button'
+import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { LocaleType } from '@src/i18n/routing'
 import { localizedAlternates } from '@src/lib/seo'
 import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
-import { DotIcon } from 'lucide-react';
+import { DotIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
-
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-	return EXPERIENCES_LIST.map((exp) => ({
-		exp_id: exp.id,
-	}))
+   return EXPERIENCES_LIST.map((exp) => ({
+      exp_id: exp.id,
+   }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -62,7 +61,7 @@ export default async function Page({ params }: Props) {
                elt={'h2'}
                className={cn(
                   'scroll-m-20 text-xl lg:text-3xl tracking-tight ',
-                  'text-foreground font-mono tracking-tight'
+                  'text-foreground font-mono tracking-tight',
                )}
             >
                {experience.title[locale]}
@@ -74,6 +73,9 @@ export default async function Page({ params }: Props) {
                <DotIcon className='size-8 text-primary' />
                <small className={cn('text-muted-foreground')}>{experience.date[locale]}</small>
             </div>
+         </RevealFromBottom>
+         <RevealFromBottom elt={'p'} delay={0.2} className={cn('text-sm text-muted-foreground')}>
+            {experience.context[locale]}
          </RevealFromBottom>
          <RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
             {experience.description[locale]}

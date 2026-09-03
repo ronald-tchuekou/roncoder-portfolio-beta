@@ -1,10 +1,10 @@
-import { cn } from "@/lib/utils";
-import { BackButton } from "@src/components/back-button";
-import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import { cn } from '@/lib/utils'
+import { BackButton } from '@src/components/back-button'
+import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { LocaleType } from '@src/i18n/routing'
 import { localizedAlternates } from '@src/lib/seo'
 import { EDUCATIONS_LIST } from '@src/resources/data/educations'
-import { DotIcon } from "lucide-react";
+import { DotIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
@@ -13,9 +13,9 @@ import { notFound } from 'next/navigation'
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-	return EDUCATIONS_LIST.map((education) => ({
-		education_id: education.id,
-	}))
+   return EDUCATIONS_LIST.map((education) => ({
+      education_id: education.id,
+   }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -61,7 +61,7 @@ export default async function Page({ params }: Props) {
                elt={'h2'}
                className={cn(
                   'scroll-m-20 text-xl lg:text-3xl tracking-tight ',
-                  'text-foreground font-mono tracking-tight'
+                  'text-foreground font-mono tracking-tight',
                )}
             >
                {education.title[locale]}
