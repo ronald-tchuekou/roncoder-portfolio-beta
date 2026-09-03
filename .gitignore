@@ -38,3 +38,7 @@ next-env.d.ts
 
 # IDE
 .idea/
+
+# Playwright
+/test-results/
+/playwright-report/

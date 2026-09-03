@@ -9,7 +9,8 @@
       "lint": "eslint .",
       "typecheck": "tsc --noEmit",
       "format": "prettier --write .",
-      "images:convert": "node scripts/convert-images.mjs"
+      "images:convert": "node scripts/convert-images.mjs",
+      "smoke": "playwright test"
    },
    "dependencies": {
       "@hookform/resolvers": "^3.10.0",
@@ -45,6 +46,7 @@
       "zod": "^3.25.76"
    },
    "devDependencies": {
+      "@playwright/test": "^1.62.1",
       "@types/node": "^24.10.0",
       "@types/react": "^19.2.18",
       "@types/react-dom": "^19.2.5",
