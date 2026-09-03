@@ -8,6 +8,8 @@ const SECURITY_HEADERS = [
    { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
 ]
 
+const isDev = process.env.NODE_ENV === 'development'
+
 // Enforcing. `tests/csp.spec.ts` walks every public page and fails on any violation
 // the policy would block, so a regression is caught before it reaches production.
 const CSP = [
@@ -17,7 +19,9 @@ const CSP = [
    "object-src 'none'",
    "img-src 'self' data: https:",
    "font-src 'self' data:",
-   "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
+   // React's dev build needs eval() to rebuild cross environment call stacks, and the
+   // Turbopack dev runtime evaluates modules the same way. Production never does.
+   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://va.vercel-scripts.com`,
    "style-src 'self' 'unsafe-inline'",
    "connect-src 'self' https://vitals.vercel-insights.com https://api.github.com",
    'frame-src https:',
