@@ -1,13 +1,14 @@
-import { cn } from "@/lib/utils";
-import { BackButton } from "@src/components/back-button";
-import { Container } from "@src/components/container";
-import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
-import { Gallery } from "@src/components/projects/gallery";
-import { ProjectTags } from "@src/components/projects/project-tags";
+import { ProjectJsonLd } from '@src/components/projects/project-json-ld'
+import { cn } from '@src/lib/utils'
+import { BackButton } from '@src/components/back-button'
+import { Container } from '@src/components/container'
+import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
+import { Gallery } from '@src/components/projects/gallery'
+import { ProjectTags } from '@src/components/projects/project-tags'
 import { Link, LocaleType } from '@src/i18n/routing'
 import { localizedAlternates } from '@src/lib/seo'
-import { PROJECTS } from '@src/resources/data/projects'
-import { DotIcon } from "lucide-react";
+import { previewableLink, PROJECTS } from '@src/resources/data/projects'
+import { LockIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
@@ -21,9 +22,9 @@ type Props = {
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-	return PROJECTS.map((project) => ({
-		project_id: project.id,
-	}))
+   return PROJECTS.map((project) => ({
+      project_id: project.id,
+   }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -31,16 +32,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const project = PROJECTS.find((project) => project.id === project_id)
    if (!project) return {}
 
+   const title = `${project.title[locale]}, ${project.role[locale]}`
+
    return {
-      title: project.title[locale],
+      title,
       description: project.description[locale],
       alternates: localizedAlternates(locale, `/projects/${project.id}`),
+      keywords: [...project.tags],
       openGraph: {
+         title,
+         description: project.description[locale],
          images: [project.image],
       },
-      keywords: [...project.tags],
       twitter: {
-         title: project.title[locale],
+         card: 'summary_large_image',
+         title,
          description: project.description[locale],
          images: [project.image],
       },
@@ -57,17 +63,19 @@ export default async function Page({ params }: Props) {
    const project = PROJECTS.find((project) => project.id === project_id)
    if (!project) notFound()
 
+   const preview = previewableLink(project)
+
    return (
       <main>
+         <ProjectJsonLd project={project} locale={locale as LocaleType} />
          <Container className={cn('flex flex-col gap-10 py-10 lg:py-20')}>
             <section className={cn('flex gap-3 items-center')}>
                <BackButton />
                <RevealFromBottom
-                  delay={0.1}
                   elt={'h1'}
                   className={cn(
                      'scroll-m-20 text-2xl lg:text-5xl tracking-tight ',
-                     'text-foreground font-mono tracking-tight'
+                     'text-foreground font-mono tracking-tight',
                   )}
                >
                   {project.title[locale]}
@@ -75,82 +83,83 @@ export default async function Page({ params }: Props) {
             </section>
 
             <section className='w-full flex flex-col gap-5'>
-               <RevealFromBottom
-                  delay={0.1}
-                  className={cn('w-full h-auto aspect-video', 'rounded-xl', 'bg-secondary/10')}
-               >
+               <RevealFromBottom className={cn('w-full h-auto aspect-video', 'rounded-xl', 'bg-secondary/10')}>
                   <Image
                      priority
                      src={project.image}
-                     alt={project.title[locale]}
+                     alt={t('cover_alt', { title: project.title[locale] })}
                      width={1280}
                      height={720}
                      sizes='(min-width: 1280px) 1216px, 100vw'
                      className={cn('w-full aspect-video object-cover', 'rounded-xl')}
                   />
                </RevealFromBottom>
-               <RevealFromBottom delay={0.2} className={cn('flex')}>
-                  <p className={cn('text-primary text-lg uppercase')}>{project.company[locale]}</p>
-                  <div className='flex items-center h-full'>
-                     <DotIcon className='size-8 text-primary' />
-                     <small className={cn('text-muted-foreground')}>{project.date[locale]}</small>
-                  </div>
+               <RevealFromBottom className={cn('flex flex-col gap-1')}>
+                  <p className={cn('text-primary text-lg uppercase')}>{project.role[locale]}</p>
+                  <p className={cn('text-muted-foreground')}>{project.context[locale]}</p>
                </RevealFromBottom>
             </section>
 
             <section>
-               <RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
-                  {project.description[locale]}
-               </RevealFromBottom>
+               <RevealFromBottom elt={'p'}>{project.description[locale]}</RevealFromBottom>
             </section>
 
-            <Gallery images={project.gallery} title={project.title[locale]} />
+            <section className='flex flex-col gap-3'>
+               <RevealFromBottom elt={'h2'} className={cn('text-xl font-mono text-foreground')}>
+                  {t('contributions_label')}
+               </RevealFromBottom>
+               <ul className='flex flex-col gap-2 list-disc pl-5'>
+                  {project.contributions.map((contribution, index) => (
+                     <RevealFromBottom elt={'li'} key={`contribution-${index}`}>
+                        {contribution[locale]}
+                     </RevealFromBottom>
+                  ))}
+               </ul>
+            </section>
+
+            <section className='flex flex-col gap-3'>
+               <RevealFromBottom elt={'h2'} className={cn('text-xl font-mono text-foreground')}>
+                  {t('result_label')}
+               </RevealFromBottom>
+               <RevealFromBottom elt={'p'}>{project.result[locale]}</RevealFromBottom>
+            </section>
+
+            <Gallery images={project.gallery} title={project.title[locale]} platform={project.platform} />
 
             <RevealFromBottom>
                <ProjectTags tags={project.tags} />
             </RevealFromBottom>
 
-            {project.authentication && (
-               <section>
-                  <RevealFromBottom delay={0.1}>
-                     <h3>{t('demo_credentials')}</h3>
-                  </RevealFromBottom>
-                  <RevealFromBottom delay={0.12} className={cn('flex items-center gap-3')}>
-                     <p className='text-muted-foreground text-sm flex-none'>{t('username')}</p>
-                     <p className='block text-base font-semibold w-full truncate text-foreground'>
-                        {project.authentication.username}
-                     </p>
-                  </RevealFromBottom>
-                  <RevealFromBottom delay={0.15} className={cn('flex items-center gap-3')}>
-                     <p className='text-muted-foreground text-sm flex-none'>{t('password')}</p>
-                     <p className='block text-base font-semibold w-full truncate text-foreground'>
-                        {project.authentication.password}
-                     </p>
-                  </RevealFromBottom>
-               </section>
+            {project.platform === 'confidential' && (
+               <RevealFromBottom className={cn('flex items-center gap-2 text-muted-foreground')}>
+                  <LockIcon className='size-4 flex-none' />
+                  <p>{t('under_nda')}</p>
+               </RevealFromBottom>
+            )}
+
+            {project.platform === 'web' && !preview && (
+               <RevealFromBottom elt={'p'} className={cn('text-muted-foreground')}>
+                  {t('link_on_request')}
+               </RevealFromBottom>
             )}
 
             <div className={cn('w-full grid grid-cols-1 gap-8 lg:grid-cols-2')}>
-               {project.links.length
-                  ? project.links.map((link, index) => (
-                       <RevealFromBottom key={`link-${index}`} delay={index * 0.1} className={cn('flex gap-3')}>
-                          <div className='flex items-center justify-center gap-2 flex-none'>
-                             {link.icon && <div className='flex-none'>{link.icon}</div>}
-                             {link.label && (
-                                <p className='text-muted-foreground text-sm flex-none'>{link.label[locale]}</p>
-                             )}
-                          </div>
-                          <Link
-                             href={link.link}
-                             target='_blank'
-                             rel='noopener noreferrer'
-                             className='block text-base font-semibold w-full truncate text-primary'
-                          >
-                             {link.link}
-                          </Link>
-                       </RevealFromBottom>
-                    ))
-                  : null}
+               {project.links.map((link, index) => (
+                  <RevealFromBottom key={`link-${index}`} className={cn('flex gap-3')}>
+                     <div className='flex items-center justify-center gap-2 flex-none'>
+                        {link.icon && <div className='flex-none'>{link.icon}</div>}
+                        {link.label && <p className='text-muted-foreground text-sm flex-none'>{link.label[locale]}</p>}
+                     </div>
+                     <Link
+                        href={link.link}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='block text-base font-semibold w-full truncate text-primary'
+                     >
+                        {link.link}
+                     </Link>
+                  </RevealFromBottom>
+               ))}
             </div>
          </Container>
          <div className='h-20'></div>

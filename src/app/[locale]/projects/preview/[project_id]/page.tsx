@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
 import { BackButton } from '@src/components/back-button'
 import { Container } from '@src/components/container'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { Link, LocaleType } from '@src/i18n/routing'
-import { PROJECTS } from '@src/resources/data/projects'
+import { previewableLink, PROJECTS } from '@src/resources/data/projects'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -13,165 +13,66 @@ type Props = {
    params: Promise<{ locale: LocaleType; project_id: string }>
 }
 
-type ProjectLinkEntry = {
-   project: (typeof PROJECTS)[number]
-   link: (typeof PROJECTS)[number]['links'][number]
+/** Only web projects with a link that answers can be embedded in the preview frame. */
+const PREVIEWABLE_PROJECTS = PROJECTS.filter((project) => previewableLink(project) !== undefined)
+
+// Anything outside generateStaticParams is a 404, never an empty frame.
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+   return PREVIEWABLE_PROJECTS.map((project) => ({ project_id: project.id }))
 }
 
-type ResolvedProjectLink = {
-   url: string
-   project?: (typeof PROJECTS)[number]
-   link?: (typeof PROJECTS)[number]['links'][number]
-}
-
-export const dynamic = 'force-dynamic'
-
-const PROJECT_LINK_ENTRIES: ProjectLinkEntry[] = PROJECTS.flatMap((project) =>
-   (project.links || []).map((link) => ({ project, link }))
-)
-
-const safeDecodeURIComponent = (value: string): string | null => {
-   try {
-      return decodeURIComponent(value)
-   } catch {
-      return null
-   }
-}
-
-const isHttpUrl = (value: string | null | undefined): value is string => {
-   if (!value) {
-      return false
-   }
-
-   try {
-      const url = new URL(value)
-      return url.protocol === 'http:' || url.protocol === 'https:'
-   } catch {
-      return false
-   }
-}
-
-const safeGetHostname = (value: string): string | null => {
-   try {
-      return new URL(value).hostname
-   } catch {
-      return null
-   }
-}
-
-const buildCandidateValues = (raw: string): string[] => {
-   const values = new Set<string>()
-
-   let current: string | null = raw
-
-   while (current) {
-      if (!values.has(current)) {
-         values.add(current)
-      } else {
-         break
-      }
-
-      const decoded = safeDecodeURIComponent(current)
-      if (!decoded || values.has(decoded)) {
-         break
-      }
-
-      current = decoded
-   }
-
-   return Array.from(values)
-}
-
-const resolveProjectLink = (projectLinkParam: string): ResolvedProjectLink | null => {
-   const candidates = buildCandidateValues(projectLinkParam)
-
-   for (const candidate of candidates) {
-      const match = PROJECT_LINK_ENTRIES.find(({ link }) => link.link === candidate)
-      if (match) {
-         return { url: match.link.link, project: match.project, link: match.link }
-      }
-   }
-
-   const fallback = candidates.find(isHttpUrl)
-   return fallback ? { url: fallback } : null
-}
-
-const resolveProjectId = (projectId: string): string | null => {
-   const project = PROJECTS.find((project) => project.id === projectId)
+const findPreview = (projectId: string) => {
+   const project = PREVIEWABLE_PROJECTS.find((item) => item.id === projectId)
    if (!project) return null
-   return project.links?.[0]?.link ?? null
+   const link = previewableLink(project)
+   if (!link) return null
+   return { project, link }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const { locale, project_id } = await params
-   const project_link = resolveProjectId(project_id)
 
-   // Preview pages embed a third-party site in an iframe: nothing worth indexing.
+   // Preview pages embed a third party site in an iframe: nothing worth indexing.
    const robots = { index: false, follow: true }
 
-   if (!project_link) {
-      return { title: 'Project preview', robots }
-   }
+   const resolved = findPreview(project_id)
+   if (!resolved) return { title: 'Project preview', robots }
 
-   const resolved = resolveProjectLink(project_link)
-
-   if (!resolved) {
-      return { title: 'Project preview', robots }
-   }
-
-   if (resolved.project) {
-      const projectTitle = resolved.project.title[locale]
-      const linkLabel = resolved.link?.label?.[locale]
-      const title = linkLabel ? `${projectTitle} – ${linkLabel}` : `${projectTitle} – Preview`
-      const description = resolved.project.description[locale]
-      const image = resolved.project.image
-
-      return {
-         title,
-         description,
-         robots,
-         openGraph: {
-            title,
-            description,
-            images: [image],
-         },
-         twitter: {
-            title,
-            description,
-         },
-      }
-   }
-
-   const hostname = safeGetHostname(resolved.url)
+   const { project } = resolved
+   const title = `${project.title[locale]}, ${project.role[locale]}`
 
    return {
-      title: hostname ? `${hostname} – Preview` : 'Project preview',
+      title,
+      description: project.description[locale],
       robots,
+      openGraph: {
+         title,
+         description: project.description[locale],
+         images: [project.image],
+      },
+      twitter: {
+         card: 'summary_large_image',
+         title,
+         description: project.description[locale],
+         images: [project.image],
+      },
    }
 }
 
 export default async function Page({ params }: Props) {
    const { locale, project_id } = await params
 
-   const project_link = resolveProjectId(project_id)
-
-   if (!project_link) {
-      notFound()
-   }
-
    setRequestLocale(locale)
 
    const t = await getTranslations({ locale, namespace: 'projects' })
-   const resolved = resolveProjectLink(project_link)
+   const resolved = findPreview(project_id)
 
-   if (!resolved?.url) {
-      notFound()
-   }
+   if (!resolved) notFound()
 
-   const projectTitle = resolved.project?.title[locale]
-   const previewLabel = resolved.link?.label?.[locale]
-   const hostname = safeGetHostname(resolved.url)
-   const heading = projectTitle ?? hostname ?? t('consult')
+   const { project, link } = resolved
+   const heading = project.title[locale]
 
    return (
       <main>
@@ -180,39 +81,33 @@ export default async function Page({ params }: Props) {
                <div className='flex flex-wrap items-center gap-3'>
                   <BackButton />
                   <RevealFromBottom
-                     delay={0.1}
                      elt={'h1'}
                      className={cn(
                         'scroll-m-20 text-2xl lg:text-4xl tracking-tight',
-                        'text-foreground font-mono tracking-tight'
+                        'text-foreground font-mono tracking-tight',
                      )}
                   >
                      {heading}
                   </RevealFromBottom>
                </div>
-               {/* {resolved.project && (
-                  <RevealFromBottom delay={0.15}>
-                     <p className='max-w-3xl text-muted-foreground'>{resolved.project.description[locale]}</p>
-                  </RevealFromBottom>
-               )} */}
-               <RevealFromBottom delay={0.2}>
+               <RevealFromBottom>
                   <Button asChild variant={'secondary'}>
                      <Link
-                        href={resolved.url}
+                        href={link.link}
                         target='_blank'
                         rel='noopener noreferrer'
                         className='text-primary font-semibold underline-offset-4 hover:underline'
                      >
-                        {previewLabel ?? t('consult')}
+                        {link.label?.[locale] ?? t('consult')}
                      </Link>
                   </Button>
                </RevealFromBottom>
             </section>
-            <RevealFromBottom delay={0.25}>
+            <RevealFromBottom>
                <div className='w-full overflow-hidden rounded-2xl border border-input bg-muted'>
                   <iframe
-                     key={resolved.url}
-                     src={resolved.url}
+                     key={link.link}
+                     src={link.link}
                      title={`${heading} preview`}
                      className='h-[70vh] w-full lg:h-[80vh]'
                      loading='lazy'

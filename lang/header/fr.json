@@ -1,7 +1,9 @@
 {
    "presentation": "Présentation",
-   "services": "Services",
+   "expertises": "Expertises",
    "resume": "Résumé",
    "projects": "Projets",
-   "contact": "Contact"
+   "contact": "Contact",
+   "open_menu": "Ouvrir le menu",
+   "close_menu": "Fermer le menu"
 }

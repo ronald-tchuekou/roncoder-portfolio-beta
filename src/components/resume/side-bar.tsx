@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { RESUME_NAV_LINKS } from '@src/resources/data/resume-nav-links'
 import { isCurrentPath } from '@src/resources/util-functions'
@@ -27,8 +27,8 @@ export const ResumeSideBar: FC = () => {
    const navButtonClass = (active: boolean) =>
       cn(
          'w-full justify-start transition duration-300',
-         'bg-accent text-muted-foreground hover:text-accent-foreground hover:bg-accent',
-         active && 'bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground'
+         'bg-accent text-accent-foreground hover:bg-accent/80',
+         active && 'bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground',
       )
 
    return (
@@ -37,17 +37,15 @@ export const ResumeSideBar: FC = () => {
             elt={'h1'}
             className={cn('scroll-m-20 text-4xl lg:text-5xl', 'text-foreground font-mono tracking-tight')}
          >
-            {t('why_choosing_me')}
+            {t('my_background')}
          </RevealFromBottom>
-         <RevealFromBottom elt={'p'} delay={0.1}>
-            {t('why_choosing_me_response')}
-         </RevealFromBottom>
+         <RevealFromBottom elt={'p'}>{t('my_background_intro')}</RevealFromBottom>
 
          {/* Desktop: vertical list */}
-         <nav aria-label={t('why_choosing_me')} className='hidden md:block'>
+         <nav aria-label={t('my_background')} className='hidden md:block'>
             <ul className={cn('w-full flex flex-col gap-3')}>
                {RESUME_NAV_LINKS.map((item, index) => (
-                  <RevealFromBottom delay={(index + 1) * 0.1} elt={'li'} key={item.url}>
+                  <RevealFromBottom elt={'li'} key={item.url}>
                      <Button asChild variant={'default'} className={navButtonClass(isActive(item.url))}>
                         <Link href={item.url} aria-current={isActive(item.url) ? 'page' : undefined}>
                            {item.icon}&nbsp;&nbsp;
@@ -60,7 +58,7 @@ export const ResumeSideBar: FC = () => {
          </nav>
 
          {/* Mobile: horizontally scrollable tabs (CSS scroll-snap, no carousel library) */}
-         <nav aria-label={t('why_choosing_me')} className='md:hidden -mx-4 px-4'>
+         <nav aria-label={t('my_background')} className='md:hidden -mx-4 px-4'>
             <ul
                ref={mobileNavRef}
                className={cn('flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2', '[scrollbar-width:none]')}

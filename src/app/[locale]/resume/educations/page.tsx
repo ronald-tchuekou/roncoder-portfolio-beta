@@ -1,12 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
+import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { SectionHeader } from '@src/components/resume/section-header'
 import { Link, LocaleType } from '@src/i18n/routing'
 import { EDUCATIONS_LIST } from '@src/resources/data/educations'
-import { DotIcon, MoveRightIcon } from "lucide-react";
+import { DotIcon, MoveRightIcon } from 'lucide-react'
 import { localizedAlternates } from '@src/lib/seo'
-import { Metadata } from 'next';
+import { RECRUITER_KEYWORDS } from '@src/resources/data/metadata'
+import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 type Props = {
@@ -21,13 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t('page_title_educations'),
       description: t('page_description_educations'),
       alternates: localizedAlternates(locale, '/resume/educations'),
-      keywords: [
-         'Compétences',
-         'Certifications',
-         'Expériences professionnelles',
-         'educations',
-         'Professional educations',
-      ],
+      keywords: RECRUITER_KEYWORDS,
       twitter: {
          title: t('page_title_educations'),
          description: t('page_description_educations'),
@@ -47,7 +42,7 @@ export default async function Page({ params }: Props) {
          <SectionHeader title='my_education' description='my_education_description' />
          <div className={cn('w-full grid grid-cols-1 gap-8 lg:grid-cols-2')}>
             {EDUCATIONS_LIST.map((education, index) => (
-               <RevealFromBottom key={education.id} delay={index < 3 ? index * 0.1 : 0.1}>
+               <RevealFromBottom key={education.id}>
                   <div className={cn('bg-card border border-input', 'rounded-lg p-5 size-full', 'flex flex-col gap-3')}>
                      <h3 className={cn('text-xl font-bold text-foreground font-mono tracking-tight')}>
                         {education.title[locale]}

@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Credenza, CredenzaContent, CredenzaFooter, CredenzaHeader, CredenzaTitle } from '@/components/ui/credenza'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { Credenza, CredenzaContent, CredenzaFooter, CredenzaHeader, CredenzaTitle } from '@src/components/ui/credenza'
+import { ScrollArea } from '@src/components/ui/scroll-area'
+import { cn } from '@src/lib/utils'
 import { LocaleType } from '@src/i18n/routing'
 import { LoaderIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
@@ -11,37 +11,33 @@ import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from '
 import { ContactFormContent, ContactFormContentRef } from '../contact/contact-form-content'
 
 export type ContactModalRef = {
-   open: (serviceKey: string) => void
+   /** The optional argument is ignored, it keeps older call sites working. */
+   open: (_key?: string) => void
 }
 
-export type ContactModalProps = {}
+export type ContactModalProps = Record<string, never>
 
-export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(({}, ref) => {
+export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>((_props, ref) => {
    const contactFormRef = useRef<ContactFormContentRef>(null)
-   const t = useTranslations('services')
+   const t = useTranslations('contact')
    const locale = useLocale() as LocaleType
    const [isLoading, setIsLoading] = useState(false)
 
    const [open, setOpen] = useState(false)
-   const [serviceKey, setServiceKey] = useState<string>()
 
    const closeModal = useCallback(() => {
       setOpen(false)
-      setServiceKey(undefined)
    }, [])
 
    const toggleOpen = useCallback(
       (stateOpened: boolean) => {
          if (stateOpened === false) closeModal()
       },
-      [closeModal]
+      [closeModal],
    )
 
    useImperativeHandle(ref, () => ({
-      open: (serviceKey) => {
-         setServiceKey(serviceKey)
-         setOpen(true)
-      },
+      open: () => setOpen(true),
    }))
 
    return (
@@ -56,19 +52,15 @@ export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(({}, 
          <CredenzaContent aria-describedby={undefined} className={'gap-0 pb-0 md:min-w-[750px] bg-card'}>
             <CredenzaHeader className='pb-2'>
                <CredenzaTitle className={cn('text-xl md:text-3xl tracking-tight font-mono font-bold text-foreground')}>
-                  {t('work_together')}
+                  {t('form_title')}
                </CredenzaTitle>
             </CredenzaHeader>
 
             <ScrollArea className={cn('md:-mx-6 h-[calc(100vh-300px)] md:h-[calc(100vh-510px)] border-y')}>
                <div className={cn('px-6 py-4 space-y-6')}>
-                  <p>
-                     {t('you_have_a_project')} <br />
-                     {t('let_talk_about_it')}
-                  </p>
+                  <p className='text-muted-foreground'>{t('form_subtitle')}</p>
                   <ContactFormContent
                      ref={contactFormRef}
-                     serviceKey={serviceKey}
                      locale={locale}
                      onCompleted={closeModal}
                      onPendingChange={setIsLoading}

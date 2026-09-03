@@ -1,5 +1,25 @@
-import env from '@src/lib/env/client'
 import { Metadata } from 'next'
+
+/** Search queries a recruiter actually types. Kept short and specific on purpose. */
+export const RECRUITER_KEYWORDS = [
+   'Senior Frontend Engineer',
+   'développeur Full Stack senior',
+   'développeur React senior',
+   'développeur Angular senior',
+   'développeur React Native',
+   'ingénieur frontend TypeScript',
+   'développeur full remote',
+   'CV développeur Full Stack',
+   'remote React developer',
+   'React Native developer',
+   'Ronald Tchuekou',
+   'Douala',
+   'Cameroun',
+]
+
+/** Bumped by hand when the content actually changes. Never `new Date()`: a lastModified
+ *  that moves on every build is ignored by crawlers. */
+export const CONTENT_UPDATED_AT = new Date('2026-09-03')
 
 export const METADATA: Metadata = {
    generator: 'Next.js',
@@ -9,14 +29,5 @@ export const METADATA: Metadata = {
    creator: 'Ronald Tchuekou',
    publisher: 'Vercel',
    category: 'technology',
-   twitter: {
-      card: 'summary_large_image',
-      title: 'Ronald Tchuekou Portfolio, Développeur FullStack et Administrateur de systèmes',
-      description:
-         'Je conçois et implémente des applications web et mobiles, design des prototypes professionnels pour décrire au mieux le scénario des fonctionnalités de vos applications.',
-      siteId: '@TchuekouRonald',
-      creator: '@TchuekouRonald',
-      creatorId: '@TchuekouRonald',
-      images: [`${env.NEXT_PUBLIC_BASE_LINK}/ronald-tchuekou-profile.jpg`], // Must be an absolute URL
-   },
+   keywords: RECRUITER_KEYWORDS,
 }

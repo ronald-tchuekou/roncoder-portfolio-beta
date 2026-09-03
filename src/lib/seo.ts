@@ -6,12 +6,13 @@ import type { Metadata } from 'next'
  * (English lives at `/x`, French at `/fr/x`). Paths are resolved against metadataBase.
  */
 export function localizedAlternates(locale: LocaleType, href: string): NonNullable<Metadata['alternates']> {
-   const languages = Object.fromEntries(
-      routing.locales.map((l) => [l, getPathname({ locale: l, href })])
-   ) as Record<LocaleType, string>
+   const languages = Object.fromEntries(routing.locales.map((l) => [l, getPathname({ locale: l, href })])) as Record<
+      LocaleType,
+      string
+   >
 
    return {
       canonical: getPathname({ locale, href }),
-      languages: { ...languages, 'x-default': getPathname({ locale: routing.defaultLocale, href }) },
+      languages: { ...languages, 'x-default': getPathname({ locale: 'fr', href }) },
    }
 }

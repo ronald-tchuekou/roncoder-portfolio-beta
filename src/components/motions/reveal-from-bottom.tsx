@@ -1,48 +1,21 @@
-"use client";
-
-import { MotionTag } from "@src/resources/util-types";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { FC, PropsWithChildren, useEffect, useRef } from "react";
+import { cn } from '@src/lib/utils'
+import { RevealTag } from '@src/resources/util-types'
+import { FC, PropsWithChildren } from 'react'
 
 type Props = {
    className?: string
-   delay?: number
-   elt?: MotionTag
-   onClick?: VoidFunction
+   elt?: RevealTag
 }
 
-export const RevealFromBottom: FC<PropsWithChildren<Props>> = ({
-  children,
-  className,
-  elt,
-  delay = 0,
-  onClick,
-}) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
-  const Comp = motion[elt || "div"];
+/**
+ * Reveals its children as they scroll into view, through a scroll driven CSS
+ * animation. No JavaScript at all: this wrapper sits on nearly every section, and
+ * gating them on hydration delayed the largest contentful paint by about a second
+ * on mobile. Browsers without `animation-timeline` simply show the content, and
+ * so does a reader who asked for reduced motion.
+ */
+export const RevealFromBottom: FC<PropsWithChildren<Props>> = ({ children, className, elt }) => {
+   const Comp = (elt || 'div') as 'div'
 
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [controls, isInView]);
-
-  return (
-    <Comp
-      ref={ref}
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0 },
-      }}
-      initial="hidden"
-      animate={controls}
-      onClick={onClick}
-      transition={{ duration: 0.35, delay: delay }}
-    >
-      {children}
-    </Comp>
-  );
-};
+   return <Comp className={cn('reveal-from-bottom', className)}>{children}</Comp>
+}

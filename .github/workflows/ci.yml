@@ -1,0 +1,83 @@
+name: CI
+
+on:
+   pull_request:
+   push:
+      branches: [main]
+
+jobs:
+   quality:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v4
+
+         - name: Enable corepack
+           run: corepack enable
+
+         - uses: actions/setup-node@v4
+           with:
+              node-version: 22
+              cache: pnpm
+
+         - name: Install dependencies
+           run: pnpm install --frozen-lockfile
+
+         - name: Lint
+           run: pnpm lint
+
+         - name: Typecheck
+           run: pnpm typecheck
+
+         - name: Build
+           run: pnpm build
+           env:
+              NEXT_PUBLIC_SITE_URL: https://roncoder-beta.vercel.app
+              NEXT_PUBLIC_GITHUB_USERNAME: ronald-tchuekou
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              DISCORD_WEBHOOK: https://discord.com/api/webhooks/placeholder/ci
+
+         - name: Audit production dependencies
+           run: pnpm audit --prod
+
+   smoke:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v4
+
+         - name: Enable corepack
+           run: corepack enable
+
+         - uses: actions/setup-node@v4
+           with:
+              node-version: 22
+              cache: pnpm
+
+         - name: Install dependencies
+           run: pnpm install --frozen-lockfile
+
+         - name: Install Playwright Chromium
+           run: pnpm exec playwright install --with-deps chromium
+
+         - name: Build
+           run: pnpm build
+           env:
+              NEXT_PUBLIC_SITE_URL: https://roncoder-beta.vercel.app
+              NEXT_PUBLIC_GITHUB_USERNAME: ronald-tchuekou
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              DISCORD_WEBHOOK: https://discord.com/api/webhooks/placeholder/ci
+
+         - name: Smoke and content security policy
+           run: pnpm smoke
+           env:
+              NEXT_PUBLIC_SITE_URL: https://roncoder-beta.vercel.app
+              NEXT_PUBLIC_GITHUB_USERNAME: ronald-tchuekou
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              DISCORD_WEBHOOK: https://discord.com/api/webhooks/placeholder/ci
+
+         - name: Upload screenshots
+           if: always()
+           uses: actions/upload-artifact@v4
+           with:
+              name: smoke-screenshots
+              path: test-results/
+              retention-days: 7

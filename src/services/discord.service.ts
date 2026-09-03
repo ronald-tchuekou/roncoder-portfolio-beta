@@ -1,9 +1,7 @@
 import 'server-only'
 
-import { LocaleType } from '@src/i18n/routing'
 import env from '@src/lib/env/server'
 import { ContactFormSchema } from '@src/resources/form-schemas'
-import { getServiceLabel } from '@src/resources/util-functions'
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
@@ -13,28 +11,56 @@ dayjs.extend(localizedFormat)
 
 const EMPTY = '- - -'
 
+/** French labels of the contract types, used in the Discord notification. */
+const CONTRACT_TYPE_LABELS: Record<string, string> = {
+   permanent: 'CDI',
+   freelance: 'Freelance',
+   long_term: 'Mission longue',
+   other: 'Autre',
+}
+
+/** French labels of the working modes, used in the Discord notification. */
+const WORK_MODE_LABELS: Record<string, string> = {
+   remote: 'Full remote',
+   hybrid: 'Hybride',
+   onsite: 'Sur site',
+}
+
 export const DiscordService = {
    /** Server-side only: forwards a contact request to the Discord webhook. Throws when Discord refuses. */
    async notifyContactRequest(request: ContactFormSchema): Promise<void> {
+      // The job title and the company come first, so the request can be triaged at a glance.
+      const headline = `**${request.jobTitle}** chez **${request.company}**`
+
       const description = [
-         `${request.firstName} ${request.lastName ?? ''} vous a contacté depuis votre portfolio en ligne pour solliciter un service.`,
+         headline,
+         `${CONTRACT_TYPE_LABELS[request.contractType] ?? request.contractType} | ${
+            WORK_MODE_LABELS[request.workMode] ?? request.workMode
+         }`,
          '',
-         `**Nom**: ${request.lastName || EMPTY}`,
-         `**Prénom**: ${request.firstName}`,
+         `**Contact**: ${request.firstName} ${request.lastName}`,
          `**Adresse email**: ${request.email}`,
-         `**Téléphone**: ${request.phone || EMPTY}`,
-         `**Service**: ${getServiceLabel(request.service, request.locale as LocaleType) || EMPTY}`,
-         `**Message**: ${request.message}`,
+         `**Lien vers l'offre**: ${request.offerUrl || EMPTY}`,
+         `**Langue du formulaire**: ${request.locale}`,
          '',
-         `Créé le ${dayjs().format('lll')}`,
+         `**Message**:`,
+         request.message,
+         '',
+         `Reçu le ${dayjs().format('lll')}`,
       ].join('\n')
 
       const res = await fetch(env.DISCORD_WEBHOOK, {
          method: 'POST',
          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
          body: JSON.stringify({
-            username: `${request.firstName} ${request.lastName || EMPTY}`.trim(),
-            embeds: [{ title: 'Nouvelle demande de contact', type: 'rich', description }],
+            username: `${request.firstName} ${request.lastName}`.trim(),
+            embeds: [
+               {
+                  title: `${request.jobTitle} | ${request.company}`,
+                  type: 'rich',
+                  description,
+               },
+            ],
          }),
       })
 

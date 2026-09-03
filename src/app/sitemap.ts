@@ -2,24 +2,22 @@ import { getPathname, LocaleType, routing } from '@src/i18n/routing'
 import env from '@src/lib/env/client'
 import { EDUCATIONS_LIST } from '@src/resources/data/educations'
 import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
+import { CONTENT_UPDATED_AT } from '@src/resources/data/metadata'
 import { PROJECTS } from '@src/resources/data/projects'
 import type { MetadataRoute } from 'next'
 
 type Entry = Omit<MetadataRoute.Sitemap[number], 'url' | 'alternates'> & { href: string }
 
-// A fixed date beats `new Date()`: a lastModified that changes on every build is ignored by crawlers.
-// Bump it when content actually changes.
-const CONTENT_UPDATED_AT = new Date('2025-12-19')
-
 const STATIC_ROUTES: Entry[] = [
    { href: '/', changeFrequency: 'monthly', priority: 1 },
-   { href: '/services', changeFrequency: 'monthly', priority: 0.8 },
-   { href: '/resume', changeFrequency: 'monthly', priority: 0.8 },
+   { href: '/expertises', changeFrequency: 'monthly', priority: 0.8 },
+   { href: '/resume', changeFrequency: 'monthly', priority: 0.9 },
    { href: '/resume/experiences', changeFrequency: 'monthly', priority: 0.6 },
    { href: '/resume/educations', changeFrequency: 'monthly', priority: 0.6 },
    { href: '/resume/about', changeFrequency: 'monthly', priority: 0.6 },
    { href: '/projects', changeFrequency: 'monthly', priority: 0.8 },
    { href: '/contact', changeFrequency: 'yearly', priority: 0.8 },
+   { href: '/legal', changeFrequency: 'yearly', priority: 0.2 },
 ]
 
 const DYNAMIC_ROUTES: Entry[] = [
@@ -36,7 +34,7 @@ const DYNAMIC_ROUTES: Entry[] = [
    })),
 ]
 
-const absolute = (locale: LocaleType, href: string) => `${env.NEXT_PUBLIC_BASE_LINK}${getPathname({ locale, href })}`
+const absolute = (locale: LocaleType, href: string) => `${env.NEXT_PUBLIC_SITE_URL}${getPathname({ locale, href })}`
 
 export default function sitemap(): MetadataRoute.Sitemap {
    return [...STATIC_ROUTES, ...DYNAMIC_ROUTES].flatMap(({ href, ...rest }) =>
@@ -47,6 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             languages: Object.fromEntries(routing.locales.map((l) => [l, absolute(l, href)])),
          },
          ...rest,
-      }))
+      })),
    )
 }

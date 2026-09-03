@@ -1,21 +1,20 @@
-import { cn } from "@/lib/utils";
-import { BackButton } from "@src/components/back-button";
-import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import { cn } from '@src/lib/utils'
+import { BackButton } from '@src/components/back-button'
+import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { LocaleType } from '@src/i18n/routing'
 import { localizedAlternates } from '@src/lib/seo'
 import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
-import { DotIcon } from 'lucide-react';
+import { DotIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
-
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-	return EXPERIENCES_LIST.map((exp) => ({
-		exp_id: exp.id,
-	}))
+   return EXPERIENCES_LIST.map((exp) => ({
+      exp_id: exp.id,
+   }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -58,32 +57,34 @@ export default async function Page({ params }: Props) {
          <div className={cn('flex gap-3 items-center')}>
             <BackButton />
             <RevealFromBottom
-               delay={0.1}
                elt={'h2'}
                className={cn(
                   'scroll-m-20 text-xl lg:text-3xl tracking-tight ',
-                  'text-foreground font-mono tracking-tight'
+                  'text-foreground font-mono tracking-tight',
                )}
             >
                {experience.title[locale]}
             </RevealFromBottom>
          </div>
-         <RevealFromBottom delay={0.2} className={cn('flex')}>
+         <RevealFromBottom className={cn('flex')}>
             <p className={cn('text-primary text-lg uppercase')}>{experience.company}</p>
             <div className='flex items-center h-full'>
                <DotIcon className='size-8 text-primary' />
                <small className={cn('text-muted-foreground')}>{experience.date[locale]}</small>
             </div>
          </RevealFromBottom>
-         <RevealFromBottom elt={'p'} delay={0.2} className={cn('')}>
+         <RevealFromBottom elt={'p'} className={cn('text-sm text-muted-foreground')}>
+            {experience.context[locale]}
+         </RevealFromBottom>
+         <RevealFromBottom elt={'p'} className={cn('')}>
             {experience.description[locale]}
          </RevealFromBottom>
-         <RevealFromBottom elt={'h3'} delay={0.3} className={cn('text-lg text-accent-foreground')}>
+         <RevealFromBottom elt={'h3'} className={cn('text-lg text-accent-foreground')}>
             {t('tasks')}
          </RevealFromBottom>
          <ul className={cn('list-disc pl-8 space-y-3')}>
             {experience.tasks.map((task, idx) => (
-               <RevealFromBottom delay={(idx + 1) * 0.1} elt={'li'} key={idx}>
+               <RevealFromBottom elt={'li'} key={idx}>
                   {task[locale]}
                </RevealFromBottom>
             ))}
