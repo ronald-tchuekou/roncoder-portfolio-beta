@@ -5,7 +5,8 @@ import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { Link, LocaleType } from '@src/i18n/routing'
 import { localizedAlternates } from '@src/lib/seo'
 import { METADATA } from '@src/resources/data/metadata'
-import { Clock, FileText, Github, Languages, Linkedin, Mail } from 'lucide-react'
+import { GithubBrandIcon, LinkedinBrandIcon } from '@src/components/icons/brand-icons'
+import { Clock, FileText, Languages, Mail } from 'lucide-react'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
@@ -90,7 +91,7 @@ export default async function Page({ params }: Props) {
                         className={itemClassName}
                      >
                         <span className={iconWrapperClassName}>
-                           <Linkedin className={iconClassName} aria-hidden='true' />
+                           <LinkedinBrandIcon className={iconClassName} />
                         </span>
                         <span>
                            <span className='block text-sm text-muted-foreground'>{t('linkedin_label')}</span>
@@ -107,7 +108,7 @@ export default async function Page({ params }: Props) {
                         className={itemClassName}
                      >
                         <span className={iconWrapperClassName}>
-                           <Github className={iconClassName} aria-hidden='true' />
+                           <GithubBrandIcon className={iconClassName} />
                         </span>
                         <span>
                            <span className='block text-sm text-muted-foreground'>{t('github_label')}</span>

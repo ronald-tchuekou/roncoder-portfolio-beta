@@ -3,13 +3,14 @@
 import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { NAV_LINKS } from '@src/resources/data/nav-links'
+import { GithubBrandIcon, LinkedinBrandIcon } from '@src/components/icons/brand-icons'
 import { track } from '@vercel/analytics'
-import { LinkedinIcon, MailIcon } from 'lucide-react'
+import { MailIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 import { Container } from './container'
 import { ResumeDownloadButton } from './home/resume-download-button'
-import { GithubBrandIcon, SOCIAL_LINKS } from './home/social-links'
+import { SOCIAL_LINKS } from './home/social-links'
 
 const EMAIL = 'ronaldtchuekou@gmail.com'
 
@@ -75,7 +76,7 @@ export const Footer: FC = () => {
                      className={externalLinkClass}
                      onClick={() => track('linkedin_click')}
                   >
-                     <LinkedinIcon className='size-4' aria-hidden />
+                     <LinkedinBrandIcon className='size-4' />
                      {t('socials.linkedin')}
                   </a>
                   <a
