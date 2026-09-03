@@ -1,17 +1,92 @@
 {
-   "page_title": "Ronald Tchuekou Portfolio, FullStack Developer and Systems Administrator",
-   "page_description": "I design and implement web and mobile applications, design professional prototypes to best describe the scenario of your application's features.",
-   "full_stack_developer": "Full-Stack Developer",
-   "hi_is": "Hi, I'm",
-   "i_create_web_and_mobile_platforms": "I excel in creating elegant web and mobile platforms.",
-   "i_use_many_languages": "I have skills in a variety of languages and technologies.",
-   "download_my_resume": "Download my resume",
-   "year": "Years",
-   "of_experiences": "Of experiences",
-   "projects": "Projects",
-   "finish": "Completed",
-   "technologies": "Technologies",
-   "mastered": "Mastered",
-   "stars": "Stars",
-   "contributions": "Contributions"
+   "page_title": "Ronald Tchuekou, Senior Frontend Engineer and Full Stack developer",
+   "page_description": "6+ years with React, Next.js, Angular and React Native. Three apps live on the stores. Available for remote work.",
+   "hero": {
+      "role": "Senior Frontend Engineer, Full Stack",
+      "hi_is": "Hi, I'm",
+      "headline": "I design and build web and mobile applications that run in production",
+      "subheadline": "6+ years with React, Next.js, Angular and React Native. Three apps published on the App Store and Google Play, and a financial supervision tool used across several Central African countries.",
+      "cta_primary": "Download my resume",
+      "cta_secondary": "See my background",
+      "availability": "Available remotely for Europe and Africa. Permanent, freelance or long term contract.",
+      "image_alt": "Ronald Tchuekou, Senior Frontend Engineer"
+   },
+   "counters": {
+      "years": { "label": "Years", "sub": "of experience" },
+      "projects": { "label": "Projects", "sub": "delivered" },
+      "apps": { "label": "Apps", "sub": "live on the stores" },
+      "contributions": { "label": "Contributions", "sub": "on GitHub" }
+   },
+   "expertise": {
+      "title": "What I work on",
+      "items": {
+         "web": {
+            "title": "Web applications",
+            "description": "React, Next.js and Angular interfaces, TypeScript, design systems, performance and accessibility."
+         },
+         "mobile": {
+            "title": "Mobile applications",
+            "description": "React Native and Expo, publishing and maintaining apps on the App Store and Google Play."
+         },
+         "design": {
+            "title": "Design and technical leadership",
+            "description": "Figma design, architecture decisions, code review, team leadership."
+         }
+      },
+      "link": "See the details"
+   },
+   "featured": {
+      "title": "Selected projects",
+      "cta": "All projects",
+      "view_project": "View project"
+   },
+   "engineering": {
+      "title": "How I work",
+      "items": {
+         "design": {
+            "title": "From requirement to design.",
+            "description": "I clarify needs with business teams and design the screens in Figma before writing code."
+         },
+         "code": {
+            "title": "Readable, tested code.",
+            "description": "Reusable components, strict TypeScript, tests on sensitive areas, systematic code review."
+         },
+         "delivery": {
+            "title": "Continuous delivery.",
+            "description": "Continuous integration, automated deployments, error monitoring after release."
+         },
+         "quality": {
+            "title": "Performance and accessibility by default.",
+            "description": "Load time, contrast, keyboard navigation and screen readers are part of the definition of done."
+         }
+      }
+   },
+   "looking_for": {
+      "title": "What I'm looking for",
+      "rows": {
+         "roles": {
+            "label": "Roles",
+            "value": "Senior Frontend Engineer, Senior Full Stack Developer, Senior React Native Developer, Lead Frontend"
+         },
+         "contract": {
+            "label": "Contract",
+            "value": "Permanent, freelance or long term contract"
+         },
+         "mode": {
+            "label": "Working mode",
+            "value": "Fully remote, UTC+1, full overlap with European working hours"
+         },
+         "environment": {
+            "label": "Environment",
+            "value": "Product teams, projects with real business stakes, code review culture"
+         }
+      },
+      "cta": "Get in touch"
+   },
+   "final_cta": {
+      "title": "Have a role that fits? Get in touch, I reply within one business day.",
+      "contact": "Contact me",
+      "resume": "Download my resume",
+      "direct": "Or directly:"
+   }
 }

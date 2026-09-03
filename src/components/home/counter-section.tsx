@@ -1,18 +1,24 @@
 import { cn } from '@/lib/utils'
-import { CAREER_START_YEAR, COMPLETED_PROJECTS_COUNT } from '@src/resources/data/informations'
+import { COMPLETED_PROJECTS_COUNT, EXPERIENCE_YEARS } from '@src/resources/data/informations'
 import { GithubService } from '@src/services/github.service'
 import { getTranslations } from 'next-intl/server'
 import { Container } from '../container'
 import { RevealFromBottom } from '../motions/reveal-from-bottom'
 
-type CounterProps = { value: number | null; label: React.ReactNode; delay?: number }
+/** Applications published and maintained on the App Store and Google Play: Lafya, Zakadia, Les Vadrouilleurs. */
+const APPS_ON_STORES_COUNT = 3
 
-const Counter = ({ value, label, delay }: CounterProps) => {
+type CounterProps = { value: number | null; suffix?: string; label: React.ReactNode; delay?: number }
+
+const Counter = ({ value, suffix, label, delay }: CounterProps) => {
    // No fabricated fallback: a tile with nothing reliable to show is not rendered.
    if (value === null) return null
    return (
       <RevealFromBottom delay={delay} className='flex gap-3'>
-         <p className='text-5xl font-extrabold text-foreground tabular-nums'>{value}</p>
+         <p className='text-5xl font-extrabold text-foreground'>
+            <span className='tabular-nums'>{value}</span>
+            {suffix ? <span aria-hidden>{suffix}</span> : null}
+         </p>
          <p>{label}</p>
       </RevealFromBottom>
    )
@@ -21,20 +27,17 @@ const Counter = ({ value, label, delay }: CounterProps) => {
 // Server component: GitHub is queried at build / revalidation time, never from the visitor's browser.
 export const CounterSection = async () => {
    const t = await getTranslations('home')
-   const [stars, contributions] = await Promise.all([
-      GithubService.getGitHubStars(),
-      GithubService.getGitHubContributions(),
-   ])
-   const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR
+   const contributions = await GithubService.getGitHubContributions()
 
    return (
-      <Container className='pb-10'>
+      <Container className='py-10'>
          <section className={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-3 md:gap-8')}>
             <Counter
-               value={yearsOfExperience}
+               value={EXPERIENCE_YEARS}
+               suffix='+'
                label={
                   <>
-                     {t('year')} <br /> {t('of_experiences')}
+                     {t('counters.years.label')} <br /> {t('counters.years.sub')}
                   </>
                }
             />
@@ -43,16 +46,16 @@ export const CounterSection = async () => {
                value={COMPLETED_PROJECTS_COUNT}
                label={
                   <>
-                     {t('projects')} <br /> {t('finish')}
+                     {t('counters.projects.label')} <br /> {t('counters.projects.sub')}
                   </>
                }
             />
             <Counter
                delay={0.3}
-               value={stars}
+               value={APPS_ON_STORES_COUNT}
                label={
                   <>
-                     Github <br /> {t('stars')}
+                     {t('counters.apps.label')} <br /> {t('counters.apps.sub')}
                   </>
                }
             />
@@ -61,7 +64,7 @@ export const CounterSection = async () => {
                value={contributions}
                label={
                   <>
-                     Github <br /> {t('contributions')}
+                     {t('counters.contributions.label')} <br /> {t('counters.contributions.sub')}
                   </>
                }
             />

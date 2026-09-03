@@ -1,0 +1,21 @@
+{
+   "skip_to_content": "Aller au contenu",
+   "resume": {
+      "download": "Télécharger mon CV",
+      "coming_soon": "Bientôt disponible, écrivez moi en attendant"
+   },
+   "socials": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "x": "X (Twitter)",
+      "youtube": "YouTube"
+   },
+   "footer": {
+      "role": "Senior Frontend Engineer, Full Stack",
+      "location": "Douala, Cameroun. Télétravail pour l'Europe et l'Afrique.",
+      "nav_title": "Navigation",
+      "contact_title": "Contact",
+      "copyright": "© {year} Ronald Tchuekou. Tous droits réservés.",
+      "legal": "Mentions légales"
+   }
+}

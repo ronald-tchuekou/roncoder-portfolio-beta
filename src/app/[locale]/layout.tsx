@@ -1,6 +1,7 @@
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+import { Footer } from '@src/components/footer'
 import { Header } from '@src/components/header/header'
 import { ThemeProvider } from '@src/components/providers/theme-provider'
 import { LocaleType, routing } from '@src/i18n/routing'
@@ -78,15 +79,33 @@ export default async function RootLayout({ children, params }: Props) {
    setRequestLocale(locale)
 
    const messages = await getMessages()
+   const t = await getTranslations({ locale, namespace: 'common' })
 
    return (
-      <html lang={locale} className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)} suppressHydrationWarning>
+      <html
+         lang={locale}
+         className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)}
+         suppressHydrationWarning
+      >
          <GoogleTagManager gtmId='GTM-5X42BXF9' />
          <body className={cn('min-h-screen antialiased font-sans')}>
             <ThemeProvider>
                <NextIntlClientProvider messages={messages}>
+                  <a
+                     href='#main-content'
+                     className={cn(
+                        'sr-only focus:not-sr-only',
+                        'focus:fixed focus:z-50 focus:top-3 focus:left-3',
+                        'focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground',
+                     )}
+                  >
+                     {t('skip_to_content')}
+                  </a>
                   <Header />
-                  {children}
+                  <div id='main-content' tabIndex={-1} className='outline-none'>
+                     {children}
+                  </div>
+                  <Footer />
                   <Toaster position='top-center' richColors duration={7000} />
                   <Analytics />
                </NextIntlClientProvider>
