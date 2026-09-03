@@ -13,7 +13,7 @@
       "smoke": "playwright test"
    },
    "dependencies": {
-      "@hookform/resolvers": "^3.10.0",
+      "@hookform/resolvers": "^5.9.1",
       "@radix-ui/react-aspect-ratio": "^1.1.8",
       "@radix-ui/react-dialog": "^1.1.15",
       "@radix-ui/react-dropdown-menu": "^2.1.16",
@@ -24,12 +24,12 @@
       "@radix-ui/react-tooltip": "^1.2.8",
       "@t3-oss/env-nextjs": "^0.13.8",
       "@tailwindcss/postcss": "^4.3.3",
-      "@vercel/analytics": "^1.5.0",
+      "@vercel/analytics": "^2.0.1",
       "class-variance-authority": "^0.7.1",
       "clsx": "^2.1.1",
       "dayjs": "^1.11.23",
       "embla-carousel-react": "^8.6.0",
-      "lucide-react": "^0.408.0",
+      "lucide-react": "^1.38.0",
       "next": "16.3.4",
       "next-intl": "^4.14.2",
       "next-themes": "^0.4.6",
@@ -37,11 +37,11 @@
       "react-dom": "19.2.8",
       "react-hook-form": "^7.66.0",
       "server-only": "^0.0.1",
-      "sonner": "^1.7.4",
+      "sonner": "^2.0.8",
       "tailwind-merge": "^3.3.1",
       "tailwindcss-animate": "^1.0.7",
       "vaul": "^1.1.2",
-      "zod": "^3.25.76"
+      "zod": "^4.5.4"
    },
    "devDependencies": {
       "@playwright/test": "^1.62.1",
