@@ -72,7 +72,7 @@ export default async function RootLayout({ children, params }: Props) {
          className={cn(fontSans.variable, fontMono.variable, fontSerif.variable)}
          suppressHydrationWarning
       >
-         <body className={cn('min-h-screen antialiased font-sans')}>
+         <body className={cn('min-h-dvh antialiased font-sans')}>
             <ThemeProvider>
                <NextIntlClientProvider messages={messages}>
                   <a
