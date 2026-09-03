@@ -31,7 +31,7 @@ jobs:
          - name: Build
            run: pnpm build
            env:
-              NEXT_PUBLIC_BASE_LINK: https://roncoder-beta.vercel.app
+              NEXT_PUBLIC_SITE_URL: https://roncoder-beta.vercel.app
               NEXT_PUBLIC_GITHUB_USERNAME: ronald-tchuekou
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               DISCORD_WEBHOOK: https://discord.com/api/webhooks/placeholder/ci
@@ -61,7 +61,7 @@ jobs:
          - name: Build
            run: pnpm build
            env:
-              NEXT_PUBLIC_BASE_LINK: https://roncoder-beta.vercel.app
+              NEXT_PUBLIC_SITE_URL: https://roncoder-beta.vercel.app
               NEXT_PUBLIC_GITHUB_USERNAME: ronald-tchuekou
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               DISCORD_WEBHOOK: https://discord.com/api/webhooks/placeholder/ci
@@ -69,7 +69,7 @@ jobs:
          - name: Smoke and content security policy
            run: pnpm smoke
            env:
-              NEXT_PUBLIC_BASE_LINK: https://roncoder-beta.vercel.app
+              NEXT_PUBLIC_SITE_URL: https://roncoder-beta.vercel.app
               NEXT_PUBLIC_GITHUB_USERNAME: ronald-tchuekou
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               DISCORD_WEBHOOK: https://discord.com/api/webhooks/placeholder/ci

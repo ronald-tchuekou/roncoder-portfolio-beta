@@ -6,7 +6,7 @@ import { Project } from '@src/resources/util-types'
 /** `CreativeWork` for every project, plus `SoftwareApplication` for the ones
  *  published on the stores. Validate any change with the schema.org validator. */
 export function ProjectJsonLd({ project, locale }: { project: Project; locale: LocaleType }) {
-   const url = `${env.NEXT_PUBLIC_BASE_LINK}/projects/${project.id}`
+   const url = `${env.NEXT_PUBLIC_SITE_URL}/projects/${project.id}`
 
    const graph: Record<string, unknown>[] = [
       {
@@ -14,7 +14,7 @@ export function ProjectJsonLd({ project, locale }: { project: Project; locale: L
          name: project.title[locale],
          description: project.description[locale],
          url,
-         image: `${env.NEXT_PUBLIC_BASE_LINK}${project.image}`,
+         image: `${env.NEXT_PUBLIC_SITE_URL}${project.image}`,
          keywords: project.tags.join(', '),
          author: { '@type': 'Person', name: 'Ronald Tchuekou' },
       },

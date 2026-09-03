@@ -34,7 +34,7 @@ const DYNAMIC_ROUTES: Entry[] = [
    })),
 ]
 
-const absolute = (locale: LocaleType, href: string) => `${env.NEXT_PUBLIC_BASE_LINK}${getPathname({ locale, href })}`
+const absolute = (locale: LocaleType, href: string) => `${env.NEXT_PUBLIC_SITE_URL}${getPathname({ locale, href })}`
 
 export default function sitemap(): MetadataRoute.Sitemap {
    return [...STATIC_ROUTES, ...DYNAMIC_ROUTES].flatMap(({ href, ...rest }) =>

@@ -40,8 +40,8 @@ export function PersonJsonLd({ locale }: { locale: LocaleType }) {
       '@type': 'Person',
       name: 'Ronald Tchuekou',
       jobTitle: JOB_TITLE[locale],
-      url: env.NEXT_PUBLIC_BASE_LINK,
-      image: `${env.NEXT_PUBLIC_BASE_LINK}/profile_3.webp`,
+      url: env.NEXT_PUBLIC_SITE_URL,
+      image: `${env.NEXT_PUBLIC_SITE_URL}/profile_3.webp`,
       email: 'mailto:ronaldtchuekou@gmail.com',
       telephone: '+237658172868',
       address: {

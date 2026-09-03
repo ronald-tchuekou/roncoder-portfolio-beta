@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
          template: '%s | Ronald Tchuekou Portfolio',
       },
       description: t('page_description'),
-      metadataBase: new URL(env.NEXT_PUBLIC_BASE_LINK),
+      metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
       alternates: localizedAlternates(locale, '/'),
       openGraph: {
          type: 'profile',

@@ -102,7 +102,7 @@ cp .env.example .env
 4. Configure environment variables in `.env`:
 ```env
 # Base URL for the website
-NEXT_PUBLIC_BASE_LINK=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 # GitHub username for stats
 NEXT_PUBLIC_GITHUB_USERNAME=your_github_username
@@ -219,7 +219,7 @@ The GitHub counters use the GitHub GraphQL API via dedicated API routes. Make su
 
 ### SEO & Sitemap
 
-- Configure `NEXT_PUBLIC_BASE_LINK` with your production URL (e.g. `https://your-domain.com`)
+- Configure `NEXT_PUBLIC_SITE_URL` with your production URL (e.g. `https://your-domain.com`)
 - The sitemap automatically includes every static page, locale-prefixed route, and dynamic page (projects, educations, experiences)
 - The generated sitemap is available at `/sitemap.xml` and the robots file at `/robots.txt`
 

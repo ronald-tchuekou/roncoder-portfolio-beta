@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
          allow: '/',
          disallow: ['/api/', '/projects/preview/'],
       },
-      sitemap: `${env.NEXT_PUBLIC_BASE_LINK}/sitemap.xml`,
+      sitemap: `${env.NEXT_PUBLIC_SITE_URL}/sitemap.xml`,
    }
 }
