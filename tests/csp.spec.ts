@@ -24,7 +24,7 @@ for (const path of PAGES) {
       const headers = response?.headers() ?? {}
       expect(
          headers['content-security-policy'] ?? headers['content-security-policy-report-only'],
-         `no policy served on ${path}`
+         `no policy served on ${path}`,
       ).toBeTruthy()
 
       expect(violations, `policy violations on ${path}`).toEqual([])

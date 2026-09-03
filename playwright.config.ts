@@ -15,5 +15,10 @@ export default defineConfig({
    ],
    webServer: process.env.SMOKE_BASE_URL
       ? undefined
-      : { command: 'pnpm build && pnpm start', url: 'http://localhost:3000', reuseExistingServer: true, timeout: 240_000 },
+      : {
+           command: 'pnpm build && pnpm start',
+           url: 'http://localhost:3000',
+           reuseExistingServer: true,
+           timeout: 240_000,
+        },
 })

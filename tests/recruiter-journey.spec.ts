@@ -35,10 +35,7 @@ test('a recruiter can qualify and get in touch without a detour', async ({ page 
 
    // 4. Open a project and find the role and the stores on it.
    await page.goto('/fr/projects', { waitUntil: 'networkidle' })
-   await page
-      .getByRole('link', { name: /Lafya/i })
-      .first()
-      .click()
+   await page.getByRole('link', { name: /Lafya/i }).first().click()
    await page.waitForURL(/\/projects\/lafya$/)
    const projectBody = await page.locator('main').innerText()
    expect(projectBody, 'the project page should state the role held').toMatch(/Développeur mobile/i)
