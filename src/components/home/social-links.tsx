@@ -2,12 +2,7 @@
 
 import { Button } from '@src/components/ui/button'
 import { cn } from '@src/lib/utils'
-import {
-   GithubBrandIcon,
-   LinkedinBrandIcon,
-   XBrandIcon,
-   YoutubeBrandIcon,
-} from '@src/components/icons/brand-icons'
+import { GithubBrandIcon, LinkedinBrandIcon, XBrandIcon, YoutubeBrandIcon } from '@src/components/icons/brand-icons'
 import { track } from '@vercel/analytics'
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'

@@ -39,7 +39,12 @@ export const CandidateCard: FC = () => {
    ]
 
    const socials = [
-      { id: 'github', href: PROFILE_LINKS.github, label: t('github_aria'), icon: <GithubBrandIcon className='size-5' /> },
+      {
+         id: 'github',
+         href: PROFILE_LINKS.github,
+         label: t('github_aria'),
+         icon: <GithubBrandIcon className='size-5' />,
+      },
       {
          id: 'linkedin',
          href: PROFILE_LINKS.linkedin,

@@ -230,11 +230,8 @@
    .background-grid-lines {
       position: absolute;
       inset: -64px;
-      background-image: repeating-linear-gradient(
-            to right,
-            var(--grid-line) 0 1px,
-            transparent 1px 64px
-         ),
+      background-image:
+         repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px 64px),
          repeating-linear-gradient(to bottom, var(--grid-line) 0 1px, transparent 1px 64px);
       /*
        * A vignette rather than a top anchored fade: the layer is fixed, so a fade that
