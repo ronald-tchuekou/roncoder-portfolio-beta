@@ -1,4 +1,4 @@
-import { contactFormSchema } from '@src/resources/form-schemas'
+import { CONTACT_BODY_MAX_BYTES, contactFormSchema } from '@src/resources/form-schemas'
 import { DiscordService } from '@src/services/discord.service'
 
 export const runtime = 'nodejs'
@@ -25,9 +25,26 @@ export async function POST(req: Request) {
       return Response.json({ error: 'too_many_requests' }, { status: 429 })
    }
 
+   // Body size limit: trust the announced length when present, then check the real payload.
+   const announcedLength = Number(req.headers.get('content-length') ?? '')
+   if (Number.isFinite(announcedLength) && announcedLength > CONTACT_BODY_MAX_BYTES) {
+      return Response.json({ error: 'payload_too_large' }, { status: 413 })
+   }
+
+   let raw: string
+   try {
+      raw = await req.text()
+   } catch {
+      return Response.json({ error: 'invalid_body' }, { status: 400 })
+   }
+
+   if (new TextEncoder().encode(raw).byteLength > CONTACT_BODY_MAX_BYTES) {
+      return Response.json({ error: 'payload_too_large' }, { status: 413 })
+   }
+
    let body: unknown
    try {
-      body = await req.json()
+      body = JSON.parse(raw)
    } catch {
       return Response.json({ error: 'invalid_json' }, { status: 400 })
    }

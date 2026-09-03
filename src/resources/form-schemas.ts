@@ -13,7 +13,11 @@ export type WorkMode = (typeof WORK_MODES)[number]
 export const CONTACT_BODY_MAX_BYTES = 10 * 1024
 
 /** Collapses every line break of a short field into a single space. */
-const collapseNewlines = (value: string) => value.replace(/[\r\n\t]+/g, ' ').replace(/\s{2,}/g, ' ').trim()
+const collapseNewlines = (value: string) =>
+   value
+      .replace(/[\r\n\t]+/g, ' ')
+      .replace(/\s{2,}/g, ' ')
+      .trim()
 
 /** A short single line field: trimmed, capped, line breaks removed. */
 const singleLine = (max: number) => z.string().max(max).transform(collapseNewlines)

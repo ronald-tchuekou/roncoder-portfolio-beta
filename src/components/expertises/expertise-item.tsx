@@ -51,7 +51,7 @@ export const ExpertiseItem: FC<ExpertiseItemProps> = ({ item }) => {
                      key={tech}
                      className={cn(
                         'rounded-full border border-input bg-background',
-                        'px-3 py-1 text-xs text-muted-foreground'
+                        'px-3 py-1 text-xs text-muted-foreground',
                      )}
                   >
                      {tech}
@@ -74,7 +74,7 @@ export const ExpertiseItem: FC<ExpertiseItemProps> = ({ item }) => {
                            className={cn(
                               'inline-flex items-center gap-1 text-sm font-medium',
                               'text-foreground underline underline-offset-4',
-                              'hover:text-primary transition-colors'
+                              'hover:text-primary transition-colors',
                            )}
                         >
                            {project?.title[locale] ?? humanizeId(projectId)}

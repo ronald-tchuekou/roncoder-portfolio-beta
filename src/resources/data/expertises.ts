@@ -117,7 +117,7 @@ export const EXPERTISES: Expertise[] = [
          en: 'UX/UI design and design systems',
       },
       summary: {
-         fr: "Je conçois les parcours et les écrans sur Figma avant de les développer moi même, ce qui réduit les allers retours entre design et développement.",
+         fr: 'Je conçois les parcours et les écrans sur Figma avant de les développer moi même, ce qui réduit les allers retours entre design et développement.',
          en: 'I design user journeys and screens in Figma before building them myself, which cuts the back and forth between design and development.',
       },
       highlights: [

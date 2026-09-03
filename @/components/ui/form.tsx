@@ -127,7 +127,7 @@ FormDescription.displayName = 'FormDescription'
 const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
    ({ className, children, ...props }, ref) => {
       const { error, formMessageId } = useFormField()
-      const t = useTranslations('services')
+      const t = useTranslations('contact')
       const body = error ? t(String(error?.message ?? '')) : children
 
       if (!body) {

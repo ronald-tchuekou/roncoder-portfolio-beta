@@ -1,17 +1,22 @@
-"use client";
+'use client'
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LocaleType } from '@src/i18n/routing'
-import { SERVICES } from '@src/resources/data/services'
-import { contactFormSchema, ContactFormSchema, defaultContactFormValues } from '@src/resources/form-schemas'
+import {
+   CONTRACT_TYPES,
+   ContactFormSchema,
+   WORK_MODES,
+   contactFormSchema,
+   defaultContactFormValues,
+} from '@src/resources/form-schemas'
 import { ContactService } from '@src/services/contact.service'
 import { useTranslations } from 'next-intl'
-import { Ref, useEffect, useImperativeHandle, useState } from 'react'
+import { Ref, useEffect, useImperativeHandle, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -21,20 +26,31 @@ export type ContactFormContentRef = {
 
 type Props = {
    locale: LocaleType
-   serviceKey?: string
    onCompleted?: VoidFunction
    /** Lets the parent mirror the pending state on its own submit button. */
    onPendingChange?: (isPending: boolean) => void
    ref?: Ref<ContactFormContentRef>
 }
 
-export const ContactFormContent = ({ locale, serviceKey, onCompleted, onPendingChange, ref }: Props) => {
-   const t = useTranslations('services')
-   const defaultValues = {
-      ...defaultContactFormValues,
-      service: serviceKey || '',
-      locale: locale,
-   }
+/** Translation key holding the label of each contract type. */
+const CONTRACT_TYPE_LABELS: Record<string, string> = {
+   permanent: 'contract_permanent',
+   freelance: 'contract_freelance',
+   long_term: 'contract_long_term',
+   other: 'contract_other',
+}
+
+/** Translation key holding the label of each work mode. */
+const WORK_MODE_LABELS: Record<string, string> = {
+   remote: 'work_remote',
+   hybrid: 'work_hybrid',
+   onsite: 'work_onsite',
+}
+
+export const ContactFormContent = ({ locale, onCompleted, onPendingChange, ref }: Props) => {
+   const t = useTranslations('contact')
+
+   const defaultValues = useMemo(() => ({ ...defaultContactFormValues, locale }), [locale])
 
    const form = useForm<ContactFormSchema>({
       resolver: zodResolver(contactFormSchema),
@@ -54,13 +70,9 @@ export const ContactFormContent = ({ locale, serviceKey, onCompleted, onPendingC
          await ContactService.send(data)
          form.reset(defaultValues)
          onCompleted?.()
-         toast.success(t('your_message_is_successfully_sent'), {
-            description: t('thanks_to_contacted_me'),
-         })
+         toast.success(t('success_title'), { description: t('success_description') })
       } catch {
-         toast.error(t('error_has_provided'), {
-            description: t('please_try_again'),
-         })
+         toast.error(t('error_title'), { description: t('error_description') })
       } finally {
          setIsPending(false)
       }
@@ -70,47 +82,61 @@ export const ContactFormContent = ({ locale, serviceKey, onCompleted, onPendingC
       submit,
    }))
 
+   /** Errors carry a translation key, resolved here so the message follows the active locale. */
+   const fieldError = (name: keyof ContactFormSchema) => {
+      const message = form.formState.errors[name]?.message
+      if (!message) return null
+      return <p className='text-xs font-medium text-destructive'>{t(message)}</p>
+   }
+
+   const requiredMark = <span className='text-destructive text-lg'>*</span>
+
    return (
       <Form {...form}>
          <form onSubmit={submit} className={cn('w-full', 'grid grid-cols-1 md:grid-cols-2 gap-5')}>
-            {/* FirstName */}
+            {/* First name */}
             <FormField
                control={form.control}
                name='firstName'
                render={({ field }) => (
                   <FormItem>
                      <FormLabel htmlFor='firstName'>
-                        {t('firstName')} <span className='text-destructive text-lg'>*</span>
+                        {t('first_name')} {requiredMark}
                      </FormLabel>
                      <FormControl>
                         <Input
                            {...field}
                            id='firstName'
-                           autoFocus={true}
-                           className={cn(form.formState.errors?.firstName && 'border-destructive')}
-                           placeholder={t('enter_your_firstName')}
+                           autoComplete='given-name'
+                           aria-invalid={!!form.formState.errors.firstName}
+                           className={cn(form.formState.errors.firstName && 'border-destructive')}
+                           placeholder={t('enter_your_first_name')}
                         />
                      </FormControl>
-                     <FormMessage />
+                     {fieldError('firstName')}
                   </FormItem>
                )}
             />
-            {/* LastName */}
+            {/* Last name */}
             <FormField
                control={form.control}
                name='lastName'
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel htmlFor='lastName'>{t('lastName')}</FormLabel>
+                     <FormLabel htmlFor='lastName'>
+                        {t('last_name')} {requiredMark}
+                     </FormLabel>
                      <FormControl>
                         <Input
                            {...field}
                            id='lastName'
-                           className={cn(form.formState.errors?.lastName && 'border-destructive')}
-                           placeholder={t('enter_your_lastName')}
+                           autoComplete='family-name'
+                           aria-invalid={!!form.formState.errors.lastName}
+                           className={cn(form.formState.errors.lastName && 'border-destructive')}
+                           placeholder={t('enter_your_last_name')}
                         />
                      </FormControl>
-                     <FormMessage />
+                     {fieldError('lastName')}
                   </FormItem>
                )}
             />
@@ -121,68 +147,151 @@ export const ContactFormContent = ({ locale, serviceKey, onCompleted, onPendingC
                render={({ field }) => (
                   <FormItem>
                      <FormLabel htmlFor='email'>
-                        {t('email')} <span className='text-destructive text-lg'>*</span>
+                        {t('email')} {requiredMark}
                      </FormLabel>
                      <FormControl>
                         <Input
                            {...field}
                            id='email'
-                           className={cn(form.formState.errors?.email && 'border-destructive')}
+                           type='email'
+                           autoComplete='email'
+                           aria-invalid={!!form.formState.errors.email}
+                           className={cn(form.formState.errors.email && 'border-destructive')}
                            placeholder={t('enter_your_email')}
                         />
                      </FormControl>
-                     <FormMessage />
+                     {fieldError('email')}
                   </FormItem>
                )}
             />
-            {/* Phone */}
+            {/* Company */}
             <FormField
                control={form.control}
-               name='phone'
+               name='company'
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel htmlFor='phone'>{t('phone')}</FormLabel>
+                     <FormLabel htmlFor='company'>
+                        {t('company')} {requiredMark}
+                     </FormLabel>
                      <FormControl>
                         <Input
                            {...field}
-                           id='phone'
-                           className={cn(form.formState.errors?.phone && 'border-destructive')}
-                           placeholder={t('enter_your_phone')}
+                           id='company'
+                           autoComplete='organization'
+                           aria-invalid={!!form.formState.errors.company}
+                           className={cn(form.formState.errors.company && 'border-destructive')}
+                           placeholder={t('enter_your_company')}
                         />
                      </FormControl>
-                     {form.formState.errors.phone?.message && (
-                        <p className={cn('text-xs font-medium text-destructive')}>
-                           {t(form.formState.errors.phone.message)}
-                        </p>
-                     )}
+                     {fieldError('company')}
                   </FormItem>
                )}
             />
-            {/* Service */}
+            {/* Job title */}
             <FormField
                control={form.control}
-               name='service'
+               name='jobTitle'
                render={({ field }) => (
                   <FormItem className='md:col-span-2'>
-                     <FormLabel htmlFor='service'>
-                        Service <span className='text-destructive text-lg'>*</span>
+                     <FormLabel htmlFor='jobTitle'>
+                        {t('job_title')} {requiredMark}
                      </FormLabel>
                      <FormControl>
-                        <Select onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
-                           <SelectTrigger className={cn(form.formState.errors?.service && 'border-destructive')}>
-                              <SelectValue id='service' placeholder={t('select_the_service')} />
+                        <Input
+                           {...field}
+                           id='jobTitle'
+                           autoComplete='organization-title'
+                           aria-invalid={!!form.formState.errors.jobTitle}
+                           className={cn(form.formState.errors.jobTitle && 'border-destructive')}
+                           placeholder={t('enter_your_job_title')}
+                        />
+                     </FormControl>
+                     {fieldError('jobTitle')}
+                  </FormItem>
+               )}
+            />
+            {/* Contract type */}
+            <FormField
+               control={form.control}
+               name='contractType'
+               render={({ field }) => (
+                  <FormItem>
+                     <FormLabel htmlFor='contractType'>
+                        {t('contract_type')} {requiredMark}
+                     </FormLabel>
+                     <FormControl>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                           <SelectTrigger
+                              id='contractType'
+                              aria-invalid={!!form.formState.errors.contractType}
+                              className={cn(form.formState.errors.contractType && 'border-destructive')}
+                           >
+                              <SelectValue placeholder={t('select_the_contract_type')} />
                            </SelectTrigger>
                            <SelectContent>
-                              {SERVICES.map((service) => (
-                                 <SelectItem key={service.key} value={service.key}>
-                                    {service.title[locale]}
+                              {CONTRACT_TYPES.map((value) => (
+                                 <SelectItem key={value} value={value}>
+                                    {t(CONTRACT_TYPE_LABELS[value])}
                                  </SelectItem>
                               ))}
                            </SelectContent>
                         </Select>
                      </FormControl>
-
-                     <FormMessage />
+                     {fieldError('contractType')}
+                  </FormItem>
+               )}
+            />
+            {/* Work mode */}
+            <FormField
+               control={form.control}
+               name='workMode'
+               render={({ field }) => (
+                  <FormItem>
+                     <FormLabel htmlFor='workMode'>
+                        {t('work_mode')} {requiredMark}
+                     </FormLabel>
+                     <FormControl>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                           <SelectTrigger
+                              id='workMode'
+                              aria-invalid={!!form.formState.errors.workMode}
+                              className={cn(form.formState.errors.workMode && 'border-destructive')}
+                           >
+                              <SelectValue placeholder={t('select_the_work_mode')} />
+                           </SelectTrigger>
+                           <SelectContent>
+                              {WORK_MODES.map((value) => (
+                                 <SelectItem key={value} value={value}>
+                                    {t(WORK_MODE_LABELS[value])}
+                                 </SelectItem>
+                              ))}
+                           </SelectContent>
+                        </Select>
+                     </FormControl>
+                     {fieldError('workMode')}
+                  </FormItem>
+               )}
+            />
+            {/* Offer URL */}
+            <FormField
+               control={form.control}
+               name='offerUrl'
+               render={({ field }) => (
+                  <FormItem className='md:col-span-2'>
+                     <FormLabel htmlFor='offerUrl'>
+                        {t('offer_url')} <span className='text-muted-foreground text-xs'>({t('optional')})</span>
+                     </FormLabel>
+                     <FormControl>
+                        <Input
+                           {...field}
+                           id='offerUrl'
+                           inputMode='url'
+                           aria-invalid={!!form.formState.errors.offerUrl}
+                           className={cn(form.formState.errors.offerUrl && 'border-destructive')}
+                           placeholder={t('enter_the_offer_url')}
+                        />
+                     </FormControl>
+                     {fieldError('offerUrl')}
                   </FormItem>
                )}
             />
@@ -193,18 +302,20 @@ export const ContactFormContent = ({ locale, serviceKey, onCompleted, onPendingC
                render={({ field }) => (
                   <FormItem className='md:col-span-2'>
                      <FormLabel htmlFor='message'>
-                        Message <span className='text-destructive text-lg'>*</span>
+                        {t('message')} {requiredMark}
                      </FormLabel>
                      <FormControl>
                         <Textarea
                            {...field}
                            id='message'
                            rows={5}
-                           className={cn('resize-none', form.formState.errors?.message && 'border-destructive')}
+                           maxLength={2000}
+                           aria-invalid={!!form.formState.errors.message}
+                           className={cn('resize-none', form.formState.errors.message && 'border-destructive')}
                            placeholder={t('enter_your_message')}
                         />
                      </FormControl>
-                     <FormMessage />
+                     {fieldError('message')}
                   </FormItem>
                )}
             />

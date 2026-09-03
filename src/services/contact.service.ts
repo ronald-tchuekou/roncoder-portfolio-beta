@@ -1,8 +1,11 @@
 import { ContactFormSchema } from '@src/resources/form-schemas'
 
 export class ContactRequestError extends Error {
-   constructor(public readonly status: number) {
-      super(`Contact request failed with status ${status}`)
+   constructor(
+      public readonly status: number,
+      public readonly code?: string,
+   ) {
+      super(`Contact request failed with status ${status}${code ? ` (${code})` : ''}`)
       this.name = 'ContactRequestError'
    }
 }
@@ -15,6 +18,12 @@ export const ContactService = {
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify(request),
       })
-      if (!res.ok) throw new ContactRequestError(res.status)
+
+      const payload = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null
+
+      // The success toast is only shown when the API confirms the request with `ok`.
+      if (!res.ok || payload?.ok !== true) {
+         throw new ContactRequestError(res.status, payload?.error)
+      }
    },
 }

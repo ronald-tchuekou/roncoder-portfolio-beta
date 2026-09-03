@@ -1,54 +1,53 @@
-import { cn } from "@/lib/utils";
-import { Container } from "@src/components/container";
-import { RevealFromBottom } from "@src/components/motions/reveal-from-bottom";
+import { cn } from '@/lib/utils'
+import { Container } from '@src/components/container'
+import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import PageTitle from '@src/components/page-title'
-import { ProjectItem } from "@src/components/projects/project-item";
+import { ProjectItem } from '@src/components/projects/project-item'
 import { LocaleType } from '@src/i18n/routing'
-import { PROJECTS } from '@src/resources/data/projects'
 import { localizedAlternates } from '@src/lib/seo'
-import { Metadata } from 'next';
+import { PROJECTS } from '@src/resources/data/projects'
+import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 type Props = {
    params: Promise<{ locale: LocaleType }>
 }
 
+/** Recruitment oriented queries, shared by both locales. */
+const PROJECTS_KEYWORDS = [
+   'Senior Frontend Engineer',
+   'développeur Full Stack senior',
+   'développeur React senior',
+   'développeur Angular senior',
+   'développeur React Native',
+   'ingénieur frontend TypeScript',
+   'développeur full remote',
+   'remote React developer',
+   'React Native developer',
+   'portfolio projets développeur',
+   'Douala',
+   'Cameroun',
+]
+
+const ORDERED_PROJECTS = [...PROJECTS].sort((a, b) => a.order - b.order)
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const locale = (await params).locale as LocaleType
    const t = await getTranslations({ locale, namespace: 'projects' })
 
    return {
-      title: t('page_title'),
-      description: t('page_description'),
+      title: t('meta_title'),
+      description: t('meta_description'),
       alternates: localizedAlternates(locale, '/projects'),
-      keywords: [
-         'roncoder projects',
-         'roncoder projet',
-         'projects roncoder',
-         'Next.js development',
-         'Angular development',
-         'Next.js SEO',
-         'Angular SEO',
-         'Next.js best practices',
-         'Angular best practices',
-         'Next.js tutorials',
-         'Angular tutorials',
-         'Next.js performance optimization',
-         'Angular performance optimization',
-         'Next.js vs Angular',
-         'Next.js components',
-         'Angular components',
-         'Next.js server-side rendering',
-         'Angular server-side rendering',
-         'Next.js static site generation',
-         'Angular static site generation',
-         'Next.js dynamic routing',
-         'Angular dynamic routing',
-         'Next.js internationalization',
-      ],
+      keywords: PROJECTS_KEYWORDS,
+      openGraph: {
+         title: t('meta_title'),
+         description: t('meta_description'),
+      },
       twitter: {
-         title: t('page_title'),
-         description: t('page_description'),
+         card: 'summary_large_image',
+         title: t('meta_title'),
+         description: t('meta_description'),
       },
    }
 }
@@ -66,7 +65,7 @@ export default async function Page({ params }: Props) {
             <PageTitle title={t('page_title')} description={t('page_description')} />
          </Container>
          <Container className={cn('grid grid-cols-1 md:grid-cols-2 gap-10')}>
-            {PROJECTS.map((item, index) => (
+            {ORDERED_PROJECTS.map((item, index) => (
                <RevealFromBottom delay={index < 4 ? index * 0.1 : 0.1} key={item.id}>
                   <ProjectItem item={item} locale={locale} priority={index === 0} />
                </RevealFromBottom>
