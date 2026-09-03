@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@src/components/ui/button'
 import { Link } from '@src/i18n/routing'
 import { motion, useReducedMotion } from 'framer-motion'
 import { RabbitIcon } from 'lucide-react'

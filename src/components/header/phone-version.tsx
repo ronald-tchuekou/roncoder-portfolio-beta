@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { NAV_LINKS } from '@src/resources/data/nav-links'
 import { isCurrentPath } from '@src/resources/util-functions'

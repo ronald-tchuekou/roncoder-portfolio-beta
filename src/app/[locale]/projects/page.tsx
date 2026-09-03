@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { Container } from '@src/components/container'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import PageTitle from '@src/components/page-title'

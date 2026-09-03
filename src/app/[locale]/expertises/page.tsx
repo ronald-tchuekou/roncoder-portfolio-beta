@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { Container } from '@src/components/container'
 import { ExpertisesList } from '@src/components/expertises/expertises-list'
 import PageTitle from '@src/components/page-title'

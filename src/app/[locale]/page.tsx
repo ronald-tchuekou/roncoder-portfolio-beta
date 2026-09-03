@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { Container } from '@src/components/container'
 import { CounterSection } from '@src/components/home/counter-section'
 import { EngineeringSection } from '@src/components/home/engineering-section'

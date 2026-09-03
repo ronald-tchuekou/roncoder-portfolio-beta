@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { COMPLETED_PROJECTS_COUNT, EXPERIENCE_YEARS } from '@src/resources/data/informations'
 import { GithubService } from '@src/services/github.service'
 import { getTranslations } from 'next-intl/server'

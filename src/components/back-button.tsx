@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@src/components/ui/button";
 import { useRouter } from '@src/i18n/routing'
 import { ArrowLeftIcon } from 'lucide-react'
 import { FC } from "react";

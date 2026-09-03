@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@src/components/ui/dialog";
 import {
   Drawer,
   DrawerClose,
@@ -21,9 +21,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { cn } from "@/lib/utils";
+} from "@src/components/ui/drawer";
+import { useMediaQuery } from "@src/hooks/use-media-query";
+import { cn } from "@src/lib/utils";
 
 interface BaseProps {
   children: React.ReactNode;

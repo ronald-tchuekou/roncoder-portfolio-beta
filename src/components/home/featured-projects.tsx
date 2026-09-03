@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
 import { Link, LocaleType } from '@src/i18n/routing'
 import { PROJECTS } from '@src/resources/data/projects'
 import { ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react'

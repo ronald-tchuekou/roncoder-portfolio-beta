@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@src/components/ui/dropdown-menu'
+import { cn } from '@src/lib/utils'
 import { LocaleType, useRouter } from '@src/i18n/routing'
 import { Check } from 'lucide-react'
 import { useLocale } from 'next-intl'

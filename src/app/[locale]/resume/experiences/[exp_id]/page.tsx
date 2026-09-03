@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { BackButton } from '@src/components/back-button'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { LocaleType } from '@src/i18n/routing'

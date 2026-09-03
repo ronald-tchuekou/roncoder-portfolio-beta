@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
 import { BackButton } from '@src/components/back-button'
 import { Container } from '@src/components/container'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'

@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { SectionHeader } from '@src/components/resume/section-header'
 import { Link, LocaleType } from '@src/i18n/routing'

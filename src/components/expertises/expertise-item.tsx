@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { Link, LocaleType } from '@src/i18n/routing'
 import { PROJECTS } from '@src/resources/data/projects'
 import { Expertise } from '@src/resources/util-types'

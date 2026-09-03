@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { NAV_LINKS } from '@src/resources/data/nav-links'
 import { track } from '@vercel/analytics'

@@ -1,5 +1,5 @@
-import { Toaster } from '@/components/ui/sonner'
-import { cn } from '@/lib/utils'
+import { Toaster } from '@src/components/ui/sonner'
+import { cn } from '@src/lib/utils'
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { Footer } from '@src/components/footer'
 import { Header } from '@src/components/header/header'

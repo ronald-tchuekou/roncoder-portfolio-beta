@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@src/components/ui/tooltip'
+import { cn } from '@src/lib/utils'
 import { track } from '@vercel/analytics'
 import { CloudDownloadIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'

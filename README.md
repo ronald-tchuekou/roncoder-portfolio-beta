@@ -34,10 +34,6 @@ A modern, multilingual portfolio website built with Next.js 16, React 19, and Ty
 
 ```
 roncoder-portfolio/
-├── @/                          # Local packages aliased to "@/..."
-│   ├── components/ui/          # Design system primitives (Radix-based)
-│   ├── hooks/                  # Shared React hooks
-│   └── lib/                    # Cross-cutting utilities
 ├── lang/                       # Static translation dictionaries
 ├── public/                     # Static assets (images, resumes, verification files)
 ├── src/
@@ -48,7 +44,8 @@ roncoder-portfolio/
 │   │   │   ├── contact/        # Contact page route
 │   │   │   ├── projects/       # Projects listing and detail routes
 │   │   │   ├── resume/         # Resume sections
-│   │   │   └── services/       # Services page
+│   │   │   ├── expertises/     # Expertise page
+│   │   │   └── legal/          # Legal notice
 │   │   ├── api/
 │   │   │   └── github/         # Serverless GitHub helpers
 │   │   │       ├── contributions/route.ts
@@ -59,8 +56,10 @@ roncoder-portfolio/
 │   ├── components/             # Reusable UI building blocks
 │   │   ├── home/               # Homepage sections
 │   │   ├── projects/           # Projects cards & modals
-│   │   ├── resume/             # Resume section widgets
-│   │   └── services/           # Service listings
+│   │   ├── resume/             # Resume section widgets, candidate card
+│   │   ├── expertises/         # Expertise listings
+│   │   └── ui/                 # Design system primitives (Radix based)
+│   ├── hooks/                  # Shared React hooks
 │   ├── i18n/                   # next-intl configuration
 │   ├── lib/                    # Runtime helpers (env, stores, utils)
 │   ├── resources/              # Typed content data & schemas
@@ -74,7 +73,7 @@ roncoder-portfolio/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 22+
 - pnpm (recommended) or npm/yarn
 
 ### Installation
@@ -111,9 +110,45 @@ NEXT_PUBLIC_GITHUB_USERNAME=your_github_username
 # GitHub token for API access (server-side only, read:user scope is enough)
 GITHUB_TOKEN=your_github_token
 
-# Discord webhook for the contact form (server-side only — never expose it with NEXT_PUBLIC_)
+# Discord webhook for the contact form (server side only, never expose it with NEXT_PUBLIC_)
 DISCORD_WEBHOOK=your_discord_webhook_url
 ```
+
+## 📜 Available scripts
+
+| Script | What it does |
+| --- | --- |
+| `pnpm dev` | Development server |
+| `pnpm build` | Production build |
+| `pnpm start` | Serve the production build |
+| `pnpm lint` | ESLint over the whole repository |
+| `pnpm typecheck` | `tsc --noEmit` |
+| `pnpm format` | Prettier write |
+| `pnpm smoke` | Playwright smoke run over both locales, screenshots in `test-results/` |
+| `pnpm images:convert` | Convert the images under `public/` to WebP |
+
+## ✍️ Adding content
+
+**A project**: append an entry to `src/resources/data/projects.tsx`. Required fields come from the
+`Project` type in `src/resources/util-types.ts`: `platform` (`web`, `mobile` or `confidential`),
+`role`, `context`, `contributions`, `result`, `featured` and `order`. Drop the images under
+`public/projects/<id>/` and reference them with `image` and `gallery`. Only web projects with a
+reachable link get a preview route.
+
+**An experience**: append an entry to `src/resources/data/experiences.ts` with a unique `id` and a
+`sortDate` in `YYYY-MM` form; the list sorts itself by date, most recent first. Detail pages are
+generated from the list, so nothing else to register.
+
+**A certification**: same shape, in `src/resources/data/educations.ts`.
+
+Every text field is a `Record<LocaleType, string>`: French and English are both mandatory. House
+style forbids em dashes and en dashes; write "Oct 2023 à Déc 2025" / "Oct 2023 to Dec 2025".
+
+## 📄 Resume PDFs
+
+`public/cv/` must hold `ronald-tchuekou-cv-fr.pdf` and `ronald-tchuekou-cv-en.pdf`. See
+`public/cv/README.md` for the rules the files have to satisfy and for how to enable the download
+buttons, which stay visible but disabled until then.
 
 ### Development
 

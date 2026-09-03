@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { EXPERTISES } from '@src/resources/data/expertises'
 import { Container } from '../container'
 import { RevealFromBottom } from '../motions/reveal-from-bottom'

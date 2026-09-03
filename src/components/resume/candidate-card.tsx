@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@src/components/ui/tooltip'
+import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { EXPERIENCE_YEARS } from '@src/resources/data/informations'
 import { DownloadIcon, GithubIcon, LinkedinIcon, MailIcon, YoutubeIcon } from 'lucide-react'

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { SectionHeader } from '@src/components/resume/section-header'
 import { LocaleType } from '@src/i18n/routing'

@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
 import { LocaleType } from '@src/i18n/routing'
 import { LoaderIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { Container } from '@src/components/container'
 import { CandidateCard } from '@src/components/resume/candidate-card'
 import { ResumeSideBar } from '@src/components/resume/side-bar'

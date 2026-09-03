@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import { Container } from '../container'
 import { RevealFromBottom } from '../motions/reveal-from-bottom'

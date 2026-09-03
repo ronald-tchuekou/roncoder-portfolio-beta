@@ -1,5 +1,5 @@
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@src/components/ui/tooltip'
+import { cn } from '@src/lib/utils'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
 import { SectionHeader } from '@src/components/resume/section-header'
 import { LocaleType } from '@src/i18n/routing'

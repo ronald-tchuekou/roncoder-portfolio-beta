@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { ArrowUpRightIcon } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'

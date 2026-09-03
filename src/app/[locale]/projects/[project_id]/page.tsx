@@ -1,5 +1,5 @@
 import { ProjectJsonLd } from '@src/components/projects/project-json-ld'
-import { cn } from '@/lib/utils'
+import { cn } from '@src/lib/utils'
 import { BackButton } from '@src/components/back-button'
 import { Container } from '@src/components/container'
 import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'

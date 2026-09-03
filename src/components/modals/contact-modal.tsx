@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Credenza, CredenzaContent, CredenzaFooter, CredenzaHeader, CredenzaTitle } from '@/components/ui/credenza'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { Credenza, CredenzaContent, CredenzaFooter, CredenzaHeader, CredenzaTitle } from '@src/components/ui/credenza'
+import { ScrollArea } from '@src/components/ui/scroll-area'
+import { cn } from '@src/lib/utils'
 import { LocaleType } from '@src/i18n/routing'
 import { LoaderIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'

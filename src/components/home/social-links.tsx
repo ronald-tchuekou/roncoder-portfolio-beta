@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
 import { track } from '@vercel/analytics'
 import { LinkedinIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'

@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@src/components/ui/button";
+import { cn } from "@src/lib/utils";
 import { ArrowLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ReactNode, useCallback } from "react";
