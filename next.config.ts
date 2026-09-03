@@ -8,8 +8,8 @@ const SECURITY_HEADERS = [
    { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
 ]
 
-// Report-only for now: switch the header name to `Content-Security-Policy` once the
-// browser console reports no violation on any page.
+// Enforcing. `tests/csp.spec.ts` walks every public page and fails on any violation
+// the policy would block, so a regression is caught before it reaches production.
 const CSP = [
    "default-src 'self'",
    "base-uri 'self'",
@@ -42,7 +42,7 @@ const nextConfig: NextConfig = {
             source: '/:path*',
             headers: [
                ...SECURITY_HEADERS,
-               { key: 'Content-Security-Policy-Report-Only', value: CSP },
+               { key: 'Content-Security-Policy', value: CSP },
                // Applies to this site being framed elsewhere, which we never want.
                // Framing third party sites in the project preview is governed by
                // `frame-src` in the policy above, not by this header.
