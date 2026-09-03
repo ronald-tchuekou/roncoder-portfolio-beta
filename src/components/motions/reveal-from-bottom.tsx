@@ -1,10 +1,10 @@
 import { cn } from '@src/lib/utils'
-import { MotionTag } from '@src/resources/util-types'
+import { RevealTag } from '@src/resources/util-types'
 import { FC, PropsWithChildren } from 'react'
 
 type Props = {
    className?: string
-   elt?: MotionTag
+   elt?: RevealTag
 }
 
 /**

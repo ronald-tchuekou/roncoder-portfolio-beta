@@ -5,7 +5,6 @@ import { cn } from '@src/lib/utils'
 import { Link } from '@src/i18n/routing'
 import { NAV_LINKS } from '@src/resources/data/nav-links'
 import { isCurrentPath } from '@src/resources/util-functions'
-import { motion } from 'framer-motion'
 import { MenuIcon, XIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -35,11 +34,7 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
             <MenuIcon className='size-6' aria-hidden='true' />
          </Button>
          {isOpen && (
-            <motion.section
-               initial={{ opacity: 0, scale: 0 }}
-               animate={{ opacity: 1, scale: 1 }}
-               className={cn('fixed top-0 left-0 right-0', 'bg-card')}
-            >
+            <section className={cn('mobile-menu fixed top-0 left-0 right-0 z-50', 'bg-card')}>
                <Container className={cn('flex justify-between items-center', 'pt-5 pb-3')}>
                   <Link href={'/'} aria-label='Ronald Tchuekou'>
                      <Image
@@ -66,12 +61,7 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
                </Container>
                <nav className={cn('flex flex-col items-center')}>
                   {NAV_LINKS.map(({ url, label }, index) => (
-                     <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 }}
-                        key={url}
-                     >
+                     <div className='mobile-menu-item' key={url} style={{ animationDelay: `${index * 0.06}s` }}>
                         <Link
                            href={url}
                            onClick={toggleMenu}
@@ -80,10 +70,10 @@ export const PhoneNavVersion: FC<{ currentPath: string }> = ({ currentPath }) =>
                            <span className='nav-link-label'>{t(label)}</span>
                            <span className={'nav-link-indicator'}></span>
                         </Link>
-                     </motion.div>
+                     </div>
                   ))}
                </nav>
-            </motion.section>
+            </section>
          )}
       </>
    )

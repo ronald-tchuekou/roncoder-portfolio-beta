@@ -25,6 +25,11 @@ const CSP = [
 ].join('; ')
 
 const nextConfig: NextConfig = {
+   experimental: {
+      // Both packages re-export hundreds of symbols from a barrel file; without
+      // this every page pulls the whole module graph into its first load.
+      optimizePackageImports: ['lucide-react', 'embla-carousel-react'],
+   },
    async redirects() {
       return [
          { source: '/services', destination: '/expertises', permanent: true },

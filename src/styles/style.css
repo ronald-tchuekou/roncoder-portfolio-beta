@@ -212,6 +212,21 @@
       }
    }
 
+   .mobile-menu {
+      animation: mobile-menu-in 180ms ease-out both;
+   }
+
+   .mobile-menu-item {
+      animation: mobile-menu-item-in 300ms ease-out both;
+   }
+
+   @media (prefers-reduced-motion: reduce) {
+      .mobile-menu,
+      .mobile-menu-item {
+         animation: none;
+      }
+   }
+
    .nav-link {
       /* `text-foreground` is explicit: without it the anchor falls back to the
          browser's default link colour, which fails contrast. min-h-11 keeps the
@@ -254,5 +269,27 @@
    }
    to {
       transform: rotate(360deg);
+   }
+}
+
+@keyframes mobile-menu-in {
+   from {
+      opacity: 0;
+      transform: scale(0.96);
+   }
+   to {
+      opacity: 1;
+      transform: none;
+   }
+}
+
+@keyframes mobile-menu-item-in {
+   from {
+      opacity: 0;
+      transform: translateY(50px);
+   }
+   to {
+      opacity: 1;
+      transform: none;
    }
 }

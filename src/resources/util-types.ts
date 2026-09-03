@@ -7,7 +7,8 @@ export type NavLink = {
    icon?: React.ReactNode
 }
 
-export type MotionTag = 'div' | 'a' | 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'li'
+/** Tags the reveal wrapper may render as. */
+export type RevealTag = 'div' | 'a' | 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'li'
 
 export type Expertise = {
    id: string

@@ -1,11 +1,11 @@
 import localFont from 'next/font/local'
 
 // Self-hosted variable fonts (latin subset). No request to Google Fonts at build or runtime.
+// The italic face is not used anywhere in the interface, so it is not declared:
+// it was a 31 KB download on every page for nothing.
 export const fontSans = localFont({
-   src: [
-      { path: './josefin-sans-latin-wght-normal.woff2', style: 'normal', weight: '100 700' },
-      { path: './josefin-sans-latin-wght-italic.woff2', style: 'italic', weight: '100 700' },
-   ],
+   src: './josefin-sans-latin-wght-normal.woff2',
+   weight: '100 700',
    variable: '--font-josefin',
    display: 'swap',
 })
