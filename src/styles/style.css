@@ -122,6 +122,10 @@
    --shadow-xl: 0px 1px 4px 0px hsl(0 0% 0% / 0.05), 0px 8px 10px -1px hsl(0 0% 0% / 0.05);
    --shadow-2xl: 0px 1px 4px 0px hsl(0 0% 0% / 0.13);
    --tracking-normal: 0rem;
+   /* Backdrop grid. Kept this faint on purpose: the drift should register when you
+      come back to a page, not while you are reading it. */
+   --grid-line: oklch(0.6902 0.1057 198.9725 / 0.065);
+   --grid-glow: oklch(0.6902 0.1057 198.9725 / 0.07);
 }
 
 .dark {
@@ -178,6 +182,9 @@
    --shadow-lg: 0px 1px 4px 0px hsl(0 0% 0% / 0.05), 0px 4px 6px -1px hsl(0 0% 0% / 0.05);
    --shadow-xl: 0px 1px 4px 0px hsl(0 0% 0% / 0.05), 0px 8px 10px -1px hsl(0 0% 0% / 0.05);
    --shadow-2xl: 0px 1px 4px 0px hsl(0 0% 0% / 0.13);
+   /* Lifted against the dark ink, where the same alpha would read as nothing. */
+   --grid-line: oklch(0.6902 0.1057 198.9725 / 0.09);
+   --grid-glow: oklch(0.6902 0.1057 198.9725 / 0.13);
 }
 
 @layer base {
@@ -199,6 +206,58 @@
             animation-timeline: view();
             animation-range: entry 0% cover 22%;
          }
+      }
+   }
+
+   /*
+    * Sits behind everything, never reachable. `body` carries the page background and
+    * html carries none, so that colour propagates to the canvas and this negative
+    * layer paints above it rather than being buried under it.
+    */
+   .background-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+   }
+
+   /*
+    * Oversized by exactly one tile, then translated by exactly one tile. Landing on
+    * 64px is pixel identical to starting at 0, so the loop has no seam and needs no
+    * reset. Only `transform` moves, so this stays on the compositor.
+    */
+   .background-grid-lines {
+      position: absolute;
+      inset: -64px;
+      background-image: repeating-linear-gradient(
+            to right,
+            var(--grid-line) 0 1px,
+            transparent 1px 64px
+         ),
+         repeating-linear-gradient(to bottom, var(--grid-line) 0 1px, transparent 1px 64px);
+      /*
+       * A vignette rather than a top anchored fade: the layer is fixed, so a fade that
+       * dies partway down would show as a band on every screenful instead of reading
+       * as ambient depth. Soft at the edges, present across the viewport.
+       */
+      mask-image: radial-gradient(ellipse 110% 100% at 50% 35%, #000 25%, transparent 92%);
+   }
+
+   .background-grid-glow {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(ellipse 90% 55% at 50% -5%, var(--grid-glow), transparent 72%);
+      transform-origin: 50% 0%;
+   }
+
+   @media (prefers-reduced-motion: no-preference) {
+      .background-grid-lines {
+         animation: background-grid-drift 60s linear infinite;
+      }
+
+      .background-grid-glow {
+         animation: background-grid-breathe 14s ease-in-out infinite alternate;
       }
    }
 
@@ -260,6 +319,26 @@
    to {
       opacity: 1;
       transform: none;
+   }
+}
+
+@keyframes background-grid-drift {
+   from {
+      transform: translate3d(0, 0, 0);
+   }
+   to {
+      transform: translate3d(64px, 64px, 0);
+   }
+}
+
+@keyframes background-grid-breathe {
+   from {
+      opacity: 0.55;
+      transform: scale(1);
+   }
+   to {
+      opacity: 1;
+      transform: scale(1.15);
    }
 }
 
