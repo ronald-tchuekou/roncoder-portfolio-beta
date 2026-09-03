@@ -1,0 +1,92 @@
+{
+   "page_title": "Ronald Tchuekou, Senior Frontend Engineer et développeur Full Stack",
+   "page_description": "6 ans et plus sur React, Next.js, Angular et React Native. Trois applications en production sur les stores. Disponible en télétravail.",
+   "hero": {
+      "role": "Senior Frontend Engineer, Full Stack",
+      "hi_is": "Bonjour, je suis",
+      "headline": "Je conçois et développe des applications web et mobiles utilisées en production",
+      "subheadline": "6 ans et plus sur React, Next.js, Angular et React Native. Trois applications publiées sur l'App Store et Google Play, un outil de supervision financière utilisé dans plusieurs pays d'Afrique centrale.",
+      "cta_primary": "Télécharger mon CV",
+      "cta_secondary": "Voir mon parcours",
+      "availability": "Disponible en télétravail pour l'Europe et l'Afrique. CDI, freelance ou mission longue.",
+      "image_alt": "Ronald Tchuekou, Senior Frontend Engineer"
+   },
+   "counters": {
+      "years": { "label": "Années", "sub": "d'expérience" },
+      "projects": { "label": "Projets", "sub": "livrés" },
+      "apps": { "label": "Applications", "sub": "en production sur les stores" },
+      "contributions": { "label": "Contributions", "sub": "GitHub" }
+   },
+   "expertise": {
+      "title": "Ce sur quoi j'interviens",
+      "items": {
+         "web": {
+            "title": "Applications web",
+            "description": "Interfaces React, Next.js et Angular, TypeScript, design system, performance et accessibilité."
+         },
+         "mobile": {
+            "title": "Applications mobiles",
+            "description": "React Native et Expo, publication et maintenance sur l'App Store et Google Play."
+         },
+         "design": {
+            "title": "Conception et direction technique",
+            "description": "Maquettes Figma, choix d'architecture, revue de code, encadrement d'équipe."
+         }
+      },
+      "link": "Voir le détail"
+   },
+   "featured": {
+      "title": "Projets marquants",
+      "cta": "Tous les projets",
+      "view_project": "Voir le projet"
+   },
+   "engineering": {
+      "title": "Comment je travaille",
+      "items": {
+         "design": {
+            "title": "Du besoin à la maquette.",
+            "description": "Je clarifie le besoin avec les équipes métier et je conçois les écrans sur Figma avant d'écrire du code."
+         },
+         "code": {
+            "title": "Un code lisible et testé.",
+            "description": "Composants réutilisables, TypeScript strict, tests sur les parties sensibles, revue de code systématique."
+         },
+         "delivery": {
+            "title": "Livraison continue.",
+            "description": "Intégration continue, déploiements automatisés, surveillance des erreurs après mise en ligne."
+         },
+         "quality": {
+            "title": "Performance et accessibilité par défaut.",
+            "description": "Temps de chargement, contraste, navigation au clavier et lecteurs d'écran font partie de la définition de terminé."
+         }
+      }
+   },
+   "looking_for": {
+      "title": "Ce que je recherche",
+      "rows": {
+         "roles": {
+            "label": "Postes",
+            "value": "Senior Frontend Engineer, développeur Full Stack senior, développeur React Native senior, Lead Frontend"
+         },
+         "contract": {
+            "label": "Contrat",
+            "value": "CDI, freelance ou mission longue"
+         },
+         "mode": {
+            "label": "Mode",
+            "value": "Télétravail complet, fuseau UTC+1, chevauchement complet avec les horaires européens"
+         },
+         "environment": {
+            "label": "Environnement",
+            "value": "Équipes produit, projets à enjeu métier fort, culture de la revue de code"
+         }
+      },
+      "cta": "Me contacter"
+   },
+   "final_cta": {
+      "title": "Un poste qui correspond ? Écrivez moi, je réponds sous 24 heures ouvrées.",
+      "contact": "Me contacter",
+      "resume": "Télécharger mon CV",
+      "direct": "Ou directement :"
+   }
+}

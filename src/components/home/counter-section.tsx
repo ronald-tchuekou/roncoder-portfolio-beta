@@ -1,44 +1,71 @@
-import { cn } from "@/lib/utils";
-import { FC } from "react";
-import { Container } from "../container";
-import { RevealFromBottom } from "../motions/reveal-from-bottom";
+import { cn } from '@src/lib/utils'
+import { COMPLETED_PROJECTS_COUNT, EXPERIENCE_YEARS } from '@src/resources/data/informations'
+import { GithubService } from '@src/services/github.service'
+import { getTranslations } from 'next-intl/server'
+import { Container } from '../container'
+import { RevealFromBottom } from '../motions/reveal-from-bottom'
 
-export const CounterSection: FC = () => {
-  return (
-    <Container className="pb-10">
-      <section
-        className={cn(
-          "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-3 md:gap-8"
-        )}
-      >
-        <RevealFromBottom className="flex gap-3">
-          <p className="text-5xl font-extrabold text-foreground">5</p>
-          <p>
-            Années <br /> D&apos;expériences
-          </p>
-        </RevealFromBottom>
+/** Applications published and maintained on the App Store and Google Play: Lafya, Zakadia, Les Vadrouilleurs. */
+const APPS_ON_STORES_COUNT = 3
 
-        <RevealFromBottom delay={0.2} className="flex gap-3">
-          <p className="text-5xl font-extrabold text-foreground">12</p>
-          <p>
-            Projets <br /> Terminés
-          </p>
-        </RevealFromBottom>
+type CounterProps = { value: number | null; suffix?: string; label: React.ReactNode; delay?: number }
 
-        <RevealFromBottom delay={0.3} className="flex gap-3">
-          <p className="text-5xl font-extrabold text-foreground">8</p>
-          <p>
-            Technologies <br /> Maîtrisées
-          </p>
-        </RevealFromBottom>
+const Counter = ({ value, suffix, label, delay }: CounterProps) => {
+   // No fabricated fallback: a tile with nothing reliable to show is not rendered.
+   if (value === null) return null
+   return (
+      <RevealFromBottom className='flex gap-3'>
+         <p className='text-5xl font-extrabold text-foreground'>
+            <span className='tabular-nums'>{value}</span>
+            {suffix ? <span aria-hidden>{suffix}</span> : null}
+         </p>
+         <p>{label}</p>
+      </RevealFromBottom>
+   )
+}
 
-        <RevealFromBottom delay={0.4} className="flex gap-3">
-          <p className="text-5xl font-extrabold text-foreground">5987</p>
-          <p>
-            Total <br /> Contributions
-          </p>
-        </RevealFromBottom>
-      </section>
-    </Container>
-  );
-};
+// Server component: GitHub is queried at build / revalidation time, never from the visitor's browser.
+export const CounterSection = async () => {
+   const t = await getTranslations('home')
+   const contributions = await GithubService.getGitHubContributions()
+
+   return (
+      <Container className='py-10'>
+         <section className={cn('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-3 md:gap-8')}>
+            <Counter
+               value={EXPERIENCE_YEARS}
+               suffix='+'
+               label={
+                  <>
+                     {t('counters.years.label')} <br /> {t('counters.years.sub')}
+                  </>
+               }
+            />
+            <Counter
+               value={COMPLETED_PROJECTS_COUNT}
+               label={
+                  <>
+                     {t('counters.projects.label')} <br /> {t('counters.projects.sub')}
+                  </>
+               }
+            />
+            <Counter
+               value={APPS_ON_STORES_COUNT}
+               label={
+                  <>
+                     {t('counters.apps.label')} <br /> {t('counters.apps.sub')}
+                  </>
+               }
+            />
+            <Counter
+               value={contributions}
+               label={
+                  <>
+                     {t('counters.contributions.label')} <br /> {t('counters.contributions.sub')}
+                  </>
+               }
+            />
+         </section>
+      </Container>
+   )
+}

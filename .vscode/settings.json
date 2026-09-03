@@ -1,3 +1,24 @@
 {
-  "cSpell.words": ["ronald"]
+   "cSpell.words": [
+      "alphorm",
+      "Alphorm",
+      "amizone",
+      "bigoodee",
+      "GITHUB",
+      "localtik",
+      "moari",
+      "privie",
+      "Reacharts",
+      "ronald",
+      "vercel"
+   ],
+   "typescript.tsdk": "node_modules/typescript/lib",
+   "typescript.preferences.autoImportSpecifierExcludeRegexes": [
+      "**/dist/",
+      "**/build/",
+      "@radix-ui/*",
+      "node:test",
+      "next/link",
+      "next/dist/client/link"
+   ]
 }

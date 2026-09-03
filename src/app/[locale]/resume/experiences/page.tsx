@@ -1,0 +1,85 @@
+import { Button } from '@src/components/ui/button'
+import { cn } from '@src/lib/utils'
+import { RevealFromBottom } from '@src/components/motions/reveal-from-bottom'
+import { SectionHeader } from '@src/components/resume/section-header'
+import { Link, LocaleType } from '@src/i18n/routing'
+import { EXPERIENCES_LIST } from '@src/resources/data/experiences'
+import { DotIcon, MoveRightIcon } from 'lucide-react'
+import { localizedAlternates } from '@src/lib/seo'
+import { RECRUITER_KEYWORDS } from '@src/resources/data/metadata'
+import { Metadata } from 'next'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+
+type Props = {
+   params: Promise<{ locale: string; project_id: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+   const locale = (await params).locale as LocaleType
+   const t = await getTranslations({ locale, namespace: 'resume' })
+
+   return {
+      title: t('page_title_experiences'),
+      description: t('page_description_experiences'),
+      alternates: localizedAlternates(locale, '/resume/experiences'),
+      keywords: RECRUITER_KEYWORDS,
+      twitter: {
+         title: t('page_title_experiences'),
+         description: t('page_description_experiences'),
+      },
+   }
+}
+
+export default async function Page({ params }: Props) {
+   const locale = (await params).locale as LocaleType
+   const t = await getTranslations({ locale, namespace: 'resume' })
+
+   // Enable static rendering
+   setRequestLocale(locale)
+
+   return (
+      <section className='w-full flex flex-col gap-5'>
+         <SectionHeader title='my_experiences' description='my_experiences_description' />
+         <div className={cn('w-full grid grid-cols-1 gap-8 lg:grid-cols-2')}>
+            {EXPERIENCES_LIST.map((experience, index) => (
+               <RevealFromBottom key={experience.id}>
+                  <div className={cn('bg-card border border-input', 'rounded-lg p-5 size-full', 'flex flex-col gap-3')}>
+                     <h3 className={cn('text-xl font-bold text-foreground font-mono tracking-tight')}>
+                        {experience.title[locale]}
+                     </h3>
+                     <p className={cn('text-primary text-lg uppercase')}>{experience.company}</p>
+                     <div className='flex items-center'>
+                        <DotIcon className='size-8 text-primary' />
+                        <small className={cn('text-muted-foreground')}>{experience.date[locale]}</small>
+                     </div>
+                     <p className={cn('text-sm text-muted-foreground')}>{experience.context[locale]}</p>
+                     {experience.keywords.length > 0 && (
+                        <ul className={cn('flex flex-wrap gap-2 h-full content-start')}>
+                           {experience.keywords.map((keyword) => (
+                              <li
+                                 key={keyword}
+                                 className={cn(
+                                    'rounded-full border border-input bg-accent/40',
+                                    'px-3 py-1 text-xs text-muted-foreground',
+                                 )}
+                              >
+                                 {keyword}
+                              </li>
+                           ))}
+                        </ul>
+                     )}
+                     <div>
+                        <Button asChild variant={'outline'} size={'sm'} className={cn('text-xs', 'rounded-full')}>
+                           <Link href={`/resume/experiences/${experience.id}`}>
+                              {t('consult')}
+                              <MoveRightIcon className='size-5 ml-2' />
+                           </Link>
+                        </Button>
+                     </div>
+                  </div>
+               </RevealFromBottom>
+            ))}
+         </div>
+      </section>
+   )
+}
